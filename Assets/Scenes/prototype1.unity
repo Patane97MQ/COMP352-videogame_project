@@ -291,6 +291,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 50814658905732340, guid: fcc7180f8ab7602489b320ddaff7c5c5,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcc7180f8ab7602489b320ddaff7c5c5, type: 2}
   m_IsPrefabAsset: 0
@@ -459,6 +464,11 @@ Prefab:
     - target: {fileID: 4974878267216176, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50982768128039380, guid: d9414ed4c08020c4580b3a591c3ee1d5,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
@@ -1347,6 +1357,34 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9c5efbfbc4570a4cbbd4534e93da93b, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &388996127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1572015061269690, guid: d9414ed4c08020c4580b3a591c3ee1d5,
+    type: 2}
+  m_PrefabInternal: {fileID: 486559335}
+--- !u!114 &388996132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 388996127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e88e02f112a4f299e3286ab15257df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 4
+  jumpSpeed: 4
+  walkOnAir: 0
+  groundRect:
+    serializedVersion: 2
+    x: -0.32
+    y: -0.72
+    width: 0.56
+    height: 0.1
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1001 &390874769
 Prefab:
   m_ObjectHideFlags: 0
@@ -1741,6 +1779,11 @@ Prefab:
     - target: {fileID: 1572015061269690, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
       propertyPath: m_Name
       value: Clone1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 50982768128039380, guid: d9414ed4c08020c4580b3a591c3ee1d5,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
@@ -3227,6 +3270,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4322647264465016, guid: a9c5efbfbc4570a4cbbd4534e93da93b,
     type: 2}
   m_PrefabInternal: {fileID: 611956174}
+--- !u!1 &744409682 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1572015061269690, guid: d9414ed4c08020c4580b3a591c3ee1d5,
+    type: 2}
+  m_PrefabInternal: {fileID: 92806070}
+--- !u!114 &744409687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 744409682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e88e02f112a4f299e3286ab15257df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 4
+  jumpSpeed: 4
+  walkOnAir: 0
+  groundRect:
+    serializedVersion: 2
+    x: -0.32
+    y: -0.72
+    width: 0.56
+    height: 0.1
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &752875891
 GameObject:
   m_ObjectHideFlags: 0
@@ -7548,6 +7619,22 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 367cbae96a7b04b48b13670f4e5dca0e, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1668674959 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1181739911832734, guid: b3aa62673b90118449cbaab41325da05,
+    type: 2}
+  m_PrefabInternal: {fileID: 1790296179}
+--- !u!114 &1668674960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1668674959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8437360a5049c45a4913776be83af795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1671390491 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4322647264465016, guid: a9c5efbfbc4570a4cbbd4534e93da93b,
@@ -9079,6 +9166,34 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11f0115c41d581242a6ff4dc151eef0a, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1973807132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1981095214291014, guid: fcc7180f8ab7602489b320ddaff7c5c5,
+    type: 2}
+  m_PrefabInternal: {fileID: 30999928}
+--- !u!114 &1973807137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1973807132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e88e02f112a4f299e3286ab15257df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 4
+  jumpSpeed: 4
+  walkOnAir: 0
+  groundRect:
+    serializedVersion: 2
+    x: -0.32
+    y: -0.72
+    width: 0.56
+    height: 0.1
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!4 &1977722701 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4322647264465016, guid: a9c5efbfbc4570a4cbbd4534e93da93b,

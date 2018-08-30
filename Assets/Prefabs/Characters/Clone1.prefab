@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212358651831000944}
   - component: {fileID: 61417614920214426}
   - component: {fileID: 50982768128039380}
+  - component: {fileID: 114642593217472226}
   m_Layer: 0
   m_Name: Clone1
   m_TagString: Untagged
@@ -87,6 +88,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.38, y: 1.26}
   m_EdgeRadius: 0
+--- !u!114 &114642593217472226
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1572015061269690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e88e02f112a4f299e3286ab15257df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 4
+  jumpSpeed: 4
+  walkOnAir: 0
+  groundRect:
+    serializedVersion: 2
+    x: -0.32
+    y: -0.72
+    width: 0.56
+    height: 0.1
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!212 &212358651831000944
 SpriteRenderer:
   m_ObjectHideFlags: 1

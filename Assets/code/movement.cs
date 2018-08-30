@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent (typeof (Rigidbody2D))]
-public class PlatformerMove : MonoBehaviour {
+public class movement : MonoBehaviour {
 
 	public float walkSpeed = 4f;
 	public float jumpSpeed = 4f;

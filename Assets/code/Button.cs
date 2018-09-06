@@ -2,8 +2,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+public static class Globals
+{
+    public static bool buttonPressed;
+
+}
+
 public class Button : MonoBehaviour {
-    
+
     private SpriteRenderer sRender;
     private BoxCollider2D bCollider;
     public Sprite myFirstImage;
@@ -11,6 +17,7 @@ public class Button : MonoBehaviour {
 
     private void Start()
     {
+        Globals.buttonPressed = false; 
         sRender = GetComponent<SpriteRenderer>();
         bCollider = GetComponent<BoxCollider2D>();
     }
@@ -29,8 +36,10 @@ public class Button : MonoBehaviour {
     {
         if (col.gameObject.tag == "red_clone")
         {
+            Globals.buttonPressed = true;
             sRender.sprite = mySecondImage;
             bCollider.size = new Vector2(0.5f, 0.05f);
+            
      
         }
     }

@@ -3,19 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class barrier : MonoBehaviour {
-
+    
+    public List<GameObject> activatorsList;
     // Use this for initialization
-    void Start() {
-      
+     
+    public bool allActive;
 
-    }
+
+    void Start() {
+        allActive = false;
+        
+
+}
 	// Update is called once per frame
 	void Update () {
 
-            if (Globals.buttonPressed == true)
+        foreach(GameObject activator in activatorsList){
+            buttonScript temp = (buttonScript) activator.GetComponent(typeof(buttonScript));
+            Debug.Log(temp.amountActive());
+            if (temp.active())
             {
-            Destroy(gameObject);
-        }
-        }
+                if (temp.amountActive() == activatorsList.Count)
+                    allActive = true;
+            }                    
+                if(allActive){
+                    Destroy(gameObject);
+            }
+                
 
+        }
+       
     }
+
+}

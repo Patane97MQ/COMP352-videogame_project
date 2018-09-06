@@ -304,11 +304,11 @@ Prefab:
     - target: {fileID: 114766854174137420, guid: fcc7180f8ab7602489b320ddaff7c5c5,
         type: 2}
       propertyPath: jumpSpeed
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1981095214291014, guid: fcc7180f8ab7602489b320ddaff7c5c5, type: 2}
       propertyPath: m_TagString
-      value: red_clone
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcc7180f8ab7602489b320ddaff7c5c5, type: 2}
@@ -496,7 +496,7 @@ Prefab:
     - target: {fileID: 114642593217472226, guid: d9414ed4c08020c4580b3a591c3ee1d5,
         type: 2}
       propertyPath: jumpSpeed
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
@@ -1746,7 +1746,7 @@ Prefab:
     - target: {fileID: 114642593217472226, guid: d9414ed4c08020c4580b3a591c3ee1d5,
         type: 2}
       propertyPath: jumpSpeed
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114642593217472226, guid: d9414ed4c08020c4580b3a591c3ee1d5,
         type: 2}

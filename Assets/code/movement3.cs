@@ -26,7 +26,7 @@ public class movement3 : MonoBehaviour {
     private Vector2 acceleration;
 
     private float axis;
-
+    private float axisLimiter;
     private float collOffset = 0.065f;
 
     // Use this for initialization
@@ -50,6 +50,7 @@ public class movement3 : MonoBehaviour {
 
         // Changes the movement to different axes depending on the direction of gravity
         axis = Input.GetAxis("Horizontal");
+        Debug.Log(axis);
         if (gravityDirection.x == 0)
             SetVelocity(new Vector2(0.1f * axis, velocity.y));
         else if (gravityDirection.y == 0)
@@ -69,6 +70,11 @@ public class movement3 : MonoBehaviour {
         AddPositionX(velocity.x);
         AddPositionY(velocity.y);
 
+        Debug.Log("Collisions: " + (down ? "down " : "")
+            + (up ? "up " : "")
+            + (left ? "left " : "")
+            + (right ? "right " : ""));
+
         //Debug.Log("Velocity(" + velocity.x + "," + velocity.y + ")");
         //Debug.Log("Down(" + down + ")");
 
@@ -81,12 +87,24 @@ public class movement3 : MonoBehaviour {
     // Try not to use this function on its own. Use SetVelocity or AddVelocity.
     public void AddPositionX(float bx)
     {
+        if (bx == 0)
+        {
+            SetTouching(Vector2.left, false);
+            SetTouching(Vector2.right, false);
+            return;
+        }
         float x = CheckNextMoveX(bx);
         transform.position = new Vector3(transform.position.x + x, transform.position.y, 0);
     }
     // Try not to use this function on its own. Use SetVelocity or AddVelocity.
     public void AddPositionY(float by)
     {
+        if (by == 0)
+        {
+            SetTouching(Vector2.down, false);
+            SetTouching(Vector2.up, false);
+            return;
+        }
         float y = CheckNextMoveY(by);
         transform.position = new Vector3(transform.position.x, transform.position.y + y, 0);
     }
@@ -121,6 +139,8 @@ public class movement3 : MonoBehaviour {
 
     private float CheckNextMoveX(float x)
     {
+        SetTouching(Vector2.left, false);
+        SetTouching(Vector2.right, false);
         if (x < 0)
         {
             Debug.DrawRay(TopLeft() + new Vector2(x, -collOffset), Vector2.down * (c2D.bounds.size.y - collOffset * 2), Color.yellow);
@@ -130,7 +150,6 @@ public class movement3 : MonoBehaviour {
             {
                 Debug.Log("Left has been hit! Repositioning...");
                 SetTouching(Vector2.left, true);
-                SetTouching(Vector2.right, false);
                 SetVelocity(new Vector2(0, velocity.y));
                 return (hit.collider.bounds.max.x) - c2D.bounds.min.x;
             }
@@ -143,21 +162,21 @@ public class movement3 : MonoBehaviour {
             if (hit)
             {
                 Debug.Log("Right has been hit! Repositioning...");
-                SetTouching(Vector2.left, false);
                 SetTouching(Vector2.right, true);
                 SetVelocity(new Vector2(0, velocity.y));
                 return (hit.collider.bounds.min.x) - c2D.bounds.max.x;
             }
         }
-        SetTouching(Vector2.left, false);
-        SetTouching(Vector2.right, false);
         return x;
 
     }
     private float CheckNextMoveY(float y)
     {
+        SetTouching(Vector2.down, false);
+        SetTouching(Vector2.up, false);
         if (y < 0)
         {
+            SetTouching(Vector2.up, false);
             Debug.DrawRay(BotRight() + new Vector2(-collOffset, y), Vector2.left * (c2D.bounds.size.x - collOffset*2), Color.yellow);
 
             RaycastHit2D hit = Physics2D.Raycast(BotRight() + new Vector2(-collOffset, y), Vector2.left, c2D.bounds.size.x - collOffset*2, ~(1 << 8));
@@ -165,27 +184,24 @@ public class movement3 : MonoBehaviour {
             {
                 Debug.Log("Down has been hit! Repositioning...");
                 SetTouching(Vector2.down, true);
-                SetTouching(Vector2.up, false);
                 SetVelocity(new Vector2(velocity.x, 0));
                 return (hit.collider.bounds.max.y) - c2D.bounds.min.y;
             }
         }
         else if (y > 0)
         {
+            SetTouching(Vector2.down, false);
             Debug.DrawRay(TopLeft() + new Vector2(collOffset, y), Vector2.right * (c2D.bounds.size.x - collOffset * 2), Color.yellow);
 
             RaycastHit2D hit = Physics2D.Raycast(TopLeft() + new Vector2(collOffset, y), Vector2.right, c2D.bounds.size.x - collOffset*2, ~(1 << 8));
             if (hit)
             {
                 Debug.Log("Up has been hit! Repositioning...");
-                SetTouching(Vector2.down, false);
                 SetTouching(Vector2.up, true);
                 SetVelocity(new Vector2(velocity.x, 0));
                 return (hit.collider.bounds.min.y) - c2D.bounds.max.y;
             }
         }
-        SetTouching(Vector2.down, false);
-        SetTouching(Vector2.up, false);
         return y;
 
     }
@@ -197,9 +213,9 @@ public class movement3 : MonoBehaviour {
             down = touching;
         else if (actualDirection == -gravityDirection)
             up = touching;
-        else if (actualDirection == Vector2.Perpendicular(gravityDirection))
-            left = touching;
         else if (actualDirection == Vector2.Perpendicular(-gravityDirection))
+            left = touching;
+        else if (actualDirection == Vector2.Perpendicular(gravityDirection))
             right = touching;
     }
 

@@ -25,5 +25,4 @@ public class nextLevel : MonoBehaviour
         }
     }
 
-}
 

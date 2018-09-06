@@ -31,6 +31,7 @@ public class Button : MonoBehaviour {
         {
             sRender.sprite = mySecondImage;
             bCollider.size = new Vector2(0.5f, 0.05f);
+     
         }
     }
 

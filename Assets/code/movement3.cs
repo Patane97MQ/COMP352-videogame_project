@@ -15,6 +15,7 @@ public class movement3 : MonoBehaviour {
     private Collider2D c2D;
 
     private bool facingRight = true;
+    private bool crouching = false;
 
     private float rotation;
     private bool up;
@@ -24,9 +25,8 @@ public class movement3 : MonoBehaviour {
 
     private Vector2 velocity;
     private Vector2 acceleration;
-
+    
     private float axis;
-    private float axisLimiter;
     private float collOffset = 0.065f;
 
     // Use this for initialization
@@ -45,12 +45,32 @@ public class movement3 : MonoBehaviour {
         CheckRotation();
         // If player is on the ground and "Jump" button is pressed,
         // They will jump the opposite direction of gravity
-        if (down && Input.GetButton("Jump"))
+        if (down && Input.GetButton("Jump") && !crouching)
             SetVelocity((-gravityDirection)*jumpStrength / 10);
 
+        if (Input.GetButton("Vertical"))
+        {
+            if(!crouching)
+            {
+                crouching = true;
+                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 2, 0);
+                transform.position = new Vector3(transform.position.x, transform.position.y - transform.localScale.y / 2, 0);
+            }
+        }
+        else
+        {
+            if (crouching)
+            {
+                crouching = false;
+                transform.position = new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, 0);
+                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, 0);
+            }
+        }
+
         // Changes the movement to different axes depending on the direction of gravity
+
         axis = Input.GetAxis("Horizontal");
-        Debug.Log(axis);
+        //Debug.Log(axis);
         if (gravityDirection.x == 0)
             SetVelocity(new Vector2(0.1f * axis, velocity.y));
         else if (gravityDirection.y == 0)
@@ -70,10 +90,10 @@ public class movement3 : MonoBehaviour {
         AddPositionX(velocity.x);
         AddPositionY(velocity.y);
 
-        Debug.Log("Collisions: " + (down ? "down " : "")
-            + (up ? "up " : "")
-            + (left ? "left " : "")
-            + (right ? "right " : ""));
+        //Debug.Log("Collisions: " + (down ? "down " : "")
+        //    + (up ? "up " : "")
+        //    + (left ? "left " : "")
+        //    + (right ? "right " : ""));
 
         //Debug.Log("Velocity(" + velocity.x + "," + velocity.y + ")");
         //Debug.Log("Down(" + down + ")");
@@ -105,6 +125,7 @@ public class movement3 : MonoBehaviour {
             SetTouching(Vector2.up, false);
             return;
         }
+
         float y = CheckNextMoveY(by);
         transform.position = new Vector3(transform.position.x, transform.position.y + y, 0);
     }
@@ -146,6 +167,7 @@ public class movement3 : MonoBehaviour {
             Debug.DrawRay(TopLeft() + new Vector2(x, -collOffset), Vector2.down * (c2D.bounds.size.y - collOffset * 2), Color.yellow);
 
             RaycastHit2D hit = Physics2D.Raycast(TopLeft() + new Vector2(x, -collOffset), Vector2.down, c2D.bounds.size.y - collOffset*2, ~(1 << 8));
+            
             if (hit)
             {
                 Debug.Log("Left has been hit! Repositioning...");
@@ -170,6 +192,42 @@ public class movement3 : MonoBehaviour {
         return x;
 
     }
+    private float CheckNextMoveY2(float y)
+    {
+        SetTouching(Vector2.down, false);
+        SetTouching(Vector2.up, false);
+        if (y < 0)
+        {
+            SetTouching(Vector2.up, false);
+            RaycastHit2D hit = Physics2D.BoxCast(new Vector2(transform.position.x, (transform.position.y - c2D.bounds.extents.y)+0.01f), new Vector2(c2D.bounds.extents.x - collOffset, 0.01f), 0, Vector2.down, y, ~(1 << 8));
+            //RaycastHit2D hit = Physics2D.CircleCast(new Vector2(transform.position.x, transform.position.y - c2D.bounds.extents.y), c2D.bounds.extents.x, Vector2.down, y - c2D.bounds.extents.x, ~(1 << 8));
+            //RaycastHit2D hit = Physics2D.Raycast(BotRight() + new Vector2(-collOffset, y), Vector2.left, c2D.bounds.size.x - collOffset * 2, ~(1 << 8));
+            if (hit)
+            {
+                Debug.Log(hit.normal);
+                Debug.Log("Down has been hit! Repositioning...");
+                SetTouching(Vector2.down, true);
+                SetVelocity(new Vector2(velocity.x, 0));
+                return -hit.distance;
+            }
+        }
+        else if (y > 0)
+        {
+            SetTouching(Vector2.down, false);
+            Debug.DrawRay(TopLeft() + new Vector2(collOffset, y), Vector2.right * (c2D.bounds.size.x - collOffset * 2), Color.yellow);
+
+            RaycastHit2D hit = Physics2D.Raycast(TopLeft() + new Vector2(collOffset, y), Vector2.right, c2D.bounds.size.x - collOffset * 2, ~(1 << 8));
+            if (hit)
+            {
+                Debug.Log("Up has been hit! Repositioning...");
+                SetTouching(Vector2.up, true);
+                SetVelocity(new Vector2(velocity.x, 0));
+                return 0;
+            }
+        }
+        return y;
+
+    }
     private float CheckNextMoveY(float y)
     {
         SetTouching(Vector2.down, false);
@@ -180,8 +238,11 @@ public class movement3 : MonoBehaviour {
             Debug.DrawRay(BotRight() + new Vector2(-collOffset, y), Vector2.left * (c2D.bounds.size.x - collOffset*2), Color.yellow);
 
             RaycastHit2D hit = Physics2D.Raycast(BotRight() + new Vector2(-collOffset, y), Vector2.left, c2D.bounds.size.x - collOffset*2, ~(1 << 8));
+            if (hit && hit.distance == 0)
+                hit = Physics2D.Raycast(BotLeft() + new Vector2(collOffset, y), Vector2.right, c2D.bounds.size.x - collOffset * 2, ~(1 << 8));
             if (hit)
             {
+                Debug.Log(hit.normal);
                 Debug.Log("Down has been hit! Repositioning...");
                 SetTouching(Vector2.down, true);
                 SetVelocity(new Vector2(velocity.x, 0));
@@ -218,7 +279,6 @@ public class movement3 : MonoBehaviour {
         else if (actualDirection == Vector2.Perpendicular(gravityDirection))
             right = touching;
     }
-
     private Vector2 TopLeft()
     {
         return new Vector2(transform.position.x - c2D.bounds.extents.x, transform.position.y + c2D.bounds.extents.y);
@@ -226,5 +286,13 @@ public class movement3 : MonoBehaviour {
     private Vector2 BotRight()
     {
         return new Vector2(transform.position.x + c2D.bounds.extents.x, transform.position.y - c2D.bounds.extents.y);
+    }
+    private Vector2 TopRight()
+    {
+        return new Vector2(transform.position.x + c2D.bounds.extents.x, transform.position.y + c2D.bounds.extents.y);
+    }
+    private Vector2 BotLeft()
+    {
+        return new Vector2(transform.position.x - c2D.bounds.extents.x, transform.position.y - c2D.bounds.extents.y);
     }
 }

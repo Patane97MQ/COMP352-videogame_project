@@ -8,6 +8,7 @@ public class barrier : MonoBehaviour {
     // Use this for initialization
      
     public bool allActive;
+    public int counter = 0;
 
 
     void Start() {
@@ -20,17 +21,15 @@ public class barrier : MonoBehaviour {
 
         foreach(GameObject activator in activatorsList){
             buttonScript temp = (buttonScript) activator.GetComponent(typeof(buttonScript));
-            Debug.Log(temp.amountActive());
-            if (temp.active())
+            if (temp.active() == true)
             {
-                if (temp.amountActive() == activatorsList.Count)
-                    allActive = true;
-            }                    
-                if(allActive){
+                counter++;
+                if (counter == 2)
+                {
                     Destroy(gameObject);
-            }
-                
-
+                }
+            } 
+            
         }
        
     }

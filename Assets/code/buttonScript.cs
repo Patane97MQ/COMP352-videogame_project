@@ -36,9 +36,6 @@ public class buttonScript : MonoBehaviour {
 
     public int amountActive()
     {
-            if(buttonPressed == false)
-             buttonPressed = true;
-             amountPressed++;
            
         return amountPressed;
     }
@@ -47,19 +44,18 @@ public class buttonScript : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "red_clone")
-        {
-            /*
-             if(buttonPressed == false)
-             buttonPressed = true;
-             amountPressed++;
-            */
-            
-          sRender.sprite = mySecondImage;
-            bCollider.size = new Vector2(0.5f, 0.05f);
-            
+        if (col.gameObject.tag == "red_clone") {
+
+            buttonPressed = true;
+            amountPressed++;
+            Debug.Log(amountPressed++);
         }
+
+        sRender.sprite = mySecondImage;
+        bCollider.size = new Vector2(0.5f, 0.05f);
     }
+        
+ 
 
     private void OnCollisionExit2D(Collision2D collision)
     {

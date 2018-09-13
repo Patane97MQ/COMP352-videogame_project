@@ -1,38 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class barrier : MonoBehaviour {
+public class Barrier : Activating {
 
-    public ActivateType activateType;
-    public bool allActive;
-
-    public List<GameObject> activatorsList;
-    // Use this for initialization
-
-
-    void Start() {
-        allActive = false;
-        
-
-}
-	// Update is called once per frame
-	void Update () {
-
-        foreach(GameObject activator in activatorsList){
-            buttonScript temp = (buttonScript) activator.GetComponent(typeof(buttonScript));
-            // INCOMPLETE!!!
-            if (temp.Active() == true)
-            {
-                Destroy(gameObject);
-            } 
-            
-        }
-       
+    protected override void Activate()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.GetComponent<Collider2D>().enabled = false;
     }
 
-}
-public enum ActivateType
-{
-    Once, Constant, Toggle
+    protected override void DeActivate()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.GetComponent<Collider2D>().enabled = true;
+    }
 }

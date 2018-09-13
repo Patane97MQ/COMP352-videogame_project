@@ -78,9 +78,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8437360a5049c45a4913776be83af795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountPressed: 0
-  myFirstImage: {fileID: 0}
-  mySecondImage: {fileID: 0}
+  activatorType: 0
+  activateTags: []
+  deactivatedImage: {fileID: 21300000, guid: c490660100859c84389aa2f9f860334f, type: 3}
+  activatedImage: {fileID: 21300000, guid: 2f078567c7f94e24ca79b7a9e3165318, type: 3}
 --- !u!212 &212953427955590424
 SpriteRenderer:
   m_ObjectHideFlags: 1

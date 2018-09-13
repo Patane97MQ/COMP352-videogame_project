@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class barrier : MonoBehaviour {
-    
+
+    public ActivateType activateType;
+    public bool allActive;
+
     public List<GameObject> activatorsList;
     // Use this for initialization
-     
-    public bool allActive;
-    public int counter = 0;
 
 
     void Start() {
@@ -21,17 +21,18 @@ public class barrier : MonoBehaviour {
 
         foreach(GameObject activator in activatorsList){
             buttonScript temp = (buttonScript) activator.GetComponent(typeof(buttonScript));
-            if (temp.active() == true)
+            // INCOMPLETE!!!
+            if (temp.Active() == true)
             {
-                counter++;
-                if (counter == 2)
-                {
-                    Destroy(gameObject);
-                }
+                Destroy(gameObject);
             } 
             
         }
        
     }
 
+}
+public enum ActivateType
+{
+    Once, Constant, Toggle
 }

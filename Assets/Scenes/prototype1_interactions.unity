@@ -310,7 +310,8 @@ Prefab:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114766854174137420, guid: fcc7180f8ab7602489b320ddaff7c5c5, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: fcc7180f8ab7602489b320ddaff7c5c5, type: 2}
   m_IsPrefabAsset: 0
 --- !u!4 &35400914 stripped
@@ -449,11 +450,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4974878267216176, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.29
+      value: 3.96
       objectReference: {fileID: 0}
     - target: {fileID: 4974878267216176, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.19
+      value: 1.15
       objectReference: {fileID: 0}
     - target: {fileID: 4974878267216176, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1727,7 +1728,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1572015061269690, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
       propertyPath: m_Name
-      value: Clone1
+      value: red_clone (1)
       objectReference: {fileID: 0}
     - target: {fileID: 50982768128039380, guid: d9414ed4c08020c4580b3a591c3ee1d5,
         type: 2}
@@ -5224,10 +5225,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f60df95b055a646ac6f83fa7fbbdc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activateType: 0
+  allActive: 1
   activatorsList:
   - {fileID: 1243204337}
   - {fileID: 2012863827}
-  allActive: 0
 --- !u!1001 &1175935964
 Prefab:
   m_ObjectHideFlags: 0
@@ -5616,6 +5618,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1815788529579870, guid: dc314214353a68d4591303b226e94237,
     type: 2}
   m_PrefabInternal: {fileID: 1902962298}
+--- !u!114 &1243204338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1243204337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8437360a5049c45a4913776be83af795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myFirstImage: {fileID: 0}
+  mySecondImage: {fileID: 0}
+  activateTags:
+  - red_clone
 --- !u!1001 &1247877142
 Prefab:
   m_ObjectHideFlags: 0
@@ -8293,6 +8310,25 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d414ef342f6a324d9f0f1cf5982cf2a, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1760723436 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1981095214291014, guid: fcc7180f8ab7602489b320ddaff7c5c5,
+    type: 2}
+  m_PrefabInternal: {fileID: 30999928}
+--- !u!114 &1760723437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1760723436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4707b7916b6511b4e9b2bfdde290e672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpStrength: 1
+  gravityDirection: {x: 0, y: -1}
+  gravityConstant: 0.4
 --- !u!1001 &1763882258
 Prefab:
   m_ObjectHideFlags: 0
@@ -8931,7 +8967,18 @@ Prefab:
       propertyPath: m_Name
       value: Button
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114317790414610788, guid: dc314214353a68d4591303b226e94237,
+        type: 2}
+      propertyPath: myFirstImage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114317790414610788, guid: dc314214353a68d4591303b226e94237,
+        type: 2}
+      propertyPath: mySecondImage
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114317790414610788, guid: dc314214353a68d4591303b226e94237, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: dc314214353a68d4591303b226e94237, type: 2}
   m_IsPrefabAsset: 0
 --- !u!4 &1908466418 stripped

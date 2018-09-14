@@ -90,10 +90,10 @@ public class movement3 : MonoBehaviour {
         AddPositionX(velocity.x);
         AddPositionY(velocity.y);
 
-        //Debug.Log("Collisions: " + (down ? "down " : "")
-        //    + (up ? "up " : "")
-        //    + (left ? "left " : "")
-        //    + (right ? "right " : ""));
+        Debug.Log("Collisions: " + (down ? "down " : "")
+            + (up ? "up " : "")
+            + (left ? "left " : "")
+            + (right ? "right " : ""));
 
         //Debug.Log("Velocity(" + velocity.x + "," + velocity.y + ")");
         //Debug.Log("Down(" + down + ")");
@@ -125,7 +125,6 @@ public class movement3 : MonoBehaviour {
             SetTouching(Vector2.up, false);
             return;
         }
-
         float y = CheckNextMoveY(by);
         transform.position = new Vector3(transform.position.x, transform.position.y + y, 0);
     }
@@ -158,7 +157,87 @@ public class movement3 : MonoBehaviour {
             transform.Rotate(new Vector3(0, 0, rotation));
     }
 
+    private void DrawBox(Vector2 centre, Vector2 size, Color color)
+    {
+        Debug.DrawLine(new Vector2(centre.x - size.x / 2, centre.y + size.y / 2), new Vector2(centre.x + size.x / 2, centre.y + size.y / 2), color);
+        Debug.DrawLine(new Vector2(centre.x + size.x / 2, centre.y + size.y / 2), new Vector2(centre.x + size.x / 2, centre.y - size.y / 2), color);
+        Debug.DrawLine(new Vector2(centre.x + size.x / 2, centre.y - size.y / 2), new Vector2(centre.x - size.x / 2, centre.y - size.y / 2), color);
+        Debug.DrawLine(new Vector2(centre.x - size.x / 2, centre.y - size.y / 2), new Vector2(centre.x - size.x / 2, centre.y + size.y / 2), color);
+        //Debug.DrawRay(new Vector2(centre.x - size.x / 2, centre.y + size.y / 2), Vector2.right * size.x / 2, color);
+        //Debug.DrawRay(new Vector2(centre.x + size.x / 2, centre.y + size.y / 2), Vector2.down * size.y / 2, color);
+        //Debug.DrawRay(new Vector2(centre.x + size.x / 2, centre.y - size.y / 2), Vector2.left * size.x / 2, color);
+        //Debug.DrawRay(new Vector2(centre.x - size.x / 2, centre.y - size.y / 2), Vector2.up * size.y / 2, color);
+    }
+    private void DrawBoxCast(Vector2 origin, Vector2 size, Vector2 direction, float distance)
+    {
+        DrawBox(origin, size, Color.green);
+        DrawBox(origin + direction * distance, size, Color.red);
+    }
+
     private float CheckNextMoveX(float x)
+    {
+        SetTouching(Vector2.left, false);
+        SetTouching(Vector2.right, false);
+        if (x < 0)
+        {
+            DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(0.01f, c2D.bounds.size.y - 0.1f), Vector2.left, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
+
+            RaycastHit2D hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(0.01f, c2D.bounds.size.y - 0.1f), transform.rotation.z, Vector2.left, Math.Abs(x) + c2D.bounds.extents.x - 0.005f, ~(1 << 8));
+            if (hit)
+            {
+                SetTouching(Vector2.left, true);
+                SetVelocity(new Vector2(0, velocity.y));
+                return 0;
+            }
+        }
+        else if (x > 0)
+        {
+            DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(0.01f, c2D.bounds.size.y - 0.1f), Vector2.right, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
+
+            RaycastHit2D hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(0.01f, c2D.bounds.size.y - 0.1f), transform.rotation.z, Vector2.right, Math.Abs(x) + c2D.bounds.extents.x - 0.005f, ~(1 << 8));
+            if (hit)
+            {
+                SetTouching(Vector2.right, true);
+                SetVelocity(new Vector2(0, velocity.y));
+                return 0;
+            }
+        }
+        return x;
+    }
+
+    private float CheckNextMoveY(float y)
+    {
+        SetTouching(Vector2.down, false);
+        SetTouching(Vector2.up, false);
+        if (y < 0)
+        {
+            DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - 0.1f, 0.01f), Vector2.down, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
+
+            RaycastHit2D hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - 0.1f, 0.01f), transform.rotation.z, Vector2.down, Math.Abs(y) + c2D.bounds.extents.y - 0.005f, ~(1 << 8));
+            if (hit)
+            {
+                SetTouching(Vector2.down, true);
+                SetVelocity(new Vector2(velocity.x, 0));
+                return 0;
+            }
+        }
+        else if (y > 0)
+        {
+            DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - 0.1f, 0.01f), Vector2.up, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
+
+            RaycastHit2D hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - 0.1f, 0.01f), transform.rotation.z, Vector2.up, Math.Abs(y) + c2D.bounds.extents.y - 0.005f, ~(1 << 8));
+            if (hit)
+            {
+                SetTouching(Vector2.up, true);
+                SetVelocity(new Vector2(velocity.x, 0));
+                return 0;
+            }
+        }
+        return y;
+    }
+
+    [Obsolete("Methos is obsolete. Use 'CheckNextMoveX' instead.")]
+    private float OLDCheckNextMoveX(float x)
     {
         SetTouching(Vector2.left, false);
         SetTouching(Vector2.right, false);
@@ -166,8 +245,8 @@ public class movement3 : MonoBehaviour {
         {
             Debug.DrawRay(TopLeft() + new Vector2(x, -collOffset), Vector2.down * (c2D.bounds.size.y - collOffset * 2), Color.yellow);
 
-            RaycastHit2D hit = Physics2D.Raycast(TopLeft() + new Vector2(x, -collOffset), Vector2.down, c2D.bounds.size.y - collOffset*2, ~(1 << 8));
-            
+            RaycastHit2D hit = Physics2D.Raycast(TopLeft() + new Vector2(x, -collOffset), Vector2.down, c2D.bounds.size.y - collOffset * 2, ~(1 << 8));
+
             if (hit)
             {
                 Debug.Log("Left has been hit! Repositioning...");
@@ -180,7 +259,7 @@ public class movement3 : MonoBehaviour {
         {
             Debug.DrawRay(BotRight() + new Vector2(x, collOffset), Vector2.up * (c2D.bounds.size.y - collOffset * 2), Color.yellow);
 
-            RaycastHit2D hit = Physics2D.Raycast(BotRight() + new Vector2(x, collOffset), Vector2.up, c2D.bounds.size.y - collOffset*2, ~(1 << 8));
+            RaycastHit2D hit = Physics2D.Raycast(BotRight() + new Vector2(x, collOffset), Vector2.up, c2D.bounds.size.y - collOffset * 2, ~(1 << 8));
             if (hit)
             {
                 Debug.Log("Right has been hit! Repositioning...");
@@ -192,43 +271,8 @@ public class movement3 : MonoBehaviour {
         return x;
 
     }
-    private float CheckNextMoveY2(float y)
-    {
-        SetTouching(Vector2.down, false);
-        SetTouching(Vector2.up, false);
-        if (y < 0)
-        {
-            SetTouching(Vector2.up, false);
-            RaycastHit2D hit = Physics2D.BoxCast(new Vector2(transform.position.x, (transform.position.y - c2D.bounds.extents.y)+0.01f), new Vector2(c2D.bounds.extents.x - collOffset, 0.01f), 0, Vector2.down, y, ~(1 << 8));
-            //RaycastHit2D hit = Physics2D.CircleCast(new Vector2(transform.position.x, transform.position.y - c2D.bounds.extents.y), c2D.bounds.extents.x, Vector2.down, y - c2D.bounds.extents.x, ~(1 << 8));
-            //RaycastHit2D hit = Physics2D.Raycast(BotRight() + new Vector2(-collOffset, y), Vector2.left, c2D.bounds.size.x - collOffset * 2, ~(1 << 8));
-            if (hit)
-            {
-                Debug.Log(hit.normal);
-                Debug.Log("Down has been hit! Repositioning...");
-                SetTouching(Vector2.down, true);
-                SetVelocity(new Vector2(velocity.x, 0));
-                return -hit.distance;
-            }
-        }
-        else if (y > 0)
-        {
-            SetTouching(Vector2.down, false);
-            Debug.DrawRay(TopLeft() + new Vector2(collOffset, y), Vector2.right * (c2D.bounds.size.x - collOffset * 2), Color.yellow);
-
-            RaycastHit2D hit = Physics2D.Raycast(TopLeft() + new Vector2(collOffset, y), Vector2.right, c2D.bounds.size.x - collOffset * 2, ~(1 << 8));
-            if (hit)
-            {
-                Debug.Log("Up has been hit! Repositioning...");
-                SetTouching(Vector2.up, true);
-                SetVelocity(new Vector2(velocity.x, 0));
-                return 0;
-            }
-        }
-        return y;
-
-    }
-    private float CheckNextMoveY(float y)
+    [Obsolete("Methos is obsolete. Use 'CheckNextMoveY' instead.")]
+    private float OLDCheckNextMoveY(float y)
     {
         SetTouching(Vector2.down, false);
         SetTouching(Vector2.up, false);

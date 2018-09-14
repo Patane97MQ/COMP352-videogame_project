@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212822553610825270}
   - component: {fileID: 61712993352533224}
   - component: {fileID: 50814658905732340}
-  - component: {fileID: 114766854174137420}
+  - component: {fileID: 114585925650549672}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1981095214291014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -10.16, y: -3.71, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -88,7 +88,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.38, y: 1.26}
   m_EdgeRadius: 0
---- !u!114 &114766854174137420
+--- !u!114 &114585925650549672
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,21 +96,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1981095214291014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80e88e02f112a4f299e3286ab15257df, type: 3}
+  m_Script: {fileID: 11500000, guid: 4707b7916b6511b4e9b2bfdde290e672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 4
-  jumpSpeed: 4
-  walkOnAir: 0
-  groundRect:
-    serializedVersion: 2
-    x: -0.32
-    y: -0.72
-    width: 0.56
-    height: 0.1
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  jumpStrength: 1
+  gravityDirection: {x: 0, y: -1}
+  gravityConstant: 0.4
 --- !u!212 &212822553610825270
 SpriteRenderer:
   m_ObjectHideFlags: 1

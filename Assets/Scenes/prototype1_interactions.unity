@@ -450,11 +450,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4974878267216176, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.64
+      value: 4.38
       objectReference: {fileID: 0}
     - target: {fileID: 4974878267216176, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4974878267216176, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1696,11 +1696,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4974878267216176, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.25
+      value: -5.07
       objectReference: {fileID: 0}
     - target: {fileID: 4974878267216176, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.28
+      value: 2.05
       objectReference: {fileID: 0}
     - target: {fileID: 4974878267216176, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -9321,7 +9321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   activateType: 0
-  activeTogether: 0
+  activeTogether: 1
   activatorsList:
   - {fileID: 1108779402}
   - {fileID: 555270868}

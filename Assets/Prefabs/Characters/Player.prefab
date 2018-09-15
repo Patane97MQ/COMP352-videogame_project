@@ -99,9 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4707b7916b6511b4e9b2bfdde290e672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpStrength: 1
+  movementSpeed: 1
+  jumpStrength: 1.5
   gravityDirection: {x: 0, y: -1}
-  gravityConstant: 0.4
+  gravityConstant: 0.98
+  stepHeight: 0.1
 --- !u!212 &212822553610825270
 SpriteRenderer:
   m_ObjectHideFlags: 1

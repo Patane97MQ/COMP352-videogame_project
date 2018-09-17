@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -31,6 +29,8 @@ public class movement3 : MonoBehaviour {
     private float axis;
     private float collOffset = 0.065f;
 
+    private Vector2 xAxisMovement;
+
     // Use this for initialization
     void Start()
     {
@@ -42,13 +42,16 @@ public class movement3 : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         // accelerationY should never/rarely be changed. This is the constant downwards force of 'gravity'
-        acceleration = gravityDirection * (gravityConstant / 100);
+        Vector2 normGravDir = new Vector2(gravityDirection.x, gravityDirection.y);
+        normGravDir.Normalize();
+        acceleration = normGravDir * (gravityConstant / 100);
         CheckRotation();
         // If player is on the ground and "Jump" button is pressed,
         // They will jump the opposite direction of gravity
+        Vector2 jumpVel = new Vector2();
         if (down && Input.GetButton("Jump") && !crouching)
-            SetVelocity((-gravityDirection)*jumpStrength / 10);
-
+            //jumpVel = (-gravityDirection) * jumpStrength / 10;
+            AddVelocity((-gravityDirection) * jumpStrength / 10);
         if (Input.GetButton("Vertical"))
         {
             if(!crouching)
@@ -76,6 +79,9 @@ public class movement3 : MonoBehaviour {
             SetVelocity(new Vector2(movementSpeed / 10 * axis, velocity.y));
         else if (gravityDirection.y == 0)
             SetVelocity(new Vector2(velocity.x, movementSpeed / 10 * axis));
+        AddVelocity(-xAxisMovement);
+        xAxisMovement = Vector2.Perpendicular(gravityDirection) * (movementSpeed / 10 * axis);
+        AddVelocity(xAxisMovement);
         
         // Determines which way the object should face when moving in specified gravity
         if ((gravityDirection == Vector2.down || gravityDirection == Vector2.right) 
@@ -91,6 +97,7 @@ public class movement3 : MonoBehaviour {
         AddPositionX(velocity.x);
         AddPositionY(velocity.y);
 
+        //AddVelocity(-xAxisMovement);
         //Debug.Log("Collisions: " + (down ? "down " : "")
         //    + (up ? "up " : "")
         //    + (left ? "left " : "")
@@ -145,17 +152,18 @@ public class movement3 : MonoBehaviour {
     // Ensures object is correctly rotated for the direction of gravity.
     private void CheckRotation()
     {
-        float previousRotation = rotation;
-        if (gravityDirection == Vector2.down)
-            rotation = 0;
-        else if (gravityDirection == Vector2.up)
-            rotation = 180;
-        else if (gravityDirection == Vector2.left)
-            rotation = -90;
-        else if (gravityDirection == Vector2.right)
-            rotation = 90;
-        if (previousRotation != rotation)
-            transform.Rotate(new Vector3(0, 0, rotation));
+        //float previousRotation = rotation;
+        //if (gravityDirection == Vector2.down)
+        //    rotation = 0;
+        //else if (gravityDirection == Vector2.up)
+        //    rotation = 180;
+        //else if (gravityDirection == Vector2.left)
+        //    rotation = -90;
+        //else if (gravityDirection == Vector2.right)
+        //    rotation = 90;
+        //if (previousRotation != rotation)
+        //    transform.Rotate(new Vector3(0, 0, rotation));
+        transform.Rotate(Vector2.)
     }
 
     private void DrawBox(Vector2 centre, Vector2 size, Color color)
@@ -175,7 +183,7 @@ public class movement3 : MonoBehaviour {
         DrawBox(origin + direction * distance, size, Color.red);
     }
 
-    private float edgeCut = 0.02f;
+    private float edgeCut = 0.01f;
 
     private float CheckNextMoveX(float x)
     {

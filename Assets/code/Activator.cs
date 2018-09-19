@@ -1,56 +1,44 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 public abstract class Activator : MonoBehaviour {
-
+    
+    public ColourEnum colour = ColourEnum.red;
     public ActivatorType activatorType = ActivatorType.Constant;
 
-    public List<string> activateTags;
-
-    public Sprite deactivatedImage;
-    public Sprite activatedImage;
-
-
-    private SpriteRenderer sRender;
     public delegate void ActivateAction(Activator activator);
     public static event ActivateAction OnActivated;
     public static event ActivateAction OnDeactivated;
 
     protected bool activated = false;
-    protected int counter = 0;
-
-
-    // Use this for initialization
-    void Start ()
-    {
-        sRender = GetComponent<SpriteRenderer>();
-    }
+    protected bool activatedOnce = false;
+    
     protected void SetActivated(bool activated)
     {
-
+        bool before = this.activated;
         if (activated)
-        {
             this.activated = ActivateHandler(true);
-            counter++;
-            sRender.sprite = activatedImage;
+        else
+            this.activated = ActivateHandler(false);
+
+        if (!before && this.activated)
+        {
+            ColourHandler.AddCount(colour, 1);
             try { OnActivated(this); }
             catch { }
-            
         }
-        else
+        else if (before && !this.activated)
         {
-            this.activated = ActivateHandler(false);
-            sRender.sprite = deactivatedImage;
+            ColourHandler.AddCount(colour, -1);
             try { OnDeactivated(this); }
             catch { }
         }
-
     }
     // Decides how the object should be activated depending on the type. Eg. Toggle chooses to either Toggle On (active) or Off (not active)
-    private bool ActivateHandler(bool activated)
+    protected bool ActivateHandler(bool activated)
     {
         switch (activatorType)
         {
+            
             case ActivatorType.Constant:
                 return activated;
 
@@ -58,20 +46,22 @@ public abstract class Activator : MonoBehaviour {
                 if (activated)
                     return !this.activated;
                 return this.activated;
+
+            case ActivatorType.Once:
+                if (activatedOnce)
+                    return this.activated;
+                activatedOnce = true;
+                return activated;
         }
         return activated;
-
     }
+
     public bool Activated()
     {
         return activated;
     }
-    public int TimesPressed()
-    {
-        return counter;
-    }
 }
 public enum ActivatorType
 {
-    Constant, Toggle
+    Constant, Toggle, Once
 }

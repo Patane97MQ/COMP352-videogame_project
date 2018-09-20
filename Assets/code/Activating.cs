@@ -15,7 +15,7 @@ public abstract class Activating : MonoBehaviour {
     void OnDisable()
     {
         Activator.OnActivated -= OnActivated;
-        Activator.OnDeactivated += OnDeactivated;
+        Activator.OnDeactivated -= OnDeactivated;
     }
 
     public bool isActive()

@@ -2878,11 +2878,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4291072657934974, guid: aa04fc27acda9ae4591aa9d5198b5d2b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.8725543
+      value: 2.44
       objectReference: {fileID: 0}
     - target: {fileID: 4291072657934974, guid: aa04fc27acda9ae4591aa9d5198b5d2b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.1128752
+      value: -2.11
       objectReference: {fileID: 0}
     - target: {fileID: 4291072657934974, guid: aa04fc27acda9ae4591aa9d5198b5d2b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2921,6 +2921,10 @@ Prefab:
         type: 2}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1670902360618260, guid: aa04fc27acda9ae4591aa9d5198b5d2b, type: 2}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa04fc27acda9ae4591aa9d5198b5d2b, type: 2}
@@ -6215,6 +6219,11 @@ Prefab:
       propertyPath: m_Size.y
       value: 0.10849285
       objectReference: {fileID: 0}
+    - target: {fileID: 114337366619656864, guid: 1bbdbd88a671d5143acb37eec78fbfb5,
+        type: 2}
+      propertyPath: colour
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bbdbd88a671d5143acb37eec78fbfb5, type: 2}
   m_IsPrefabAsset: 0
@@ -6986,8 +6995,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   colourHandler:
-    red: 1
-    blue: 0
+    red: 0
+    blue: 1
     green: 0
 --- !u!4 &1514718442 stripped
 Transform:
@@ -7324,11 +7333,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4808503078617606, guid: 1bbdbd88a671d5143acb37eec78fbfb5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.046663
+      value: -3.83
       objectReference: {fileID: 0}
     - target: {fileID: 4808503078617606, guid: 1bbdbd88a671d5143acb37eec78fbfb5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.883
+      value: 0.86
       objectReference: {fileID: 0}
     - target: {fileID: 4808503078617606, guid: 1bbdbd88a671d5143acb37eec78fbfb5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -7362,7 +7371,7 @@ Prefab:
     - target: {fileID: 114337366619656864, guid: 1bbdbd88a671d5143acb37eec78fbfb5,
         type: 2}
       propertyPath: activatorType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 61508348507546866, guid: 1bbdbd88a671d5143acb37eec78fbfb5,
         type: 2}
@@ -9703,7 +9712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   colourHandler:
-    red: 0
+    red: 1
     blue: 0
     green: 0
 --- !u!1001 &2004817095
@@ -9933,11 +9942,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4291072657934974, guid: aa04fc27acda9ae4591aa9d5198b5d2b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.32
+      value: -2.67
       objectReference: {fileID: 0}
     - target: {fileID: 4291072657934974, guid: aa04fc27acda9ae4591aa9d5198b5d2b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.15
+      value: -2.13
       objectReference: {fileID: 0}
     - target: {fileID: 4291072657934974, guid: aa04fc27acda9ae4591aa9d5198b5d2b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -9972,6 +9981,15 @@ Prefab:
         type: 2}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61468858718994764, guid: aa04fc27acda9ae4591aa9d5198b5d2b,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1670902360618260, guid: aa04fc27acda9ae4591aa9d5198b5d2b, type: 2}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa04fc27acda9ae4591aa9d5198b5d2b, type: 2}

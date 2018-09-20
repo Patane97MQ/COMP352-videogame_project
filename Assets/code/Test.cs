@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Indicator : MonoBehaviour {
-
-    Activating connect;
-
-
+public class Test : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

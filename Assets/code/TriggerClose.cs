@@ -16,33 +16,14 @@ public class TriggerClose : MonoBehaviour {
 		
 	}
 
-    
-     void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (tag == "Player")
-        {
-            Debug.Log("collison exited");
-            whichBarrier.GetComponent<SpriteRenderer>().enabled = true;
-            whichBarrier.GetComponent<Collider2D>().enabled = true;
+        Debug.Log("collison exited");
+        whichBarrier.GetComponent<SpriteRenderer>().enabled = true;
+        whichBarrier.GetComponent<Collider2D>().enabled = true;
 
-            gameObject.GetComponent<Collider2D>().enabled = false;
-        }
-        else
-        {
-            gameObject.GetComponent<Collider2D>().enabled = false;
-        }
-    }
-
-    
-    void OnCollisionExit2D(Collision2D collision)
-    {
-   
-
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-
+        gameObject.GetComponent<Collider2D>().enabled = false;
     }
 
 

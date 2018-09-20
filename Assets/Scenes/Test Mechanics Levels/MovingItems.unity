@@ -2917,6 +2917,11 @@ Prefab:
       propertyPath: whichBarrier
       value: 
       objectReference: {fileID: 1997739314}
+    - target: {fileID: 61468858718994764, guid: aa04fc27acda9ae4591aa9d5198b5d2b,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa04fc27acda9ae4591aa9d5198b5d2b, type: 2}
   m_IsPrefabAsset: 0
@@ -9963,6 +9968,11 @@ Prefab:
       propertyPath: whichBarrier
       value: 
       objectReference: {fileID: 1514061062}
+    - target: {fileID: 61468858718994764, guid: aa04fc27acda9ae4591aa9d5198b5d2b,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa04fc27acda9ae4591aa9d5198b5d2b, type: 2}
   m_IsPrefabAsset: 0

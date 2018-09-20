@@ -1,35 +1,26 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+public class Physics : MonoBehaviour {
 
-public class movement3 : MonoBehaviour {
-
-    public float movementSpeed = 1f;
-    public float jumpStrength = 1f;
     public Vector2 gravityDirection = Vector2.down;
-    public float gravityConstant = 0.4f;
+    public float gravityConstant = 0.98f;
+    public float horizontalDrag = 0.0001f;
+    public float weight = 0f;
     public float stepHeight = 0.1f;
 
-    private Transform t;
-    private Rigidbody2D rb2D;
-    private Collider2D c2D;
+    protected Transform t;
+    protected Rigidbody2D rb2D;
+    protected Collider2D c2D;
 
-    private bool facingRight = true;
-    private bool crouching = false;
+    protected float rotation;
+    protected bool up;
+    protected bool down;
+    protected bool left;
+    protected bool right;
 
-    private float rotation;
-    private bool up;
-    private bool down;
-    private bool left;
-    private bool right;
-
-    private Vector2 velocity;
-    private Vector2 acceleration;
-    
-    private float axis;
-    private float collOffset = 0.065f;
+    protected Vector2 velocity;
+    protected Vector2 acceleration;
 
     // Use this for initialization
     void Start()
@@ -38,54 +29,13 @@ public class movement3 : MonoBehaviour {
         rb2D = gameObject.GetComponent<Rigidbody2D>();
         c2D = gameObject.GetComponent<Collider2D>();
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-        // accelerationY should never/rarely be changed. This is the constant downwards force of 'gravity'
+
+    // Update is called once per frame
+    protected void FixedUpdate ()
+    {
         acceleration = gravityDirection * (gravityConstant / 100);
+        // accelerationY should never/rarely be changed. This is the constant downwards force of 'gravity'
         CheckRotation();
-        // If player is on the ground and "Jump" button is pressed,
-        // They will jump the opposite direction of gravity
-        if (down && Input.GetButton("Jump") && !crouching)
-            SetVelocity((-gravityDirection)*jumpStrength / 10);
-
-        if (Input.GetButton("Vertical"))
-        {
-            if(!crouching)
-            {
-                crouching = true;
-                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 2, 0);
-                transform.position = new Vector3(transform.position.x, transform.position.y - transform.localScale.y / 2, 0);
-            }
-        }
-        else
-        {
-            if (crouching)
-            {
-                crouching = false;
-                transform.position = new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, 0);
-                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, 0);
-            }
-        }
-
-        // Changes the movement to different axes depending on the direction of gravity
-
-        axis = Input.GetAxis("Horizontal");
-        //SetVelocity(new Vector2(movementSpeed / 10 * axis, movementSpeed / 10 * axis) * Vector2.Perpendicular(gravityDirection));
-        if (gravityDirection.x == 0)
-            SetVelocity(new Vector2(movementSpeed / 10 * axis, velocity.y));
-        else if (gravityDirection.y == 0)
-            SetVelocity(new Vector2(velocity.x, movementSpeed / 10 * axis));
-        
-        // Determines which way the object should face when moving in specified gravity
-        if ((gravityDirection == Vector2.down || gravityDirection == Vector2.right) 
-         && (axis < 0 && facingRight || axis > 0 && !facingRight)
-         || (gravityDirection == Vector2.up || gravityDirection == Vector2.left)
-         && (axis > 0 && facingRight || axis < 0 && !facingRight))
-        {
-            facingRight = !facingRight;
-            transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, 0);
-        }
 
         // Velocity constants are always applied!
         AddPositionX(velocity.x);
@@ -101,10 +51,18 @@ public class movement3 : MonoBehaviour {
 
         // Velocity is always accelerated. This is exclusively used for gravity
         AddVelocity(acceleration);
+        HorizontalDrag();
     }
-
     // ====================================================================
 
+    private void HorizontalDrag()
+    {
+        velocity = Vector2.MoveTowards(velocity, new Vector2(0, velocity.y), 1);
+    }
+    //private void ApplyFriction()
+    //{
+    //    velocity = new Vector2(Mathf.MoveTowards(velocity.x, 0, horizontalDrag), Mathf.MoveTowards(velocity.y, 0, horizontalDrag));
+    //}
     // Try not to use this function on its own. Use SetVelocity or AddVelocity.
     public void AddPositionX(float bx)
     {
@@ -140,6 +98,14 @@ public class movement3 : MonoBehaviour {
         velocity += bv;
     }
 
+    public void AddForceX(float x)
+    {
+        AddVelocity(new Vector2(x/weight, 0));
+    }
+    public void AddForceY(float y)
+    {
+        AddVelocity(new Vector2(0, y/weight));
+    }
     // ====================================================================
 
     // Ensures object is correctly rotated for the direction of gravity.
@@ -156,8 +122,8 @@ public class movement3 : MonoBehaviour {
             rotation = 90;
         if (previousRotation != rotation)
             transform.Rotate(new Vector3(0, 0, rotation));
-    }
 
+    }
     private void DrawBox(Vector2 centre, Vector2 size, Color color)
     {
         Debug.DrawLine(new Vector2(centre.x - size.x / 2, centre.y + size.y / 2), new Vector2(centre.x + size.x / 2, centre.y + size.y / 2), color);
@@ -202,6 +168,8 @@ public class movement3 : MonoBehaviour {
                     transform.position = new Vector3(transform.position.x, transform.position.y + stepHeight, transform.position.z);
                 else
                 {
+                    if ((nextCheck.collider.GetComponent("Physics") as Physics) != null)
+                        (nextCheck.collider.GetComponent("Physics") as Physics).AddForceX(x);
                     // Setting the object to be touching the left
                     SetTouching(Vector2.left, true);
 
@@ -229,6 +197,8 @@ public class movement3 : MonoBehaviour {
                     transform.position = new Vector3(transform.position.x, transform.position.y + stepHeight, transform.position.z);
                 else
                 {
+                    if ((nextCheck.collider.GetComponent("Physics") as Physics) != null)
+                        (nextCheck.collider.GetComponent("Physics") as Physics).AddForceX(x);
                     SetTouching(Vector2.right, true);
                     SetVelocity(new Vector2(0, velocity.y));
                     return nextCheck.distance - c2D.bounds.extents.x + 0.005f;
@@ -245,104 +215,32 @@ public class movement3 : MonoBehaviour {
         {
             DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), Vector2.down, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
 
-            RaycastHit2D hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), transform.rotation.z, Vector2.down, Math.Abs(y) + c2D.bounds.extents.y - 0.005f, ~(1 << 8));
-            if (hit)
+            RaycastHit2D nextCheck = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), transform.rotation.z, Vector2.down, Math.Abs(y) + c2D.bounds.extents.y - 0.005f, ~(1 << 8));
+            if (nextCheck)
             {
+                if ((nextCheck.collider.GetComponent("Physics") as Physics) != null)
+                    (nextCheck.collider.GetComponent("Physics") as Physics).AddForceY(y);
                 SetTouching(Vector2.down, true);
                 SetVelocity(new Vector2(velocity.x, 0));
-                return -(hit.distance - c2D.bounds.extents.y + 0.005f);
+                return -(nextCheck.distance - c2D.bounds.extents.y + 0.005f);
             }
         }
         else if (y > 0)
         {
             DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), Vector2.up, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
 
-            RaycastHit2D hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), transform.rotation.z, Vector2.up, Math.Abs(y) + c2D.bounds.extents.y - 0.005f, ~(1 << 8));
-            if (hit)
+            RaycastHit2D nextCheck = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), transform.rotation.z, Vector2.up, Math.Abs(y) + c2D.bounds.extents.y - 0.005f, ~(1 << 8));
+            if (nextCheck)
             {
+                if ((nextCheck.collider.GetComponent("Physics") as Physics) != null)
+                    (nextCheck.collider.GetComponent("Physics") as Physics).AddForceY(y);
                 SetTouching(Vector2.up, true);
                 SetVelocity(new Vector2(velocity.x, 0));
-                return hit.distance - c2D.bounds.extents.y + 0.005f;
+                return nextCheck.distance - c2D.bounds.extents.y + 0.005f;
             }
         }
         return y;
     }
-
-    [Obsolete("Method is obsolete. Use 'CheckNextMoveX' instead.")]
-    private float OLDCheckNextMoveX(float x)
-    {
-        SetTouching(Vector2.left, false);
-        SetTouching(Vector2.right, false);
-        if (x < 0)
-        {
-            Debug.DrawRay(TopLeft() + new Vector2(x, -collOffset), Vector2.down * (c2D.bounds.size.y - collOffset * 2), Color.yellow);
-
-            RaycastHit2D hit = Physics2D.Raycast(TopLeft() + new Vector2(x, -collOffset), Vector2.down, c2D.bounds.size.y - collOffset * 2, ~(1 << 8));
-
-            if (hit)
-            {
-                Debug.Log("Left has been hit! Repositioning...");
-                SetTouching(Vector2.left, true);
-                SetVelocity(new Vector2(0, velocity.y));
-                return (hit.collider.bounds.max.x) - c2D.bounds.min.x;
-            }
-        }
-        else if (x > 0)
-        {
-            Debug.DrawRay(BotRight() + new Vector2(x, collOffset), Vector2.up * (c2D.bounds.size.y - collOffset * 2), Color.yellow);
-
-            RaycastHit2D hit = Physics2D.Raycast(BotRight() + new Vector2(x, collOffset), Vector2.up, c2D.bounds.size.y - collOffset * 2, ~(1 << 8));
-            if (hit)
-            {
-                Debug.Log("Right has been hit! Repositioning...");
-                SetTouching(Vector2.right, true);
-                SetVelocity(new Vector2(0, velocity.y));
-                return (hit.collider.bounds.min.x) - c2D.bounds.max.x;
-            }
-        }
-        return x;
-
-    }
-    [Obsolete("Method is obsolete. Use 'CheckNextMoveY' instead.")]
-    private float OLDCheckNextMoveY(float y)
-    {
-        SetTouching(Vector2.down, false);
-        SetTouching(Vector2.up, false);
-        if (y < 0)
-        {
-            SetTouching(Vector2.up, false);
-            Debug.DrawRay(BotRight() + new Vector2(-collOffset, y), Vector2.left * (c2D.bounds.size.x - collOffset*2), Color.yellow);
-
-            RaycastHit2D hit = Physics2D.Raycast(BotRight() + new Vector2(-collOffset, y), Vector2.left, c2D.bounds.size.x - collOffset*2, ~(1 << 8));
-            if (hit && hit.distance == 0)
-                hit = Physics2D.Raycast(BotLeft() + new Vector2(collOffset, y), Vector2.right, c2D.bounds.size.x - collOffset * 2, ~(1 << 8));
-            if (hit)
-            {
-                Debug.Log(hit.normal);
-                Debug.Log("Down has been hit! Repositioning...");
-                SetTouching(Vector2.down, true);
-                SetVelocity(new Vector2(velocity.x, 0));
-                return (hit.collider.bounds.max.y) - c2D.bounds.min.y;
-            }
-        }
-        else if (y > 0)
-        {
-            SetTouching(Vector2.down, false);
-            Debug.DrawRay(TopLeft() + new Vector2(collOffset, y), Vector2.right * (c2D.bounds.size.x - collOffset * 2), Color.yellow);
-
-            RaycastHit2D hit = Physics2D.Raycast(TopLeft() + new Vector2(collOffset, y), Vector2.right, c2D.bounds.size.x - collOffset*2, ~(1 << 8));
-            if (hit)
-            {
-                Debug.Log("Up has been hit! Repositioning...");
-                SetTouching(Vector2.up, true);
-                SetVelocity(new Vector2(velocity.x, 0));
-                return (hit.collider.bounds.min.y) - c2D.bounds.max.y;
-            }
-        }
-        return y;
-
-    }
-
     private void SetTouching(Vector2 actualDirection, bool touching)
     {
 

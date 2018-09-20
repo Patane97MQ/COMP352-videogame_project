@@ -20,8 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4046520060528978}
   - component: {fileID: 212125089487465878}
-  - component: {fileID: 61500002890601926}
   - component: {fileID: 50624667483812838}
+  - component: {fileID: 61500002890601926}
+  - component: {fileID: 114238909209886342}
   m_Layer: 10
   m_Name: Wooden Crate
   m_TagString: red_clone
@@ -49,7 +50,7 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1590858759579808}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -87,6 +88,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.49, y: 0.45}
   m_EdgeRadius: 0
+--- !u!114 &114238909209886342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1590858759579808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8439ffef412951488b294045c92eea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityDirection: {x: 0, y: -1}
+  gravityConstant: 0.98
+  horizontalDrag: 0.001
+  weight: 5
+  stepHeight: 0.1
 --- !u!212 &212125089487465878
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -164,8 +164,14 @@ public class Physics : MonoBehaviour {
 
                 // If no objects were hit when checking the stepheight (meaning we can step on top of this object) 
                 // AND If we make the downwards edge cut (accounting for the edge cut of the bottom collider. If this check wasnt here, then we can clip into objects which is BAD!)
-                if (!stepCheck && Math.Abs(x) >= edgeCut)
-                    transform.position = new Vector3(transform.position.x, transform.position.y + stepHeight, transform.position.z);
+                if (!stepCheck)
+                {
+                    if (Math.Abs(x) >= edgeCut)
+                        transform.position = new Vector3(transform.position.x, transform.position.y + stepHeight, transform.position.z);
+                    else
+                        return x;
+                }
+                
                 else
                 {
                     if ((nextCheck.collider.GetComponent("Physics") as Physics) != null)
@@ -193,8 +199,13 @@ public class Physics : MonoBehaviour {
             {
                 RaycastHit2D stepCheck = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y + stepHeight), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), transform.rotation.z, Vector2.right, Math.Abs(x) + c2D.bounds.extents.x - 0.005f, ~(1 << 8));
 
-                if (!stepCheck && Math.Abs(x) >= edgeCut)
-                    transform.position = new Vector3(transform.position.x, transform.position.y + stepHeight, transform.position.z);
+                if (!stepCheck)
+                {
+                    if (Math.Abs(x) >= edgeCut)
+                        transform.position = new Vector3(transform.position.x, transform.position.y + stepHeight, transform.position.z);
+                    else
+                        return x;
+                }
                 else
                 {
                     if ((nextCheck.collider.GetComponent("Physics") as Physics) != null)

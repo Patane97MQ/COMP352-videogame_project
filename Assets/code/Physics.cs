@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Physics : MonoBehaviour {
@@ -143,6 +145,53 @@ public class Physics : MonoBehaviour {
 
     private float edgeCut = 0.02f;
 
+    //private float BoxCheckingX(Vector2 direction, float x)
+    //{
+    //    // Drawing a BoxCast of the below (for debugging)
+    //    DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
+
+    //    // BoxCast of this object is shot in the direction it wants to move. This will basically check if the objects 'next move' will hit anything
+    //    RaycastHit2D nextCheck = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), transform.rotation.z, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f, ~(1 << 8));
+
+    //    // If the object WILL hit something on its next move
+    //    if (nextCheck)
+    //    {
+    //        // BoxCast of this object is shot the same as above, however the y position is +stepHeight.
+    //        // If we hit nothing, then we know the originally hit object is below our step height and the object should be placed on top of it
+    //        List<RaycastHit2D> stepChecks = new List<RaycastHit2D>(Physics2D.BoxCastAll(new Vector2(transform.position.x, transform.position.y + stepHeight), new Vector2(0.01f, c2D.bounds.size.y - (edgeCut * 2)), transform.rotation.z, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f, ~(1 << 8)));
+
+    //        foreach (RaycastHit2D step in stepChecks)
+    //        {
+    //            if (step.collider.gameObject.GetComponent("Physics") as Physics == null)
+    //                Debug.Log(step.collider.name);
+    //        }
+    //        // If no objects were hit when checking the stepheight (meaning we can step on top of this object) 
+    //        // AND If we make the downwards edge cut (accounting for the edge cut of the bottom collider. If this check wasnt here, then we can clip into objects which is BAD!)
+    //        if (stepChecks.Where(stepCheck => !(stepCheck.collider is Physics)).Count() == 0)
+    //        {
+    //            if (Math.Abs(x) >= edgeCut)
+    //                transform.position += Vector3.up * stepHeight;
+    //            else
+    //                return x;
+    //        }
+
+    //        else
+    //        {
+    //            if ((nextCheck.collider.GetComponent("Physics") as Physics) != null)
+    //                (nextCheck.collider.GetComponent("Physics") as Physics).AddForceX(x);
+    //            // Setting the object to be touching the left
+    //            SetTouching(Vector2.left, true);
+
+    //            // Setting the object X velocity to 0
+    //            SetVelocity(new Vector2(0, velocity.y));
+
+    //            // Returning the distance the object is from the hit object. This ensures that it moves as close as it can to that object before stopping
+    //            // If we didnt do this, then there would be large gaps between an object and its collider
+    //            return -(nextCheck.distance - c2D.bounds.extents.x + 0.005f);
+    //        }
+    //    }
+    //}
+
     private float CheckNextMoveX(float x)
     {
         SetTouching(Vector2.left, false);
@@ -160,14 +209,19 @@ public class Physics : MonoBehaviour {
             {
                 // BoxCast of this object is shot the same as above, however the y position is +stepHeight.
                 // If we hit nothing, then we know the originally hit object is below our step height and the object should be placed on top of it
-                RaycastHit2D stepCheck = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y + stepHeight), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), transform.rotation.z, Vector2.left, Math.Abs(x) + c2D.bounds.extents.x - 0.005f, ~(1 << 8));
+                List<RaycastHit2D> stepChecks = new List<RaycastHit2D>(Physics2D.BoxCastAll(new Vector2(transform.position.x, transform.position.y + stepHeight), new Vector2(0.01f, c2D.bounds.size.y - (edgeCut * 2)), transform.rotation.z, Vector2.left, Math.Abs(x) + c2D.bounds.extents.x - 0.005f, ~(1 << 8)));
 
+                foreach(RaycastHit2D step in stepChecks)
+                {
+                    if (step.collider.gameObject.GetComponent("Physics") as Physics == null)
+                        Debug.Log(step.collider.name);
+                }
                 // If no objects were hit when checking the stepheight (meaning we can step on top of this object) 
                 // AND If we make the downwards edge cut (accounting for the edge cut of the bottom collider. If this check wasnt here, then we can clip into objects which is BAD!)
-                if (!stepCheck)
+                if (stepChecks.Where(stepCheck => !(stepCheck.collider is Physics)).Count() == 0)
                 {
                     if (Math.Abs(x) >= edgeCut)
-                        transform.position = new Vector3(transform.position.x, transform.position.y + stepHeight, transform.position.z);
+                        transform.position += Vector3.up * stepHeight;
                     else
                         return x;
                 }
@@ -202,7 +256,7 @@ public class Physics : MonoBehaviour {
                 if (!stepCheck)
                 {
                     if (Math.Abs(x) >= edgeCut)
-                        transform.position = new Vector3(transform.position.x, transform.position.y + stepHeight, transform.position.z);
+                        transform.position += Vector3.up * stepHeight;
                     else
                         return x;
                 }

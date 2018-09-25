@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+
+public enum ColourEnum
+{
+    red, blue, green
+}
+[System.Serializable]
+public class ColourHandler
+{
+    public int red, blue, green = 0;
+    private static Dictionary<ColourEnum, int> colourCounts = new Dictionary<ColourEnum, int>();
+    
+    public static void AddCount(ColourEnum colour, int amount)
+    {
+        if (!colourCounts.ContainsKey(colour))
+            colourCounts.Add(colour, 0);
+        colourCounts[colour] = Math.Max(0, colourCounts[colour] + amount);
+    }
+
+    public bool CheckAllColours()
+    {
+        foreach (FieldInfo fieldInfo in this.GetType().GetFields().Where(FieldInfo => FieldInfo.IsPublic))
+        {
+            int maxValue = (int)fieldInfo.GetValue(this);
+            if (maxValue <= 0)
+                continue;
+            ColourEnum colourEnum = (ColourEnum) Enum.Parse(typeof(ColourEnum), fieldInfo.Name);
+            
+            if (colourCounts[colourEnum] < maxValue)
+                return false;
+        }
+        return true;
+    }
+}

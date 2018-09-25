@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Barrier : Activating {
+public class NextLevelDoor : Activating {
 
     protected override void Activate()
     {
@@ -9,8 +9,5 @@ public class Barrier : Activating {
     }
 
     protected override void DeActivate()
-    {
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        gameObject.GetComponent<Collider2D>().enabled = true;
-    }
+    { }
 }

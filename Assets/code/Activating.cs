@@ -1,12 +1,18 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Activating : MonoBehaviour {
 
-    public bool active = false;
 
+    public bool inverted = false;
     public ColourHandler colourHandler;
 
+    private bool active = false;
+
+    protected void Start()
+    {
+        active = inverted;
+        CheckForActivation(true);
+    }
     void OnEnable()
     {
         Activator.OnActivated += OnActivated;
@@ -18,29 +24,29 @@ public abstract class Activating : MonoBehaviour {
         Activator.OnDeactivated -= OnDeactivated;
     }
 
-    public bool isActive()
+    public bool IsActive()
     {
         return active;
     }
 
-
     void OnActivated(Activator activator)
     {
-        CheckForActivation();
+        CheckForActivation(false);
     }
     void OnDeactivated(Activator activator)
     {
-        CheckForActivation();
+        CheckForActivation(false);
     }
 
-    void CheckForActivation()
+    void CheckForActivation(bool firstRun)
     {
         bool currentState = active;
 
         active = ActiveColoursCheck();
-
+        if (inverted)
+            active = !active;
         // If the 'active' state has changed, update the object but running Activate() or Deactivate() respectively
-        if (currentState != active)
+        if (currentState != active || firstRun)
         {
             if (active)
                 Activate();

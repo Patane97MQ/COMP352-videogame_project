@@ -1,20 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Indicator : MonoBehaviour {
 
-    Activating connect;
+    public Activator activator;
 
+    void OnEnable()
+    {
+        Activator.OnActivated += OnActivated;
+        Activator.OnDeactivated += OnDeactivated;
+    }
+    void OnDisable()
+    {
+        Activator.OnActivated -= OnActivated;
+        Activator.OnDeactivated -= OnDeactivated;
+    }
+    private void Start()
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/coloured/" + activator.colour + "/indicator/" + (activator.Activated() ? "on" : "off"), typeof(Sprite)) as Sprite;
+    }
+    void OnActivated(Activator activator)
+    {
+        if (activator.Equals(this.activator))
+            gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/coloured/" + activator.colour + "/indicator/" + (activator.Activated() ? "on" : "off"), typeof(Sprite)) as Sprite;
 
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+    void OnDeactivated(Activator activator)
+    {
+        if (activator.Equals(this.activator))
+            gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/coloured/" + activator.colour + "/indicator/" + (activator.Activated() ? "on" : "off"), typeof(Sprite)) as Sprite;
+    }
 }

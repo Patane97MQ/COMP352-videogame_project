@@ -1,12 +1,9 @@
 ﻿using System;
-<<<<<<< HEAD:Assets/code/movement3.cs
-=======
-using System.Collections.Generic;
 using System.Linq;
->>>>>>> dev:Assets/code/Physics.cs
 using UnityEngine;
 
-public class Physics : MonoBehaviour {
+public class Physics : MonoBehaviour
+{
 
     public Vector2 gravity = new Vector2(0, -9.81f);
 
@@ -27,8 +24,6 @@ public class Physics : MonoBehaviour {
     protected Vector2 velocity;
     protected Vector2 acceleration;
 
-    private Vector2 xAxisMovement;
-
     // Use this for initialization
     void Start()
     {
@@ -36,76 +31,18 @@ public class Physics : MonoBehaviour {
         rb2D = gameObject.GetComponent<Rigidbody2D>();
         c2D = gameObject.GetComponent<Collider2D>();
     }
-<<<<<<< HEAD:Assets/code/movement3.cs
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-        // accelerationY should never/rarely be changed. This is the constant downwards force of 'gravity'
-        Vector2 normGravDir = new Vector2(gravityDirection.x, gravityDirection.y);
-        normGravDir.Normalize();
-        acceleration = normGravDir * (gravityConstant / 100);
-        CheckRotation();
-        // If player is on the ground and "Jump" button is pressed,
-        // They will jump the opposite direction of gravity
-        Vector2 jumpVel = new Vector2();
-        if (down && Input.GetButton("Jump") && !crouching)
-            //jumpVel = (-gravityDirection) * jumpStrength / 10;
-            AddVelocity((-gravityDirection) * jumpStrength / 10);
-        if (Input.GetButton("Vertical"))
-        {
-            if(!crouching)
-            {
-                crouching = true;
-                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 2, 0);
-                transform.position = new Vector3(transform.position.x, transform.position.y - transform.localScale.y / 2, 0);
-            }
-        }
-        else
-        {
-            if (crouching)
-            {
-                crouching = false;
-                transform.position = new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, 0);
-                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, 0);
-            }
-        }
-
-        // Changes the movement to different axes depending on the direction of gravity
-
-        axis = Input.GetAxis("Horizontal");
-        //SetVelocity(new Vector2(movementSpeed / 10 * axis, movementSpeed / 10 * axis) * Vector2.Perpendicular(gravityDirection));
-        if (gravityDirection.x == 0)
-            SetVelocity(new Vector2(movementSpeed / 10 * axis, velocity.y));
-        else if (gravityDirection.y == 0)
-            SetVelocity(new Vector2(velocity.x, movementSpeed / 10 * axis));
-        AddVelocity(-xAxisMovement);
-        xAxisMovement = Vector2.Perpendicular(gravityDirection) * (movementSpeed / 10 * axis);
-        AddVelocity(xAxisMovement);
-        
-        // Determines which way the object should face when moving in specified gravity
-        if ((gravityDirection == Vector2.down || gravityDirection == Vector2.right) 
-         && (axis < 0 && facingRight || axis > 0 && !facingRight)
-         || (gravityDirection == Vector2.up || gravityDirection == Vector2.left)
-         && (axis > 0 && facingRight || axis < 0 && !facingRight))
-        {
-            facingRight = !facingRight;
-            transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, 0);
-        }
-=======
 
     // Update is called once per frame
-    protected void FixedUpdate ()
+    protected void FixedUpdate()
     {
         acceleration = gravity / 1000;
         // accelerationY should never/rarely be changed. This is the constant downwards force of 'gravity'
         CheckRotation();
->>>>>>> dev:Assets/code/Physics.cs
 
         // Velocity constants are always applied!
         AddPositionX(velocity.x);
         AddPositionY(velocity.y);
 
-        //AddVelocity(-xAxisMovement);
         //Debug.Log("Collisions: " + (down ? "down " : "")
         //    + (up ? "up " : "")
         //    + (left ? "left " : "")
@@ -149,7 +86,7 @@ public class Physics : MonoBehaviour {
             SetTouching(Vector2.up, false);
             return;
         }
-        float y = CheckNextMoveY2(by);
+        float y = CheckNextMoveY(by);
         transform.position = new Vector3(transform.position.x, transform.position.y + y, 0);
     }
     // Sets the current velocity as a whole.
@@ -180,23 +117,6 @@ public class Physics : MonoBehaviour {
     // Ensures object is correctly rotated for the direction of gravity.
     private void CheckRotation()
     {
-<<<<<<< HEAD:Assets/code/movement3.cs
-        //float previousRotation = rotation;
-        //if (gravityDirection == Vector2.down)
-        //    rotation = 0;
-        //else if (gravityDirection == Vector2.up)
-        //    rotation = 180;
-        //else if (gravityDirection == Vector2.left)
-        //    rotation = -90;
-        //else if (gravityDirection == Vector2.right)
-        //    rotation = 90;
-        //if (previousRotation != rotation)
-        //    transform.Rotate(new Vector3(0, 0, rotation));
-        transform.Rotate(Vector2.)
-    }
-=======
-        float previousRotation = rotation;
-        if (gravityDirection == Vector2.down)
         if (gravity.normalized == Vector2.down)
             rotation = 0;
         else if (gravity.normalized == Vector2.up)
@@ -205,9 +125,8 @@ public class Physics : MonoBehaviour {
             rotation = -90;
         else if (gravity.normalized == Vector2.right)
             rotation = 90;
-        if(transform.rotation.z != rotation)
+        if (transform.rotation.z != rotation)
             transform.Rotate(new Vector3(0, 0, rotation));
->>>>>>> dev:Assets/code/Physics.cs
 
     }
     private void DrawBox(Vector2 centre, Vector2 size, Color color)
@@ -223,9 +142,8 @@ public class Physics : MonoBehaviour {
         DrawBox(origin + direction * distance, size, Color.red);
     }
 
-    private float edgeCut = 0.01f;
     private float edgeCut = 0.02f;
-    
+
     private static Boolean HasPhysics(GameObject obj)
     {
         if (obj == null)
@@ -241,7 +159,7 @@ public class Physics : MonoBehaviour {
     private RaycastHit2D BoxCastIgnoreCaster(Vector2 origin, Vector2 size, float angle, Vector2 direction, float distance)
     {
         RaycastHit2D[] hit = Physics2D.BoxCastAll(origin, size, angle, direction, distance);
-        if(hit.Count() > 0)
+        if (hit.Count() > 0)
         {
             if (hit[0] && hit[0].collider.gameObject == gameObject)
                 return hit[1];
@@ -268,7 +186,7 @@ public class Physics : MonoBehaviour {
             // Distance is saved as this object. The reason that its saved here is because it might be changed later (within stepCheck)
             float raycastDistance = nextCheck.distance;
             RaycastHit2D stepCheck = BoxCastIgnoreCaster(new Vector2(transform.position.x, transform.position.y + stepHeight), new Vector2(0.01f, c2D.bounds.size.y - (edgeCut * 2)), transform.rotation.z, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
-            
+
             // In this scenario, we bump into an object which is below our stepheight threshhold (such as a button). If so, we will try to step on top of it.
             // We also only pass this if statement when the object we are colliding is NOT the originally collided object.
             if (!stepCheck || stepCheck.collider.gameObject != nextCheck.collider.gameObject && (HasPhysics(stepCheck.collider.gameObject)))
@@ -295,10 +213,10 @@ public class Physics : MonoBehaviour {
             // If we are colliding into an object with physics, push it.
             if (HasPhysics(nextCheck.collider.gameObject))
                 GrabPhysics(nextCheck.collider.gameObject).AddForceX(x);
-            
+
             SetTouching(direction, true);
             SetVelocity(new Vector2(0, velocity.y));
-            return Math.Sign(direction.x)*(raycastDistance - c2D.bounds.extents.x + 0.005f);
+            return Math.Sign(direction.x) * (raycastDistance - c2D.bounds.extents.x + 0.005f);
         }
         return x;
     }
@@ -337,7 +255,7 @@ public class Physics : MonoBehaviour {
             return RunAllBoxCastsForX(x, Vector2.right);
         return x;
     }
-    private float CheckNextMoveY2(float y)
+    private float CheckNextMoveY(float y)
     {
         SetTouching(Vector2.down, false);
         SetTouching(Vector2.up, false);
@@ -347,40 +265,40 @@ public class Physics : MonoBehaviour {
             return RunAllBoxCastsForY(y, Vector2.up);
         return y;
     }
-    private float CheckNextMoveY(float y)
-    {
-        SetTouching(Vector2.down, false);
-        SetTouching(Vector2.up, false);
-        if (y < 0)
-        {
-            DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), Vector2.down, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
+    //private float CheckNextMoveY(float y)
+    //{
+    //    SetTouching(Vector2.down, false);
+    //    SetTouching(Vector2.up, false);
+    //    if (y < 0)
+    //    {
+    //        DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), Vector2.down, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
 
-            RaycastHit2D nextCheck = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), transform.rotation.z, Vector2.down, Math.Abs(y) + c2D.bounds.extents.y - 0.005f, ~(1 << 8));
-            if (nextCheck)
-            {
-                if ((nextCheck.collider.GetComponent("Physics") as Physics) != null)
-                    (nextCheck.collider.GetComponent("Physics") as Physics).AddForceY(y);
-                SetTouching(Vector2.down, true);
-                SetVelocity(new Vector2(velocity.x, 0));
-                return -(nextCheck.distance - c2D.bounds.extents.y + 0.005f);
-            }
-        }
-        else if (y > 0)
-        {
-            DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), Vector2.up, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
+    //        RaycastHit2D nextCheck = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), transform.rotation.z, Vector2.down, Math.Abs(y) + c2D.bounds.extents.y - 0.005f, ~(1 << 8));
+    //        if (nextCheck)
+    //        {
+    //            if ((nextCheck.collider.GetComponent("Physics") as Physics) != null)
+    //                (nextCheck.collider.GetComponent("Physics") as Physics).AddForceY(y);
+    //            SetTouching(Vector2.down, true);
+    //            SetVelocity(new Vector2(velocity.x, 0));
+    //            return -(nextCheck.distance - c2D.bounds.extents.y + 0.005f);
+    //        }
+    //    }
+    //    else if (y > 0)
+    //    {
+    //        DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), Vector2.up, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
 
-            RaycastHit2D nextCheck = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), transform.rotation.z, Vector2.up, Math.Abs(y) + c2D.bounds.extents.y - 0.005f, ~(1 << 8));
-            if (nextCheck)
-            {
-                if ((nextCheck.collider.GetComponent("Physics") as Physics) != null)
-                    (nextCheck.collider.GetComponent("Physics") as Physics).AddForceY(y);
-                SetTouching(Vector2.up, true);
-                SetVelocity(new Vector2(velocity.x, 0));
-                return nextCheck.distance - c2D.bounds.extents.y + 0.005f;
-            }
-        }
-        return y;
-    }
+    //        RaycastHit2D nextCheck = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), transform.rotation.z, Vector2.up, Math.Abs(y) + c2D.bounds.extents.y - 0.005f, ~(1 << 8));
+    //        if (nextCheck)
+    //        {
+    //            if ((nextCheck.collider.GetComponent("Physics") as Physics) != null)
+    //                (nextCheck.collider.GetComponent("Physics") as Physics).AddForceY(y);
+    //            SetTouching(Vector2.up, true);
+    //            SetVelocity(new Vector2(velocity.x, 0));
+    //            return nextCheck.distance - c2D.bounds.extents.y + 0.005f;
+    //        }
+    //    }
+    //    return y;
+    //}
     private void SetTouching(Vector2 actualDirection, bool touching)
     {
 

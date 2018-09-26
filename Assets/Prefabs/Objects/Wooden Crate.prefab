@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4046520060528978}
   - component: {fileID: 212125089487465878}
-  - component: {fileID: 50624667483812838}
   - component: {fileID: 61500002890601926}
+  - component: {fileID: 50624667483812838}
   - component: {fileID: 114238909209886342}
   m_Layer: 10
   m_Name: Wooden Crate

@@ -28,9 +28,14 @@ public class ColourHandler
             if (maxValue <= 0)
                 continue;
             ColourEnum colourEnum = (ColourEnum) Enum.Parse(typeof(ColourEnum), fieldInfo.Name);
-            
-            if (colourCounts[colourEnum] < maxValue)
+            try
+            {
+                if (colourCounts[colourEnum] < maxValue)
+                    return false;
+            } catch (KeyNotFoundException)
+            {
                 return false;
+            }
         }
         return true;
     }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class Barrier : Activating {
+public class Barrier : Activating
+{
 
     protected override void Activate()
     {

@@ -11,7 +11,13 @@ public class TriggerClose : MonoBehaviour {
         gameObject.GetComponent<Renderer>().enabled = false;
 
     }
-	
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        gameObject.GetComponent<Collider2D>().enabled = false;
+
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
      

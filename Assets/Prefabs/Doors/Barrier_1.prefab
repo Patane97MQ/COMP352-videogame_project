@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4780080601127114}
   - component: {fileID: 212027185232768574}
   - component: {fileID: 61358078339798830}
-  - component: {fileID: 114181087025972104}
+  - component: {fileID: 114520301172053488}
   m_Layer: 0
   m_Name: Barrier_1
   m_TagString: Untagged
@@ -67,7 +67,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
---- !u!114 &114181087025972104
+--- !u!114 &114520301172053488
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,13 +75,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1943702519581076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f60df95b055a646ac6f83fa7fbbdc6, type: 3}
+  m_Script: {fileID: 11500000, guid: c2edd6a5e106dc74bb42140f1b96afba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inverted: 0
+  colourHandler:
+    red: 0
+    blue: 0
+    green: 0
   active: 0
-  activateType: 0
-  activeTogether: 0
-  activatorsList: []
 --- !u!212 &212027185232768574
 SpriteRenderer:
   m_ObjectHideFlags: 1

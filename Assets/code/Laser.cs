@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Laser : Activating {
     public Direction direction = Direction.Up;
@@ -53,8 +54,11 @@ public class Laser : Activating {
 
             hit = laserRay.collider.gameObject;
 
-            if (hit.tag.Contains("clone") || hit.tag.Contains("Player"))
+            if (hit.tag.Contains("clone"))  
                 Destroy(hit);
+
+            if (hit.tag.Contains("Player"))
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
             lr.SetPosition(0, startPosition);
             lr.SetPosition(1, startPosition + laserRay.distance * vectorDirection);

@@ -61,8 +61,8 @@ public abstract class Activating : MonoBehaviour {
         return colourHandler.CheckAllColours();
     }
 
-    protected abstract void Activate();
-    protected abstract void DeActivate();
+    public abstract void Activate();
+    public abstract void DeActivate();
 }
 public enum ActivatingType
 {

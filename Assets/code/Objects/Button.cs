@@ -1,18 +1,26 @@
 ﻿using UnityEngine;
 
 
-public class Button : Tagable {
+public class Button : Tagable
+{
     bool pressed = false;
-
+    //bool aOnce = false;
+    //public Activating triggering;
     private void Start()
     {
         ChangeSprite();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
-    {   
-        if(activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag))
+    {
+        if (activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag))
             SetActivated(true);
+
+        //if (aOnce == false)
+        //{
+          //  triggering.GetComponent<Activating>().Activate();
+          //  aOnce = true;
+        //}
         pressed = true;
         ChangeSprite();
     }

@@ -162,16 +162,7 @@ public class Physics : MonoBehaviour
     // 2. Isnt a trigger.
     private RaycastHit2D BoxCastHandler(Vector2 origin, Vector2 size, float angle, Vector2 direction, float distance)
     {
-        RaycastHit2D[] hit = Physics2D.BoxCastAll(origin, size, angle, direction, distance);
-        if (hit.Count() > 0)
         RaycastHit2D[] hits = Physics2D.BoxCastAll(origin, size, angle, direction, distance);
-        //if(hits.Count() > 0)
-        //{
-        //    if (hits[0] && hits[0].collider.gameObject == gameObject)
-        //        return hits[1];
-        //    return hits[0];
-        //}
-
         foreach (RaycastHit2D hit in hits)
         {
             if (hit && (hit.collider.gameObject == gameObject || hit.collider.isTrigger))
@@ -198,12 +189,8 @@ public class Physics : MonoBehaviour
         {
             // Distance is saved as this object. The reason that its saved here is because it might be changed later (within stepCheck)
             float raycastDistance = nextCheck.distance;
-            RaycastHit2D stepCheck = BoxCastIgnoreCaster(new Vector2(transform.position.x, transform.position.y + stepHeight), new Vector2(0.01f, c2D.bounds.size.y - (edgeCut * 2)), transform.rotation.z, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
-
-=======
             RaycastHit2D stepCheck = BoxCastHandler(new Vector2(transform.position.x, transform.position.y + stepHeight), new Vector2(0.01f, c2D.bounds.size.y - (edgeCut * 2)), transform.rotation.z, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
             
->>>>>>> dev-interactions
             // In this scenario, we bump into an object which is below our stepheight threshhold (such as a button). If so, we will try to step on top of it.
             // We also only pass this if statement when the object we are colliding is NOT the originally collided object.
             if (!stepCheck || stepCheck.collider.gameObject != nextCheck.collider.gameObject && (HasPhysics(stepCheck.collider.gameObject)))
@@ -282,40 +269,6 @@ public class Physics : MonoBehaviour
             return RunAllBoxCastsForY(y, Vector2.up);
         return y;
     }
-    //private float CheckNextMoveY(float y)
-    //{
-    //    SetTouching(Vector2.down, false);
-    //    SetTouching(Vector2.up, false);
-    //    if (y < 0)
-    //    {
-    //        DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), Vector2.down, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
-
-    //        RaycastHit2D nextCheck = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), transform.rotation.z, Vector2.down, Math.Abs(y) + c2D.bounds.extents.y - 0.005f, ~(1 << 8));
-    //        if (nextCheck)
-    //        {
-    //            if ((nextCheck.collider.GetComponent("Physics") as Physics) != null)
-    //                (nextCheck.collider.GetComponent("Physics") as Physics).AddForceY(y);
-    //            SetTouching(Vector2.down, true);
-    //            SetVelocity(new Vector2(velocity.x, 0));
-    //            return -(nextCheck.distance - c2D.bounds.extents.y + 0.005f);
-    //        }
-    //    }
-    //    else if (y > 0)
-    //    {
-    //        DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), Vector2.up, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
-
-    //        RaycastHit2D nextCheck = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), transform.rotation.z, Vector2.up, Math.Abs(y) + c2D.bounds.extents.y - 0.005f, ~(1 << 8));
-    //        if (nextCheck)
-    //        {
-    //            if ((nextCheck.collider.GetComponent("Physics") as Physics) != null)
-    //                (nextCheck.collider.GetComponent("Physics") as Physics).AddForceY(y);
-    //            SetTouching(Vector2.up, true);
-    //            SetVelocity(new Vector2(velocity.x, 0));
-    //            return nextCheck.distance - c2D.bounds.extents.y + 0.005f;
-    //        }
-    //    }
-    //    return y;
-    //}
     private void SetTouching(Vector2 actualDirection, bool touching)
     {
 

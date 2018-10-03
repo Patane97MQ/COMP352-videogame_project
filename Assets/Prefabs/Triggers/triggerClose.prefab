@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4291072657934974}
   - component: {fileID: 212072484860274870}
-  - component: {fileID: 114114774846513324}
   - component: {fileID: 61468858718994764}
+  - component: {fileID: 114114774846513324}
   m_Layer: 8
   m_Name: triggerClose
   m_TagString: Untagged
@@ -78,7 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9fbb8435799c5439adbd2f581fa04f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whichBarrier: {fileID: 0}
+  triggering: {fileID: 0}
+  activateTags: []
 --- !u!212 &212072484860274870
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -111,8 +112,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 33822595
-  m_SortingLayer: -1
+  m_SortingLayerID: 979384285
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 229fc8ecca38f544faedafe54fb8e12f, type: 3}
   m_Color: {r: 0.764151, g: 0.039649345, b: 0.039649345, a: 1}

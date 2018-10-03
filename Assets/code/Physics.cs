@@ -156,14 +156,27 @@ public class Physics : MonoBehaviour
             return null;
         return obj.GetComponent<Physics>();
     }
-    private RaycastHit2D BoxCastIgnoreCaster(Vector2 origin, Vector2 size, float angle, Vector2 direction, float distance)
+
+    // Currently returns the first RaycastHit2D that:
+    // 1. Isnt the object this script is attached to.
+    // 2. Isnt a trigger.
+    private RaycastHit2D BoxCastHandler(Vector2 origin, Vector2 size, float angle, Vector2 direction, float distance)
     {
         RaycastHit2D[] hit = Physics2D.BoxCastAll(origin, size, angle, direction, distance);
         if (hit.Count() > 0)
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(origin, size, angle, direction, distance);
+        //if(hits.Count() > 0)
+        //{
+        //    if (hits[0] && hits[0].collider.gameObject == gameObject)
+        //        return hits[1];
+        //    return hits[0];
+        //}
+
+        foreach (RaycastHit2D hit in hits)
         {
-            if (hit[0] && hit[0].collider.gameObject == gameObject)
-                return hit[1];
-            return hit[0];
+            if (hit && (hit.collider.gameObject == gameObject || hit.collider.isTrigger))
+                continue;
+            return hit;
         }
         return new RaycastHit2D();
     }
@@ -174,7 +187,7 @@ public class Physics : MonoBehaviour
         DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
 
         // BoxCast of this object is shot in the direction it wants to move. This will basically check if the objects 'next move' will hit anything
-        RaycastHit2D nextCheck = BoxCastIgnoreCaster(new Vector2(transform.position.x, transform.position.y), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), transform.rotation.z, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
+        RaycastHit2D nextCheck = BoxCastHandler(new Vector2(transform.position.x, transform.position.y), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), transform.rotation.z, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
 
         // ************************************************************************************************************************************************************************************************
         // *** When Stephen gets time, he will change this 'nextCheck' and 'stepCheck' to list an array of all objects to be hit and determine everything after looping through all.
@@ -187,6 +200,10 @@ public class Physics : MonoBehaviour
             float raycastDistance = nextCheck.distance;
             RaycastHit2D stepCheck = BoxCastIgnoreCaster(new Vector2(transform.position.x, transform.position.y + stepHeight), new Vector2(0.01f, c2D.bounds.size.y - (edgeCut * 2)), transform.rotation.z, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
 
+=======
+            RaycastHit2D stepCheck = BoxCastHandler(new Vector2(transform.position.x, transform.position.y + stepHeight), new Vector2(0.01f, c2D.bounds.size.y - (edgeCut * 2)), transform.rotation.z, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
+            
+>>>>>>> dev-interactions
             // In this scenario, we bump into an object which is below our stepheight threshhold (such as a button). If so, we will try to step on top of it.
             // We also only pass this if statement when the object we are colliding is NOT the originally collided object.
             if (!stepCheck || stepCheck.collider.gameObject != nextCheck.collider.gameObject && (HasPhysics(stepCheck.collider.gameObject)))
@@ -226,7 +243,7 @@ public class Physics : MonoBehaviour
         DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
 
         // BoxCast of this object is shot in the direction it wants to move. This will basically check if the objects 'next move' will hit anything
-        RaycastHit2D nextCheck = BoxCastIgnoreCaster(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), transform.rotation.z, direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
+        RaycastHit2D nextCheck = BoxCastHandler(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), transform.rotation.z, direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
 
         // ************************************************************************************************************************************************************************************************
         // *** When Stephen gets time, he will change this 'nextCheck' and 'stepCheck' to list an array of all objects to be hit and determine everything after looping through all.

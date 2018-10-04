@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114238909209886342}
   m_Layer: 10
   m_Name: Wooden Crate
-  m_TagString: red_clone
+  m_TagString: environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

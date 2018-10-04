@@ -12,14 +12,23 @@ public class PlayerMovement : Physics {
     private float axis;
     private float collOffset = 0.065f;
 
+    public AudioClip jump;
+    private AudioSource source;
+
+    void Awake (){
+        source = GetComponent<AudioSource>();
+    }
+
 
     // Update is called once per frame
     new void FixedUpdate () {
 
         // If player is on the ground and "Jump" button is pressed,
         // They will jump the opposite direction of gravity
-        if (down && Input.GetButton("Jump") && !crouching)
+        if (down && Input.GetButton("Jump") && !crouching){
             SetVelocity((-gravity.normalized) * jumpStrength / 10);
+            source.PlayOneShot(jump);
+            }
 
         if (Input.GetButton("Vertical"))
         {
@@ -37,6 +46,7 @@ public class PlayerMovement : Physics {
                 crouching = false;
                 transform.position = new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, 0);
                 transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, 0);
+                
             }
         }
 

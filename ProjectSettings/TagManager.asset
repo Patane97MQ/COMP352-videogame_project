@@ -6,6 +6,7 @@ TagManager:
   tags:
   - red_clone
   - environment
+  - backgroundMusic
   layers:
   - Default
   - TransparentFX

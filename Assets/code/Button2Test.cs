@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 
 public class Button2Test : Tagable
 {
     bool pressed = false;
-
+    bool colStay = false;
     bool aOnce = false;
+    List<GameObject> pressing = new List<GameObject>();
     public Activating triggering;
     public Activating triggering2;
 
@@ -16,25 +18,42 @@ public class Button2Test : Tagable
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag))
-            SetActivated(true);
+        //if (activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag))
+        //    SetActivated(true);
 
-        if (aOnce == false)
+        //if (aOnce == false)
+        //{
+        //    triggering.GetComponent<Activating>().Activate();
+        //    triggering2.GetComponent<Activating>().Activate();
+        //    aOnce = true;
+        //}
+        //pressed = true;
+        //ChangeSprite();
+
+        if (activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag))
+            pressing.Add(collision.gameObject);
+        if(pressed = false && pressing.Count > 0)
         {
-            triggering.GetComponent<Activating>().Activate();
-            triggering2.GetComponent<Activating>().Activate();
-            aOnce = true;
+            SetActivated(true);
+            pressed = true;
+            ChangeSprite();
         }
-        pressed = true;
-        ChangeSprite();
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        //if (activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag))
+        //    SetActivated(false);
+        //pressed = false;
+        //ChangeSprite();
         if (activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag))
+            pressing.Add(collision.gameObject);
+        if (pressed = true && pressing.Count <= 0)
+        {
             SetActivated(false);
-        pressed = false;
-        ChangeSprite();
+            pressed = false;
+            ChangeSprite();
+        }
     }
     void ChangeSprite()
     {

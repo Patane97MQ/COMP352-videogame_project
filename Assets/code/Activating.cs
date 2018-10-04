@@ -105,10 +105,6 @@ public abstract class Activating : MonoBehaviour {
     {
         return colourHandler.CheckAllColours();
     }
-    private bool ColourCheck(ColourEnum colour)
-    {
-        return colourHandler.CheckColour(colour);
-    }
 
     public abstract void Activate();
     public abstract void DeActivate();

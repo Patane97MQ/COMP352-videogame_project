@@ -13,6 +13,11 @@ public class ColourHandler
     public int red, blue, green, orange = 0;
     private static Dictionary<ColourEnum, int> colourCounts = new Dictionary<ColourEnum, int>();
     
+    public static void Reset()
+    {
+        colourCounts = new Dictionary<ColourEnum, int>();
+    }
+
     public static void AddCount(ColourEnum colour, int amount)
     {
         if (!colourCounts.ContainsKey(colour))

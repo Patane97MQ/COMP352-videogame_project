@@ -5,12 +5,12 @@ using System.Reflection;
 
 public enum ColourEnum
 {
-    red, blue, green
+    red, blue, green, orange
 }
 [System.Serializable]
 public class ColourHandler
 {
-    public int red, blue, green = 0;
+    public int red, blue, green, orange = 0;
     private static Dictionary<ColourEnum, int> colourCounts = new Dictionary<ColourEnum, int>();
     
     public static void AddCount(ColourEnum colour, int amount)

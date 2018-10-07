@@ -45,7 +45,6 @@ public abstract class Activating : MonoBehaviour {
 
     void OnActivated(Activator activator)
     {
-        Debug.Log(activator.colour.ToString());
         CheckForActivation(activator.colour);
     }
     void OnDeactivated(Activator activator)

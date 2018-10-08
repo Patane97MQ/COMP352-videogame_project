@@ -5,8 +5,21 @@ public class Gravity_switch : Activating {
     public Vector2 original;
     public Direction direction = Direction.up;
 
+    private bool toggle = false;
+
     public override void Activate()
     {
+        if (toggle)
+        {
+            Debug.Log("Deactive");
+            if (original != Vector2.zero)
+                Physics2D.gravity = original;
+            ChangeSprite();
+            toggle = false;
+            return;
+        }
+        toggle = true;
+        Debug.Log("Active");
         original = Physics2D.gravity;
         switch (direction)
         {
@@ -19,9 +32,7 @@ public class Gravity_switch : Activating {
     }
 
     public override void DeActivate()
-    {   
-        if(original != Vector2.zero)
-            Physics2D.gravity = original;
+    {
     }
 
     private string GravityDirectionString()

@@ -14,6 +14,7 @@ public class Button : Tagable
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("TRIGGER");
         if (activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag) && !pressing.Contains(collision.gameObject))
             pressing.Add(collision.gameObject);
         if (pressed == false && pressing.Count > 0)

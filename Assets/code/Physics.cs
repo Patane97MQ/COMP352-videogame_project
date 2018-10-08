@@ -125,8 +125,9 @@ public class Physics : MonoBehaviour
             rotation = -90;
         else if (Physics2D.gravity.normalized == Vector2.right)
             rotation = 90;
-        if (transform.rotation.z != rotation)
-            transform.Rotate(new Vector3(0, 0, rotation));
+        //Debug.Log(rotation);
+        //if (transform.rotation.z != rotation)
+        //    transform.Rotate(new Vector3(0, 0, rotation));
 
     }
     private void DrawBox(Vector2 centre, Vector2 size, Color color)

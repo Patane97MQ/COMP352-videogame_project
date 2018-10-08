@@ -3,8 +3,10 @@
 
 public class PlayerMovement : Physics {
 
-    public float movementSpeed = 1f;
+    public float moveStrength = 1f;
     public float jumpStrength = 1.5f;
+
+    public PlayerSounds sounds = new PlayerSounds();
 
     private bool facingRight = true;
     private bool crouching = false;
@@ -12,7 +14,6 @@ public class PlayerMovement : Physics {
     private float axis;
     private float collOffset = 0.065f;
 
-    public AudioClip jump;
     private AudioSource source;
 
     void Awake (){
@@ -27,7 +28,7 @@ public class PlayerMovement : Physics {
         // They will jump the opposite direction of gravity
         if (down && Input.GetButton("Jump") && !crouching){
             SetVelocity((-Physics2D.gravity.normalized) * jumpStrength / 10);
-            source.PlayOneShot(jump);
+            source.PlayOneShot(sounds.jump);
             }
 
         if (Input.GetButton("Vertical"))
@@ -55,9 +56,9 @@ public class PlayerMovement : Physics {
         axis = Input.GetAxis("Horizontal");
         //SetVelocity(new Vector2(movementSpeed / 10 * axis, movementSpeed / 10 * axis) * Vector2.Perpendicular(gravityDirection));
         if (Physics2D.gravity.normalized.x == 0)
-            SetVelocity(new Vector2(movementSpeed / 10 * axis, velocity.y));
+            SetVelocity(new Vector2(moveStrength / 10 * axis, velocity.y));
         else if (Physics2D.gravity.normalized.y == 0)
-            SetVelocity(new Vector2(velocity.x, movementSpeed / 10 * axis));
+            SetVelocity(new Vector2(velocity.x, moveStrength / 10 * axis));
         
         // Determines which way the object should face when moving in specified gravity
         if ((Physics2D.gravity.normalized == Vector2.down || Physics2D.gravity.normalized == Vector2.right) 
@@ -70,5 +71,11 @@ public class PlayerMovement : Physics {
         }
 
         base.FixedUpdate();
+    }
+
+    [System.Serializable]
+    public class PlayerSounds
+    {
+        public AudioClip jump;
     }
 }

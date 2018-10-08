@@ -6,9 +6,10 @@ public class Physics : MonoBehaviour
 {
 
     //public Vector2 gravity = new Vector2(0, -9.81f);
+    
 
-    public float horizontalDrag = 0.0001f;
     public float weight = 0f;
+    public Vector2 drag = new Vector2(1f, 1f);
     public float stepHeight = 0.1f;
 
     protected Transform t;
@@ -35,7 +36,7 @@ public class Physics : MonoBehaviour
     // Update is called once per frame
     protected void FixedUpdate()
     {
-        acceleration = Physics2D.gravity / 1000;
+        acceleration = (Physics2D.gravity + (Physics2D.gravity.normalized * (weight / drag.y))) / 1000;
         // accelerationY should never/rarely be changed. This is the constant downwards force of 'gravity'
         CheckRotation();
 
@@ -53,13 +54,13 @@ public class Physics : MonoBehaviour
 
         // Velocity is always accelerated. This is exclusively used for gravity
         AddVelocity(acceleration);
-        HorizontalDrag();
+        CalculateDrag();
     }
     // ====================================================================
 
-    private void HorizontalDrag()
+    private void CalculateDrag()
     {
-        velocity = Vector2.MoveTowards(velocity, new Vector2(0, velocity.y), 1);
+        velocity = Vector2.MoveTowards(velocity, new Vector2(0, velocity.y), 1 / drag.x);
     }
     //private void ApplyFriction()
     //{

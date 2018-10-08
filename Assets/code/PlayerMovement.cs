@@ -26,7 +26,7 @@ public class PlayerMovement : Physics {
         // If player is on the ground and "Jump" button is pressed,
         // They will jump the opposite direction of gravity
         if (down && Input.GetButton("Jump") && !crouching){
-            SetVelocity((-gravity.normalized) * jumpStrength / 10);
+            SetVelocity((-Physics2D.gravity.normalized) * jumpStrength / 10);
             source.PlayOneShot(jump);
             }
 
@@ -54,15 +54,15 @@ public class PlayerMovement : Physics {
 
         axis = Input.GetAxis("Horizontal");
         //SetVelocity(new Vector2(movementSpeed / 10 * axis, movementSpeed / 10 * axis) * Vector2.Perpendicular(gravityDirection));
-        if (gravity.normalized.x == 0)
+        if (Physics2D.gravity.normalized.x == 0)
             SetVelocity(new Vector2(movementSpeed / 10 * axis, velocity.y));
-        else if (gravity.normalized.y == 0)
+        else if (Physics2D.gravity.normalized.y == 0)
             SetVelocity(new Vector2(velocity.x, movementSpeed / 10 * axis));
         
         // Determines which way the object should face when moving in specified gravity
-        if ((gravity.normalized == Vector2.down || gravity.normalized == Vector2.right) 
+        if ((Physics2D.gravity.normalized == Vector2.down || Physics2D.gravity.normalized == Vector2.right) 
          && (axis < 0 && facingRight || axis > 0 && !facingRight)
-         || (gravity.normalized == Vector2.up || gravity.normalized == Vector2.left)
+         || (Physics2D.gravity.normalized == Vector2.up || Physics2D.gravity.normalized == Vector2.left)
          && (axis > 0 && facingRight || axis < 0 && !facingRight))
         {
             facingRight = !facingRight;

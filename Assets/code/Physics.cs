@@ -5,7 +5,7 @@ using UnityEngine;
 public class Physics : MonoBehaviour
 {
 
-    public Vector2 gravity = new Vector2(0, -9.81f);
+    //public Vector2 gravity = new Vector2(0, -9.81f);
 
     public float horizontalDrag = 0.0001f;
     public float weight = 0f;
@@ -35,7 +35,7 @@ public class Physics : MonoBehaviour
     // Update is called once per frame
     protected void FixedUpdate()
     {
-        acceleration = gravity / 1000;
+        acceleration = Physics2D.gravity / 1000;
         // accelerationY should never/rarely be changed. This is the constant downwards force of 'gravity'
         CheckRotation();
 
@@ -117,13 +117,13 @@ public class Physics : MonoBehaviour
     // Ensures object is correctly rotated for the direction of gravity.
     private void CheckRotation()
     {
-        if (gravity.normalized == Vector2.down)
+        if (Physics2D.gravity.normalized == Vector2.down)
             rotation = 0;
-        else if (gravity.normalized == Vector2.up)
+        else if (Physics2D.gravity.normalized == Vector2.up)
             rotation = 180;
-        else if (gravity.normalized == Vector2.left)
+        else if (Physics2D.gravity.normalized == Vector2.left)
             rotation = -90;
-        else if (gravity.normalized == Vector2.right)
+        else if (Physics2D.gravity.normalized == Vector2.right)
             rotation = 90;
         if (transform.rotation.z != rotation)
             transform.Rotate(new Vector3(0, 0, rotation));
@@ -272,13 +272,13 @@ public class Physics : MonoBehaviour
     private void SetTouching(Vector2 actualDirection, bool touching)
     {
 
-        if (actualDirection == gravity.normalized)
+        if (actualDirection == Physics2D.gravity.normalized)
             down = touching;
-        else if (actualDirection == -gravity.normalized)
+        else if (actualDirection == -Physics2D.gravity.normalized)
             up = touching;
-        else if (actualDirection == Vector2.Perpendicular(-gravity.normalized))
+        else if (actualDirection == Vector2.Perpendicular(-Physics2D.gravity.normalized))
             left = touching;
-        else if (actualDirection == Vector2.Perpendicular(gravity.normalized))
+        else if (actualDirection == Vector2.Perpendicular(Physics2D.gravity.normalized))
             right = touching;
     }
     private Vector2 TopLeft()

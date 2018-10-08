@@ -20,8 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4439207876032596}
   - component: {fileID: 212363591932393420}
+  - component: {fileID: 114114584869822848}
   m_Layer: 0
-  m_Name: gravity_switcher_down
+  m_Name: gravity_switcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,6 +41,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114114584869822848
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1372232836220740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac67d37d1ee3ce4bad000863ab54e19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingState: 0
+  inverted: 0
+  colourHandler:
+    red: 0
+    blue: 0
+    green: 0
+    orange: 0
+  original: {x: 0, y: 0}
+  direction: 0
 --- !u!212 &212363591932393420
 SpriteRenderer:
   m_ObjectHideFlags: 1

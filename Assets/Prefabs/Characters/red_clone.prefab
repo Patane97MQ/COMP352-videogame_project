@@ -99,12 +99,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4707b7916b6511b4e9b2bfdde290e672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: {x: 0, y: -9.81}
-  horizontalDrag: 0.0001
-  weight: 0
+  weight: 10
+  drag: {x: 1, y: 1}
   stepHeight: 0.1
-  movementSpeed: 1
-  jumpStrength: 1.5
+  moveStrength: 1
+  jumpStrength: 2.2
+  sounds:
+    jump: {fileID: 0}
 --- !u!212 &212358651831000944
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -139,7 +140,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: c040096682a0a4f46b1e413b8a36db0a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

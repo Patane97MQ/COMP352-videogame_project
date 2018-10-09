@@ -26,7 +26,7 @@ public class Physics : MonoBehaviour
     protected Vector2 acceleration;
 
     // Use this for initialization
-    void Start()
+    protected void Start()
     {
         t = transform;
         rb2D = gameObject.GetComponent<Rigidbody2D>();
@@ -101,15 +101,17 @@ public class Physics : MonoBehaviour
         velocity += bv;
     }
 
-    public float AddForceX(float x)
+    public float AddForceX(Physics other, float x)
     {
-        float force = x / weight;
+        //float force = x / weight;
+        float force = (x * (other.weight / weight)) / weight;
         AddVelocity(new Vector2(force, 0));
         return force;
     }
-    public float AddForceY(float y)
+    public float AddForceY(Physics other, float y)
     {
-        float force = y / weight;
+        //float force = y / weight;
+        float force = (y * (other.weight / weight)) / weight;
         AddVelocity(new Vector2(0, force));
         return force;
     }
@@ -162,7 +164,7 @@ public class Physics : MonoBehaviour
     // Currently returns the first RaycastHit2D that:
     // 1. Isnt the object this script is attached to.
     // 2. Isnt a trigger.
-    private RaycastHit2D BoxCastHandler(Vector2 origin, Vector2 size, float angle, Vector2 direction, float distance)
+    protected RaycastHit2D BoxCastHandler(Vector2 origin, Vector2 size, float angle, Vector2 direction, float distance)
     {
         RaycastHit2D[] hits = Physics2D.BoxCastAll(origin, size, angle, direction, distance);
         foreach (RaycastHit2D hit in hits)
@@ -204,7 +206,7 @@ public class Physics : MonoBehaviour
                     if (stepCheck && HasPhysics(stepCheck.collider.gameObject))
                     {
                         // Add force to that object
-                        GrabPhysics(stepCheck.collider.gameObject).AddForceX(x);
+                        GrabPhysics(stepCheck.collider.gameObject).AddForceX(this, x);
                         // Move the distance from this object to the physics object
                         raycastDistance = stepCheck.distance;
                     }
@@ -218,7 +220,7 @@ public class Physics : MonoBehaviour
             }
             // If we are colliding into an object with physics, push it.
             if (HasPhysics(nextCheck.collider.gameObject))
-                GrabPhysics(nextCheck.collider.gameObject).AddForceX(x);
+                GrabPhysics(nextCheck.collider.gameObject).AddForceX(this, x);
 
             SetTouching(direction, true);
             SetVelocity(new Vector2(0, velocity.y));
@@ -243,7 +245,7 @@ public class Physics : MonoBehaviour
         {
             // If we are colliding into an object with physics, push it.
             if (HasPhysics(nextCheck.collider.gameObject))
-                GrabPhysics(nextCheck.collider.gameObject).AddForceY(y);
+                GrabPhysics(nextCheck.collider.gameObject).AddForceY(this, y);
 
             SetTouching(direction, true);
             SetVelocity(new Vector2(velocity.x, 0));

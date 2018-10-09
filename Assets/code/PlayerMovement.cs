@@ -16,6 +16,11 @@ public class PlayerMovement : Physics {
 
     private AudioSource source;
 
+    new void Start()
+    {
+        base.Start();
+        Utilities.initialGravity = Physics2D.gravity;
+    }
     void Awake (){
         source = GetComponent<AudioSource>();
     }
@@ -27,7 +32,7 @@ public class PlayerMovement : Physics {
         // If player is on the ground and "Jump" button is pressed,
         // They will jump the opposite direction of gravity
         if (down && Input.GetButton("Jump") && !crouching){
-            SetVelocity((-Physics2D.gravity.normalized) * jumpStrength / 10);
+            SetVelocity((-Physics2D.gravity.normalized) * jumpStrength / weight);
             source.PlayOneShot(sounds.jump);
             }
 
@@ -44,10 +49,14 @@ public class PlayerMovement : Physics {
         {
             if (crouching)
             {
-                crouching = false;
-                transform.position = new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, 0);
-                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, 0);
-                
+                if (!BoxCastHandler(new Vector2(transform.position.x, transform.position.y + transform.localScale.y / 2), new Vector2(transform.localScale.x, transform.localScale.y* 2), 0, Vector2.up, 0))
+                {
+                    crouching = false;
+                    transform.position = new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, 0);
+                    transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, 0);
+                }
+                else
+                    Debug.Log("CANNOT UNCROUCH");
             }
         }
 
@@ -56,9 +65,9 @@ public class PlayerMovement : Physics {
         axis = Input.GetAxis("Horizontal");
         //SetVelocity(new Vector2(movementSpeed / 10 * axis, movementSpeed / 10 * axis) * Vector2.Perpendicular(gravityDirection));
         if (Physics2D.gravity.normalized.x == 0)
-            SetVelocity(new Vector2(moveStrength / 10 * axis, velocity.y));
+            SetVelocity(new Vector2(moveStrength / weight * axis, velocity.y));
         else if (Physics2D.gravity.normalized.y == 0)
-            SetVelocity(new Vector2(velocity.x, moveStrength / 10 * axis));
+            SetVelocity(new Vector2(velocity.x, moveStrength / weight * axis));
         
         // Determines which way the object should face when moving in specified gravity
         if ((Physics2D.gravity.normalized == Vector2.down || Physics2D.gravity.normalized == Vector2.right) 

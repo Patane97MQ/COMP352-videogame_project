@@ -45,7 +45,7 @@ using System.Collections.Generic;
 //        up, down, left, right
 //    }
 //}
-public class Gravity_switch : Activator
+public class Gravity_switch : MonoBehaviour
 {
     bool pressed = false;
     List<GameObject> pressing = new List<GameObject>();
@@ -70,7 +70,6 @@ public class Gravity_switch : Activator
             pressing.Add(collision.gameObject);
         if (pressed == false && pressing.Count > 0)
         {
-            //SetActivated(true);
             switch (direction)
             {
                 case Direction.Up:
@@ -92,7 +91,6 @@ public class Gravity_switch : Activator
             pressing.Remove(collision.gameObject);
         if (pressed == true && pressing.Count <= 0)
         {
-            //SetActivated(false);
             pressed = false;
             ChangeSprite();
         }

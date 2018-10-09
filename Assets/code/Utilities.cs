@@ -28,3 +28,7 @@ public class Utilities {
         return b;
     }
 }
+public enum Direction
+{
+    Up, Down, Left, Right
+}

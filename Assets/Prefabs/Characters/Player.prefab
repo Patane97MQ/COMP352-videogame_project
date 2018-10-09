@@ -213,7 +213,7 @@ MonoBehaviour:
   moveStrength: 1
   jumpStrength: 1.6
   sounds:
-    jump: {fileID: 0}
+    jump: {fileID: 8300000, guid: c91e52590bd17f34fb64e8ffaf9834bd, type: 3}
 --- !u!212 &212822553610825270
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -9085,7 +9085,7 @@ Prefab:
     - target: {fileID: 114106508947539188, guid: a6cecf75cc210464fbdbdb991516a8ea,
         type: 2}
       propertyPath: inverted
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114106508947539188, guid: a6cecf75cc210464fbdbdb991516a8ea,
         type: 2}

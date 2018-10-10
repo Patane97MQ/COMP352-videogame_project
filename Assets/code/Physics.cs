@@ -163,17 +163,10 @@ public class Physics : MonoBehaviour
         //    transform.Rotate(new Vector3(0, 0, rotation));
 
     }
-    private void DrawBox(Vector2 centre, Vector2 size, Color color)
-    {
-        Debug.DrawLine(new Vector2(centre.x - size.x / 2, centre.y + size.y / 2), new Vector2(centre.x + size.x / 2, centre.y + size.y / 2), color);
-        Debug.DrawLine(new Vector2(centre.x + size.x / 2, centre.y + size.y / 2), new Vector2(centre.x + size.x / 2, centre.y - size.y / 2), color);
-        Debug.DrawLine(new Vector2(centre.x + size.x / 2, centre.y - size.y / 2), new Vector2(centre.x - size.x / 2, centre.y - size.y / 2), color);
-        Debug.DrawLine(new Vector2(centre.x - size.x / 2, centre.y - size.y / 2), new Vector2(centre.x - size.x / 2, centre.y + size.y / 2), color);
-    }
     private void DrawBoxCast(Vector2 origin, Vector2 size, Vector2 direction, float distance)
     {
-        DrawBox(origin, size, Color.green);
-        DrawBox(origin + direction * distance, size, Color.red);
+        Utilities.DrawBox(origin, size, Color.green);
+        Utilities.DrawBox(origin + direction * distance, size, Color.red);
     }
 
     private float edgeCut = 0.02f;

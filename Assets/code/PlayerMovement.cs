@@ -37,27 +37,30 @@ public class PlayerMovement : Physics {
             source.PlayOneShot(sounds.jump);
             }
 
-        if (Input.GetButton("Vertical"))
+        if (Input.GetAxisRaw("Vertical") < 0)
         {
             if(!crouching)
             {
                 crouching = true;
+                transform.position = new Vector3(transform.position.x, transform.position.y + (Physics2D.gravity.normalized.y * (transform.localScale.y / 2)), 0);
                 transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 2, 0);
-                transform.position = new Vector3(transform.position.x, transform.position.y - transform.localScale.y / 2, 0);
             }
         }
         else
         {
             if (crouching)
             {
-                if (!Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x, transform.position.y + transform.localScale.y / 2), new Vector2(transform.localScale.x, transform.localScale.y* 2), 0, Vector2.up, 0))
+                RaycastHit2D hit;
+                if (Physics2D.gravity.normalized.y < 0)
+                    hit = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x, transform.position.y - c2D.bounds.extents.y), new Vector2(c2D.bounds.size.x, 0.05f), 0, Vector2.up, c2D.bounds.size.y * 2);
+                else
+                    hit = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x, transform.position.y + c2D.bounds.extents.y), new Vector2(c2D.bounds.size.x, 0.05f), 0, Vector2.down, c2D.bounds.size.y * 2);
+                if (!hit)
                 {
                     crouching = false;
-                    transform.position = new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, 0);
+                    transform.position = new Vector3(transform.position.x, transform.position.y + (-Physics2D.gravity.normalized.y * (transform.localScale.y / 2)), 0);
                     transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, 0);
                 }
-                else
-                    Debug.Log("CANNOT UNCROUCH");
             }
         }
 

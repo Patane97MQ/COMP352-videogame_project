@@ -27,6 +27,21 @@ public class Utilities {
             return a;
         return b;
     }
+    
+    // Currently returns the first RaycastHit2D that:
+    // 1. Isnt the object this script is attached to.
+    // 2. Isnt a trigger.
+    public static RaycastHit2D BoxCastHandler(GameObject caster, Vector2 origin, Vector2 size, float angle, Vector2 direction, float distance)
+    {
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(origin, size, angle, direction, distance);
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit && (hit.collider.gameObject == caster || hit.collider.isTrigger))
+                continue;
+            return hit;
+        }
+        return new RaycastHit2D();
+    }
 }
 public enum Direction
 {

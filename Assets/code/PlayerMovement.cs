@@ -29,6 +29,7 @@ public class PlayerMovement : Physics {
     // Update is called once per frame
     new void FixedUpdate () {
 
+        base.FixedUpdate();
         // If player is on the ground and "Jump" button is pressed,
         // They will jump the opposite direction of gravity
         if (down && Input.GetButton("Jump") && !crouching){
@@ -49,7 +50,7 @@ public class PlayerMovement : Physics {
         {
             if (crouching)
             {
-                if (!BoxCastHandler(new Vector2(transform.position.x, transform.position.y + transform.localScale.y / 2), new Vector2(transform.localScale.x, transform.localScale.y* 2), 0, Vector2.up, 0))
+                if (!Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x, transform.position.y + transform.localScale.y / 2), new Vector2(transform.localScale.x, transform.localScale.y* 2), 0, Vector2.up, 0))
                 {
                     crouching = false;
                     transform.position = new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, 0);
@@ -79,7 +80,6 @@ public class PlayerMovement : Physics {
             transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, 0);
         }
 
-        base.FixedUpdate();
     }
 
     [System.Serializable]

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212125089487465878}
   - component: {fileID: 61500002890601926}
   - component: {fileID: 50624667483812838}
+  - component: {fileID: 114365750696777040}
   - component: {fileID: 114238909209886342}
   m_Layer: 10
   m_Name: Crate_2
@@ -102,6 +103,27 @@ MonoBehaviour:
   weight: 5
   drag: {x: 1, y: 1}
   stepHeight: 0.1
+  rotation: 0
+  up: 0
+  down: 0
+  left: 0
+  right: 0
+  velocity: {x: 0, y: 0}
+  acceleration: {x: 0, y: 0}
+  parent: {fileID: 0}
+  useParentX: 0
+  useParentY: 0
+--- !u!114 &114365750696777040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1590858759579808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3d8ed986214c8a4394fb5f0e4ee989a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212125089487465878
 SpriteRenderer:
   m_ObjectHideFlags: 1

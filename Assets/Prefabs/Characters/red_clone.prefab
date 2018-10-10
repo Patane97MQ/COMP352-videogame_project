@@ -100,10 +100,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 10
-  drag: {x: 1, y: 1}
+  drag: {x: 0, y: 0}
   stepHeight: 0.1
+  rotation: 0
+  up: 0
+  down: 0
+  left: 0
+  right: 0
+  velocity: {x: 0, y: 0}
+  acceleration: {x: 0, y: 0}
+  parent: {fileID: 0}
+  useParentX: 0
+  useParentY: 0
   moveStrength: 1
-  jumpStrength: 2.2
+  jumpStrength: 2.3
   sounds:
     jump: {fileID: 0}
 --- !u!212 &212358651831000944

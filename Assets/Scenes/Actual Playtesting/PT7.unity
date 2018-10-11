@@ -651,7 +651,7 @@ Prefab:
         type: 2}
       propertyPath: scene.sceneAsset
       value: 
-      objectReference: {fileID: 102900000, guid: e2a1f5bf15d751a46969b4c6dcd35229,
+      objectReference: {fileID: 102900000, guid: 0a6857fb9184a994192e32dacdb138b3,
         type: 3}
     - target: {fileID: 114904414888053730, guid: d25d9da504642f24daaf0228afca9f04,
         type: 2}

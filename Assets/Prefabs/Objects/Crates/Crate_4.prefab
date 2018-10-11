@@ -100,8 +100,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 5
-  drag: {x: 1, y: 1}
+  drag: {x: 10, y: 1}
   stepHeight: 0.1
+  rotation: 0
+  up: 0
+  down: 0
+  left: 0
+  right: 0
+  velocity: {x: 0, y: 0}
+  acceleration: {x: 0, y: 0}
+  useParentX: 0
+  useParentY: 0
 --- !u!212 &212125089487465878
 SpriteRenderer:
   m_ObjectHideFlags: 1

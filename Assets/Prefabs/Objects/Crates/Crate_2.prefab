@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 5
-  drag: {x: 1, y: 1}
+  drag: {x: 10, y: 1}
   stepHeight: 0.1
   rotation: 0
   up: 0
@@ -110,7 +110,6 @@ MonoBehaviour:
   right: 0
   velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
-  parent: {fileID: 0}
   useParentX: 0
   useParentY: 0
 --- !u!114 &114365750696777040

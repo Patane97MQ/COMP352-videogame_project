@@ -229,7 +229,6 @@ MonoBehaviour:
   right: 0
   velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
-  parent: {fileID: 0}
   useParentX: 0
   useParentY: 0
   moveStrength: 1

@@ -8314,6 +8314,21 @@ Prefab:
       propertyPath: colourHandler.blue
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 212054092197590646, guid: cb4680d55a63f5947955019b80b9df9f,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.003921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 212054092197590646, guid: cb4680d55a63f5947955019b80b9df9f,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.30980393
+      objectReference: {fileID: 0}
+    - target: {fileID: 212054092197590646, guid: cb4680d55a63f5947955019b80b9df9f,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.627451
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb4680d55a63f5947955019b80b9df9f, type: 2}
   m_IsPrefabAsset: 0

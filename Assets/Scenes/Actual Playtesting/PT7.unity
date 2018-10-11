@@ -361,7 +361,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4808503078617606, guid: 1bbdbd88a671d5143acb37eec78fbfb5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -9.94
+      value: -10.48
       objectReference: {fileID: 0}
     - target: {fileID: 4808503078617606, guid: 1bbdbd88a671d5143acb37eec78fbfb5, type: 2}
       propertyPath: m_LocalPosition.y
@@ -6931,7 +6931,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4965673402231012, guid: da35469d0488c994f8c934262599ab68, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -9.92
+      value: -10.53
       objectReference: {fileID: 0}
     - target: {fileID: 4965673402231012, guid: da35469d0488c994f8c934262599ab68, type: 2}
       propertyPath: m_LocalPosition.y
@@ -12611,6 +12611,11 @@ Prefab:
       propertyPath: m_Name
       value: Green_Indicator (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 114932085324512270, guid: 7f10e811af20a7546948ab2ab84b0024,
+        type: 2}
+      propertyPath: activator
+      value: 
+      objectReference: {fileID: 1060543615}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f10e811af20a7546948ab2ab84b0024, type: 2}
   m_IsPrefabAsset: 0

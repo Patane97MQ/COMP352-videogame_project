@@ -6,10 +6,16 @@ public class Button : Tagable
 {
     bool pressed = false;
     List<GameObject> pressing = new List<GameObject>();
+    public ButtonSounds sounds = new ButtonSounds();
+    private AudioSource source;
 
     private void Start()
     {
         ChangeSprite();
+    }
+
+    void Awake (){
+        source = GetComponent<AudioSource>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -21,6 +27,7 @@ public class Button : Tagable
             SetActivated(true);
             pressed = true;
             ChangeSprite();
+            source.PlayOneShot(sounds.soundTrigger);
         }
     }
 
@@ -37,6 +44,11 @@ public class Button : Tagable
     }
     void ChangeSprite()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/coloured/" + colour + "/button_" + (activated ? "on" : "off") + (pressed ? "_pressed" : ""), typeof(Sprite)) as Sprite;
+        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/coloured/" + colour + "/button_" + (activated ? "on" : "off") + (pressed ? "_pressed" : "") + ("_"+activatorType.ToString()), typeof(Sprite)) as Sprite;
+    }
+
+    [System.Serializable]
+    public class ButtonSounds {
+        public AudioClip soundTrigger;
     }
 }

@@ -6,11 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Level1.unity
-    guid: 13852b4021f1e5142801062e30171eac
-  - enabled: 0
     path: 
-    guid: 00000000000000000000000000000000
+    guid: 13852b4021f1e5142801062e30171eac
   - enabled: 0
     path: Assets/Scenes/Level4.unity
     guid: 03d29f3a0cd61cc43802fe5b52277406
@@ -21,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/prototype1_movement.unity
     guid: 941552570de29804a9472df1b17a239e
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: 
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Playtesting Levels/Playtesting1.unity
@@ -32,4 +29,37 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Playtesting Levels/Level9.unity
     guid: a3a75719e9018f342b1e026b6b62c2fb
+  - enabled: 1
+    path: Assets/Scenes/Actual Playtesting/PT0.unity
+    guid: 7fcaae93a82298e4894f90ca79b3d502
+  - enabled: 1
+    path: Assets/Scenes/Actual Playtesting/Work in Progress/PT2.unity
+    guid: c8d1959bcba8ae24f8fc0587ebe52bf2
+  - enabled: 1
+    path: Assets/Scenes/Actual Playtesting/PT1.unity
+    guid: d334517803ace8a4f8475431971e1262
+  - enabled: 1
+    path: Assets/Scenes/Actual Playtesting/PT3.unity
+    guid: f4091639d6169dc42954b60c76ba9472
+  - enabled: 1
+    path: Assets/Scenes/Actual Playtesting/Work in Progress/PT4.unity
+    guid: b27118d5cb295514386319e685a13413
+  - enabled: 1
+    path: Assets/Scenes/Actual Playtesting/PT8.unity
+    guid: 0a6857fb9184a994192e32dacdb138b3
+  - enabled: 1
+    path: Assets/Scenes/Actual Playtesting/PT6.unity
+    guid: 37b1a79cefcc54fab8a7ce02acef8de5
+  - enabled: 1
+    path: Assets/Scenes/Actual Playtesting/PT7.unity
+    guid: 887cdf8111e034572b8e30f186975540
+  - enabled: 1
+    path: Assets/Scenes/Actual Playtesting/PT9.unity
+    guid: e2a1f5bf15d751a46969b4c6dcd35229
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

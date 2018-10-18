@@ -7,6 +7,10 @@ TagManager:
   - red_clone
   - environment
   - backgroundMusic
+  - blue_crate
+  - white_crate
+  - red_crate
+  - blue_red_crate
   layers:
   - Default
   - TransparentFX

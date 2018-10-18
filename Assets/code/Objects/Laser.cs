@@ -65,7 +65,3 @@ public class Laser : Activating {
         }
     }
 }
-public enum Direction
-{
-    Up, Down, Left, Right
-}

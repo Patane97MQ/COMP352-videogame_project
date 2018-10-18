@@ -54,11 +54,8 @@ public class Laser : Activating {
 
             hit = laserRay.collider.gameObject;
 
-            if (hit.tag.Contains("clone"))
-                Destroy(hit);
-
-            if (hit.tag.Contains("Player"))
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            if(hit.tag != "environment") { 
+}               Utilities.Destroy(hit);
 
             lr.SetPosition(0, startPosition);
             lr.SetPosition(1, startPosition + laserRay.distance * vectorDirection);

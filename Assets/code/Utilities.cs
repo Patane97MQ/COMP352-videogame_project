@@ -5,6 +5,21 @@ using UnityEngine.SceneManagement;
 public class Utilities {
     public static Vector2 initialGravity;
 
+    public static void Destroy(GameObject gameObject)
+    {
+        if (gameObject.tag == "Player")
+            ReloadScene();
+        else
+        {
+            // Maybe play a destroy animation?
+            UnityEngine.Object.Destroy(gameObject);
+        }
+    }
+
+    public static void ReloadScene()
+    {
+        LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     public static void LoadScene(int index)
     {
         Resetting();

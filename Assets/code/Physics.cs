@@ -35,6 +35,8 @@ public class Physics : MonoBehaviour
     [HideInInspector]
     public bool useParentY;
 
+    protected float edgeCut = 0.02f;
+
     private float speedCap = float.MaxValue;
 
     // Use this for initialization
@@ -169,7 +171,6 @@ public class Physics : MonoBehaviour
         Utilities.DrawBox(origin + direction * distance, size, Color.red);
     }
 
-    private float edgeCut = 0.02f;
 
     private static Boolean HasPhysics(GameObject obj)
     {
@@ -203,7 +204,7 @@ public class Physics : MonoBehaviour
         {
             // Distance is saved as this object. The reason that its saved here is because it might be changed later (within stepCheck)
             float raycastDistance = nextCheck.distance;
-            RaycastHit2D stepCheck = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x, transform.position.y + stepHeight), new Vector2(0.01f, c2D.bounds.size.y - (edgeCut * 2)), transform.rotation.z, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
+            RaycastHit2D stepCheck = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x, transform.position.y + stepHeight), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), transform.rotation.z, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
             
             // In this scenario, we bump into an object which is below our stepheight threshhold (such as a button). If so, we will try to step on top of it.
             // We also only pass this if statement when the object we are colliding is NOT the originally collided object.

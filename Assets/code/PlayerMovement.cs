@@ -25,17 +25,27 @@ public class PlayerMovement : Physics {
         source = GetComponent<AudioSource>();
     }
 
-
+    bool waitJump;
     // Update is called once per frame
-    new void FixedUpdate () {
-
-        base.FixedUpdate();
+    void Update() {
         // If player is on the ground and "Jump" button is pressed,
         // They will jump the opposite direction of gravity
-        if (down && Input.GetButton("Jump") && !crouching){
-            SetVelocity((-Physics2D.gravity.normalized) * jumpStrength / weight);
-            source.PlayOneShot(sounds.jump);
+        if (down && Input.GetButton("Jump") && !crouching)
+        {
+            if (!waitJump)
+            {
+                SetVelocity((-Physics2D.gravity.normalized) * jumpStrength / weight);
+                source.PlayOneShot(sounds.jump);
+                waitJump = true;
             }
+        }
+        if (Input.GetButtonUp("Jump"))
+            waitJump = false;
+        //if (down && Input.GetButton("Jump") && !crouching)
+        //{
+        //    SetVelocity((-Physics2D.gravity.normalized) * jumpStrength / weight);
+        //    source.PlayOneShot(sounds.jump);
+        //}
 
         if (Input.GetAxisRaw("Vertical") < 0)
         {
@@ -52,14 +62,14 @@ public class PlayerMovement : Physics {
             {
                 RaycastHit2D hit;
                 if (Physics2D.gravity.normalized.y < 0)
-                    hit = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x, transform.position.y - c2D.bounds.extents.y), new Vector2(c2D.bounds.size.x, 0.05f), 0, Vector2.up, c2D.bounds.size.y * 2);
+                    hit = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x, transform.position.y - c2D.bounds.extents.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), 0, Vector2.up, c2D.bounds.size.y * 2);
                 else
-                    hit = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x, transform.position.y + c2D.bounds.extents.y), new Vector2(c2D.bounds.size.x, 0.05f), 0, Vector2.down, c2D.bounds.size.y * 2);
+                    hit = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x, transform.position.y + c2D.bounds.extents.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), 0, Vector2.down, c2D.bounds.size.y * 2);
                 if (!hit)
                 {
                     crouching = false;
-                    transform.position = new Vector3(transform.position.x, transform.position.y + (-Physics2D.gravity.normalized.y * (transform.localScale.y / 2)), 0);
                     transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, 0);
+                    transform.position = new Vector3(transform.position.x, transform.position.y + (-Physics2D.gravity.normalized.y * (transform.localScale.y / 2)), 0);
                 }
             }
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -42,7 +43,13 @@ public class Utilities {
             return a;
         return b;
     }
-    
+
+    public static float FurthestFrom(float a, float b, float target)
+    {
+        if (Math.Abs(a - target) >= Math.Abs(b - target))
+            return a;
+        return b;
+    }
     // Currently returns the first RaycastHit2D that:
     // 1. Isnt the object this script is attached to.
     // 2. Isnt a trigger.
@@ -57,6 +64,20 @@ public class Utilities {
         }
         return new RaycastHit2D();
     }
+
+    public static RaycastHit2D[] BoxCastHandlerAll(GameObject caster, Vector2 origin, Vector2 size, float angle, Vector2 direction, float distance)
+    {
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(origin, size, angle, direction, distance);
+        List<RaycastHit2D> returnedHits = new List<RaycastHit2D>();
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit && (hit.collider.gameObject == caster || hit.collider.isTrigger))
+                continue;
+            returnedHits.Add(hit);
+        }
+        return returnedHits.ToArray();
+    }
+
     public static void DrawBox(Vector2 centre, Vector2 size, Color color)
     {
         Debug.DrawLine(new Vector2(centre.x - size.x / 2, centre.y + size.y / 2), new Vector2(centre.x + size.x / 2, centre.y + size.y / 2), color);

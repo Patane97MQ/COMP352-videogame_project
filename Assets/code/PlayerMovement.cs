@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 public class PlayerMovement : Physics {
@@ -10,7 +11,8 @@ public class PlayerMovement : Physics {
 
     private bool facingRight = true;
     private bool crouching = false;
-    
+
+    private float capMovement = float.MaxValue;
     private float axis;
     private float collOffset = 0.065f;
 
@@ -79,9 +81,9 @@ public class PlayerMovement : Physics {
         axis = Input.GetAxis("Horizontal");
         //SetVelocity(new Vector2(movementSpeed / 10 * axis, movementSpeed / 10 * axis) * Vector2.Perpendicular(gravityDirection));
         if (Physics2D.gravity.normalized.x == 0)
-            SetVelocity(new Vector2(moveStrength / weight * axis, velocity.y));
+            SetVelocity(new Vector2(Utilities.ClosestTo(moveStrength / weight * axis, capMovement, 0), velocity.y));
         else if (Physics2D.gravity.normalized.y == 0)
-            SetVelocity(new Vector2(velocity.x, moveStrength / weight * axis));
+            SetVelocity(new Vector2(velocity.x, Utilities.ClosestTo(moveStrength / weight * axis, capMovement, 0)));
         
         // Determines which way the object should face when moving in specified gravity
         if ((Physics2D.gravity.normalized == Vector2.down || Physics2D.gravity.normalized == Vector2.right) 
@@ -92,7 +94,13 @@ public class PlayerMovement : Physics {
             facingRight = !facingRight;
             transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, 0);
         }
-
+        capMovement = float.MaxValue;
+    }
+    public float CapMovement(float x)
+    {
+        Debug.Log("Cap=" + x);
+        capMovement = x;
+        return capMovement;
     }
 
     [System.Serializable]

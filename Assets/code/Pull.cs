@@ -12,25 +12,19 @@ public class Pull : Interactable{
 
         Collider2D collider = gameObject.GetComponent<Collider2D>();
         Collider2D iCollider = iGameObject.GetComponent<Collider2D>();
-
+        
         if (iGameObject.transform.position.x + iCollider.bounds.extents.x < gameObject.transform.position.x - collider.bounds.extents.x
             || iGameObject.transform.position.x - iCollider.bounds.extents.x > gameObject.transform.position.x + collider.bounds.extents.x)
         {
+            
             Physics thisPhysics = gameObject.GetComponent<Physics>();
 
-            float x = thisPhysics.AddRawForceX(pMovement, pMovement.velocity.x*1.5f);
-
-            pMovement.SetVelocity(new Vector2(pMovement.velocity.x, pMovement.velocity.y));
-            //pMovement.AddRawForceX(thisPhysics, -Mathf.Sign(pMovement.velocity.x)*(x / thisPhysics.weight));
-
-            //thisPhysics.SetParent(pMovement);
-            //thisPhysics.useParentX = true;
-
-            //thisPhysics.AddRawForceX(iPhysics, iPhysics.velocity.x);
-            //float xOffset = gameObject.transform.position.x - iGameObject.transform.position.x;
-            //gameObject.transform.position = new Vector2(iGameObject.transform.position.x + xOffset, gameObject.transform.position.y);
-            //gameObject.transform.SetParent(iGameObject.transform);
-            //Debug.Log("ThisPhysics: X="+thisPhysics.velocity.x + ", Y="+thisPhysics.velocity.y);
+            float velocityx = pMovement.velocity.x;
+            if()
+            pMovement.SetVelocity(new Vector2(0, pMovement.velocity.y));
+            pMovement.AddVelocity(new Vector2(thisPhysics.CalculateForce(pMovement, velocityx), 0));
+            
+            thisPhysics.AddRawForceX(pMovement, pMovement.velocity.x);
         }
     }
     public override void DeInteract(Interactor interactor)

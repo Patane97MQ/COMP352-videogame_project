@@ -55,6 +55,7 @@ public class Interactor : MonoBehaviour {
         //    current.Interact(this);
         if(interactables.Count > 0)
         {
+            Utilities.DrawBox(interactables[0].GetComponent<Transform>().position, new Vector2(1f, 1f), Color.magenta);
             if (Input.GetKey("e"))
             {
                 if (current == null)
@@ -68,7 +69,6 @@ public class Interactor : MonoBehaviour {
                     current.DeInteract(this);
                 current = null;
             }
-
             //else
             //    interactables[0].DeInteract(this);
         }

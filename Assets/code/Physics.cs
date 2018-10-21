@@ -39,6 +39,11 @@ public class Physics : MonoBehaviour
 
     private float speedCap = float.MaxValue;
 
+    public Transform GetTransform()
+    {
+        return t;
+    }
+
     // Use this for initialization
     protected void Start()
     {
@@ -113,22 +118,23 @@ public class Physics : MonoBehaviour
         velocity = bv;
     }
     // Adds to the current velocity.
-    public void AddVelocity(Vector2 bv)
+    public Vector2 AddVelocity(Vector2 bv)
     {
         velocity += bv;
+        return velocity;
     }
     public float AddRawForceX(Physics other, float x)
     {
-        AddVelocity(new Vector2(x, 0));
-        return x;
+        Debug.Log(gameObject.name + " AddRawForceX=" + x);
+        return AddVelocity(new Vector2(x, 0)).x;
     }
     public float AddRawForceY(Physics other, float y)
     {
-        AddVelocity(new Vector2(0, y));
-        return y;
+        return AddVelocity(new Vector2(0, y)).y;
     }
     public float AddForceX(Physics other, float x)
     {
+        Debug.Log("AddForceX=" + x);
         float force = x / weight;
         //float force = (x * (other.weight / weight)) / weight;
         return AddRawForceX(other, force);
@@ -136,8 +142,12 @@ public class Physics : MonoBehaviour
     public float AddForceY(Physics other, float y)
     {
         //float force = y / weight;
-        float force = (y * (other.weight / weight)) / weight;
+        float force = CalculateForce(other, y);
         return AddRawForceY(other, force);
+    }
+    public float CalculateForce(Physics other, float a)
+    {
+        return a / weight;
     }
     // ====================================================================
     

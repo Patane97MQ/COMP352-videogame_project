@@ -129,6 +129,7 @@ public class PlayerMovement : Physics {
             if (Physics2D.gravity.normalized.y == 1 && facingDown || Physics2D.gravity.normalized.y == -1 && !facingDown)
             {
                 facingDown = !facingDown;
+                //transform.localRotation = new Quaternion(0, 0, 180, 0);
                 transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, 0);
             }
         }

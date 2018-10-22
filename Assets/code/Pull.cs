@@ -20,7 +20,7 @@ public class Pull : Interactable{
             Physics thisPhysics = gameObject.GetComponent<Physics>();
 
             float velocityx = pMovement.velocity.x;
-            if()
+            //if()
             pMovement.SetVelocity(new Vector2(0, pMovement.velocity.y));
             pMovement.AddVelocity(new Vector2(thisPhysics.CalculateForce(pMovement, velocityx), 0));
             

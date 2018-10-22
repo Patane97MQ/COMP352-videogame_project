@@ -9,27 +9,43 @@ public class PlayerMovement : Physics {
 
     public PlayerSounds sounds = new PlayerSounds();
 
-    private bool facingRight = true;
+    private bool waitJump;
+
+    private bool facingRight = true, facingDown = true;
     private bool crouching = false;
 
     private float capMovement = float.MaxValue;
     private float axis;
-    private float collOffset = 0.065f;
+    private readonly float collOffset = 0.065f;
 
     private AudioSource source;
+
+    [HideInInspector]
+    public bool flipSpriteX = true, flipSpriteY = true;
 
     new void Start()
     {
         base.Start();
         Utilities.initialGravity = Physics2D.gravity;
-    }
-    void Awake (){
         source = GetComponent<AudioSource>();
     }
 
-    bool waitJump;
+
     // Update is called once per frame
     void Update() {
+        JumpInput();
+
+        CrouchInput();
+
+        MovementInput();
+
+        SpriteFlipX();
+
+        SpriteFlipY();
+    }
+
+    private void JumpInput()
+    {
         // If player is on the ground and "Jump" button is pressed,
         // They will jump the opposite direction of gravity
         if (down && Input.GetButton("Jump") && !crouching)
@@ -43,15 +59,13 @@ public class PlayerMovement : Physics {
         }
         if (Input.GetButtonUp("Jump"))
             waitJump = false;
-        //if (down && Input.GetButton("Jump") && !crouching)
-        //{
-        //    SetVelocity((-Physics2D.gravity.normalized) * jumpStrength / weight);
-        //    source.PlayOneShot(sounds.jump);
-        //}
+    }
 
+    private void CrouchInput()
+    {
         if (Input.GetAxisRaw("Vertical") < 0)
         {
-            if(!crouching)
+            if (!crouching)
             {
                 crouching = true;
                 transform.position = new Vector3(transform.position.x, transform.position.y + (Physics2D.gravity.normalized.y * (transform.localScale.y / 2)), 0);
@@ -62,6 +76,7 @@ public class PlayerMovement : Physics {
         {
             if (crouching)
             {
+                // This section checks if the player is allowed to un-crouch (If there is something above them whilst crouching)
                 RaycastHit2D hit;
                 if (Physics2D.gravity.normalized.y < 0)
                     hit = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x, transform.position.y - c2D.bounds.extents.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), 0, Vector2.up, c2D.bounds.size.y * 2);
@@ -75,7 +90,10 @@ public class PlayerMovement : Physics {
                 }
             }
         }
+    }
 
+    private void MovementInput()
+    {
         // Changes the movement to different axes depending on the direction of gravity
 
         axis = Input.GetAxis("Horizontal");
@@ -84,18 +102,40 @@ public class PlayerMovement : Physics {
             SetVelocity(new Vector2(Utilities.ClosestTo(moveStrength / weight * axis, capMovement, 0), velocity.y));
         else if (Physics2D.gravity.normalized.y == 0)
             SetVelocity(new Vector2(velocity.x, Utilities.ClosestTo(moveStrength / weight * axis, capMovement, 0)));
-        
-        // Determines which way the object should face when moving in specified gravity
-        if ((Physics2D.gravity.normalized == Vector2.down || Physics2D.gravity.normalized == Vector2.right) 
-         && (axis < 0 && facingRight || axis > 0 && !facingRight)
-         || (Physics2D.gravity.normalized == Vector2.up || Physics2D.gravity.normalized == Vector2.left)
-         && (axis > 0 && facingRight || axis < 0 && !facingRight))
-        {
-            facingRight = !facingRight;
-            transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, 0);
-        }
+
         capMovement = float.MaxValue;
     }
+
+    private void SpriteFlipX()
+    {
+        // Flips objects spriteX depending on moving left or right
+        if (flipSpriteX)
+        {
+            if (axis < 0 && facingRight || axis > 0 && !facingRight)
+            {
+                facingRight = !facingRight;
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 0);
+            }
+        }
+        else
+            flipSpriteX = true;
+    }
+
+    private void SpriteFlipY()
+    {
+        // Flips objects spriteY depending on the direction of Y Gravity
+        if (flipSpriteY)
+        {
+            if (Physics2D.gravity.normalized.y == 1 && facingDown || Physics2D.gravity.normalized.y == -1 && !facingDown)
+            {
+                facingDown = !facingDown;
+                transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, 0);
+            }
+        }
+        else
+            flipSpriteY = true;
+    }
+
     public float CapMovement(float x)
     {
         Debug.Log("Cap=" + x);

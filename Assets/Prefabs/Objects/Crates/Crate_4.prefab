@@ -21,7 +21,9 @@ GameObject:
   - component: {fileID: 4046520060528978}
   - component: {fileID: 212125089487465878}
   - component: {fileID: 61500002890601926}
+  - component: {fileID: 61846505436812954}
   - component: {fileID: 50624667483812838}
+  - component: {fileID: 114925920308682566}
   - component: {fileID: 114238909209886342}
   m_Layer: 10
   m_Name: Crate_4
@@ -88,6 +90,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
+--- !u!61 &61846505436812954
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1590858759579808}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 0.64}
+    newSize: {x: 0.49, y: 0.45}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!114 &114238909209886342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -111,6 +138,17 @@ MonoBehaviour:
   acceleration: {x: 0, y: 0}
   useParentX: 0
   useParentY: 0
+--- !u!114 &114925920308682566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1590858759579808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3d8ed986214c8a4394fb5f0e4ee989a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212125089487465878
 SpriteRenderer:
   m_ObjectHideFlags: 1

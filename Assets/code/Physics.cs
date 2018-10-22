@@ -125,7 +125,6 @@ public class Physics : MonoBehaviour
     }
     public float AddRawForceX(Physics other, float x)
     {
-        Debug.Log(gameObject.name + " AddRawForceX=" + x);
         return AddVelocity(new Vector2(x, 0)).x;
     }
     public float AddRawForceY(Physics other, float y)
@@ -134,7 +133,6 @@ public class Physics : MonoBehaviour
     }
     public float AddForceX(Physics other, float x)
     {
-        Debug.Log("AddForceX=" + x);
         float force = x / weight;
         //float force = (x * (other.weight / weight)) / weight;
         return AddRawForceX(other, force);

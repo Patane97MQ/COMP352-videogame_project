@@ -20,6 +20,7 @@ public class Pull : Interactable{
             
             Physics thisPhysics = gameObject.GetComponent<Physics>();
 
+<<<<<<< HEAD:Assets/code/Interact/Pull.cs
             float pMovementVelX = pMovement.velocity.x;
 
             // Simply saves the X direction of the pMovement object to this object (eg. of this object is to the left, direction will be -1)
@@ -31,6 +32,10 @@ public class Pull : Interactable{
 
             pMovement.flipSpriteX = false;
 
+=======
+            float velocityx = pMovement.velocity.x;
+            //if()
+>>>>>>> 769ff3ef155d02ff39c38748caffb8e7f654d20e:Assets/code/Pull.cs
             pMovement.SetVelocity(new Vector2(0, pMovement.velocity.y));
             pMovement.AddVelocity(new Vector2(thisPhysics.CalculateForce(pMovement, pMovementVelX), 0));
             

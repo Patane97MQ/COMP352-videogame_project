@@ -16,7 +16,6 @@ public class PlayerMovement : Physics {
 
     private float capMovement = float.MaxValue;
     private float axis;
-    private readonly float collOffset = 0.065f;
 
     private AudioSource source;
 

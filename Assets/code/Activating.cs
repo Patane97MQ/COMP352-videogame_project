@@ -85,7 +85,6 @@ public abstract class Activating : MonoBehaviour {
     // Checks ALL colours. Generally used in the 'AUTO' selection for StartingState
     void CheckForActivation()
     {
-        bool currentState = active;
         try
         {
             active = ColourCheck();

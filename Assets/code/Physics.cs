@@ -8,7 +8,7 @@ public class Physics : MonoBehaviour
     
     public float weight = 0f;
     public Vector2 drag = new Vector2(1f, 1f);
-    public float stepHeight = 0.1f;
+    public Vector2 stepHeight = new Vector2(0.1f, 0.1f);
 
     protected Transform t;
     protected Rigidbody2D rb2D;
@@ -16,24 +16,16 @@ public class Physics : MonoBehaviour
 
     [HideInInspector]
     public float rotation;
-    [HideInInspector]
+    
     public bool up;
-    [HideInInspector]
     public bool down;
-    [HideInInspector]
     public bool left;
-    [HideInInspector]
     public bool right;
 
     [HideInInspector]
     public Vector2 velocity;
     [HideInInspector]
     public Vector2 acceleration;
-    
-    [HideInInspector]
-    public bool useParentX;
-    [HideInInspector]
-    public bool useParentY;
 
     protected float edgeCut = 0.02f;
 
@@ -195,6 +187,7 @@ public class Physics : MonoBehaviour
 
     
 
+
     private float RunAllBoxCastsForX(float x, Vector2 direction)
     {
         // Drawing a BoxCast of the below (for debugging)
@@ -212,7 +205,7 @@ public class Physics : MonoBehaviour
         {
             // Distance is saved as this object. The reason that its saved here is because it might be changed later (within stepCheck)
             float raycastDistance = nextCheck.distance;
-            RaycastHit2D stepCheck = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x, transform.position.y + stepHeight), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), transform.rotation.z, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
+            RaycastHit2D stepCheck = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x, transform.position.y + (-Physics2D.gravity.normalized.y) * stepHeight.x), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), 0, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
             
             // In this scenario, we bump into an object which is below our stepheight threshhold (such as a button). If so, we will try to step on top of it.
             // We also only pass this if statement when the object we are colliding is NOT the originally collided object.
@@ -230,25 +223,29 @@ public class Physics : MonoBehaviour
                         raycastDistance = stepCheck.distance;
                     }
                     else
-                        // Move the Y value up to the current stepHeight
-                        transform.position += Vector3.up * stepHeight;
+                        // Move the Y value up to the current stepHeight (works in both Gravity directions)
+                        transform.position += (new Vector3(0, -Physics2D.gravity.normalized.y)) * stepHeight.x;
                 }
                 // Otherwise, clip slightly into the object. This way we dont lose any momentum or movement on any objects!
                 else
                     return x;
             }
-            // If we are colliding into an object with physics, push it.
-            if (HasPhysics(nextCheck.collider.gameObject))
-                GrabPhysics(nextCheck.collider.gameObject).AddForceX(this, x);
+            else
+            {
+                // If we are colliding into an object with physics, push it.
+                if (HasPhysics(nextCheck.collider.gameObject))
+                    GrabPhysics(nextCheck.collider.gameObject).AddForceX(this, x);
 
-            SetTouching(direction, true);
-            SetVelocity(new Vector2(0, velocity.y));
-            return Math.Sign(direction.x) * (raycastDistance - c2D.bounds.extents.x + 0.005f);
+                SetTouching(direction, true);
+                SetVelocity(new Vector2(0, velocity.y));
+                return Math.Sign(direction.x) * (raycastDistance - c2D.bounds.extents.x + 0.005f);
+            }
         }
         return x;
     }
     private float RunAllBoxCastsForY(float y, Vector2 direction)
     {
+
         // Drawing a BoxCast of the below (for debugging)
         DrawBoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
 
@@ -262,13 +259,61 @@ public class Physics : MonoBehaviour
         // If an object is hit.
         if (nextCheck)
         {
-            // If we are colliding into an object with physics, push it.
-            if (HasPhysics(nextCheck.collider.gameObject))
-                GrabPhysics(nextCheck.collider.gameObject).AddForceY(this, y);
+            // Distance is saved as this object. The reason that its saved here is because it might be changed later (within stepCheck)
+            float raycastDistance = nextCheck.distance;
+            RaycastHit2D stepCheckLeft  = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x - stepHeight.y, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), 0, direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
+            RaycastHit2D stepCheckRight = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x + stepHeight.y, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), 0, direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
 
-            SetTouching(direction, true);
-            SetVelocity(new Vector2(velocity.x, 0));
-            return Math.Sign(direction.y) * (nextCheck.distance - c2D.bounds.extents.y + 0.005f);
+            // In this scenario, we bump into an object which is below our stepheight threshhold (such as a button). If so, we will try to step on top of it.
+            // We also only pass this if statement when the object we are colliding is NOT the originally collided object.
+            if ((!stepCheckLeft || stepCheckLeft.collider.gameObject != nextCheck.collider.gameObject && (HasPhysics(stepCheckLeft.collider.gameObject)))
+                || (!stepCheckRight || stepCheckRight.collider.gameObject != nextCheck.collider.gameObject && (HasPhysics(stepCheckRight.collider.gameObject))))
+            {
+                // If we are able to step onto the object without glitching, do so!
+                if (Math.Abs(y) >= edgeCut)
+                {
+                    // LEFT
+                    // If we did hit an object AND that object has any sort of physics
+                    if (stepCheckLeft && HasPhysics(stepCheckLeft.collider.gameObject))
+                    {
+                        // Add force to that object
+                        GrabPhysics(stepCheckLeft.collider.gameObject).AddForceY(this, y);
+                        // Move the distance from this object to the physics object
+                        raycastDistance = stepCheckLeft.distance;
+                    }
+                    // RIGHT
+                    else if (stepCheckRight && HasPhysics(stepCheckRight.collider.gameObject))
+                    {
+                        // Add force to that object
+                        GrabPhysics(stepCheckRight.collider.gameObject).AddForceY(this, y);
+                        // Move the distance from this object to the physics object
+                        raycastDistance = stepCheckRight.distance;
+                    }
+                    else
+                    {
+                        int dir = 0;
+                        if (!stepCheckLeft)
+                            dir = -1;
+                        else if (!stepCheckRight)
+                            dir = 1;
+                        // Move the Y value up to the current stepHeight (works in both Gravity directions)
+                        transform.position += (new Vector3(dir, 0)) * stepHeight.y;
+                    }
+                }
+                // Otherwise, clip slightly into the object. This way we dont lose any momentum or movement on any objects!
+                else
+                    return y;
+            }
+            else
+            {
+                // If we are colliding into an object with physics, push it.
+                if (HasPhysics(nextCheck.collider.gameObject))
+                    GrabPhysics(nextCheck.collider.gameObject).AddForceY(this, y);
+                
+                SetTouching(direction, true);
+                SetVelocity(new Vector2(velocity.x, 0));
+                return Math.Sign(direction.y) * (nextCheck.distance - c2D.bounds.extents.y + 0.005f);
+            }
         }
         return y;
     }

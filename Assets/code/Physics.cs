@@ -175,8 +175,8 @@ public class Physics : MonoBehaviour
     }
     private void DrawBoxCast(Vector2 origin, Vector2 size, Vector2 direction, float distance)
     {
-        Utilities.DrawBox(origin, size, Color.green);
-        Utilities.DrawBox(origin + direction * distance, size, Color.red);
+        //Utilities.DrawBox(origin, size, Color.grey);
+        Utilities.DrawBox(origin + direction * distance, size, Color.black);
     }
 
 

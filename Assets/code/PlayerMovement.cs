@@ -68,8 +68,8 @@ public class PlayerMovement : Physics {
             if (!crouching)
             {
                 crouching = true;
-                transform.position = new Vector3(transform.position.x, transform.position.y + (Physics2D.gravity.normalized.y * (transform.localScale.y / 2)), 0);
                 transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 2, 0);
+                transform.position = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y / 2), 0);
             }
         }
         else
@@ -85,8 +85,9 @@ public class PlayerMovement : Physics {
                 if (!hit)
                 {
                     crouching = false;
+                    Debug.Log(transform.localScale.y / 2);
+                    transform.position = new Vector3(transform.position.x, transform.position.y + (transform.localScale.y / 2), 0);
                     transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, 0);
-                    transform.position = new Vector3(transform.position.x, transform.position.y + (-Physics2D.gravity.normalized.y * (transform.localScale.y / 2)), 0);
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using EditorUtilities;
+using UnityEngine.Analytics;
 
 public class ChangeLevelDoor : Activating {
 
@@ -20,5 +21,6 @@ public class ChangeLevelDoor : Activating {
     {
         if (open && collider.gameObject.tag.Equals("Player"))
             Utilities.LoadScene(scene);
+
     }
 }

@@ -2465,12 +2465,12 @@ Prefab:
     - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
         type: 2}
       propertyPath: m_EventPayload.m_StandardEventType
-      value: LevelComplete
+      value: LevelStart
       objectReference: {fileID: 0}
     - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
         type: 2}
       propertyPath: m_EventPayload.m_Name
-      value: level_complete
+      value: level_start
       objectReference: {fileID: 0}
     - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
         type: 2}
@@ -2586,7 +2586,7 @@ Prefab:
     - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
         type: 2}
       propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[0].m_Value.m_Value
-      value: PT3
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
         type: 2}
@@ -2600,6 +2600,7 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114909476364924104, guid: d25d9da504642f24daaf0228afca9f04, type: 2}
+    - {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: d25d9da504642f24daaf0228afca9f04, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1644419979

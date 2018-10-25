@@ -35,8 +35,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Actual Playtesting/Work in Progress/PT4.unity
     guid: b27118d5cb295514386319e685a13413
-  - enabled: 1
-    path: Assets/Scenes/Actual Playtesting/PT0.unity
+  - enabled: 0
+    path: Assets/__DELETED_GUID_Trash/7fcaae93a82298e4894f90ca79b3d502
     guid: 7fcaae93a82298e4894f90ca79b3d502
   - enabled: 1
     path: Assets/Scenes/Actual Playtesting/PT1.unity
@@ -56,8 +56,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Actual Playtesting/PT10.unity
     guid: 116d3d39263de0f4baa5edafdfb51993
-  - enabled: 0
-    path: Assets/Scenes/Actual Playtesting/Work in Progress/PT9.unity
+  - enabled: 1
+    path: Assets/Scenes/Actual Playtesting/PT9.unity
     guid: e2a1f5bf15d751a46969b4c6dcd35229
   - enabled: 0
     path: 

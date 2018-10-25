@@ -617,9 +617,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: faf2b808-f1c3-41dd-8169-6c2e9215b84f
+  cloudProjectId: 2bb02cd2-2b9e-43d3-a968-48adedad0583
   projectName: C-lone
-  organizationId: bradt
+  organizationId: scott752
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

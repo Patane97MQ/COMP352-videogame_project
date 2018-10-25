@@ -3203,6 +3203,32 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcc7180f8ab7602489b320ddaff7c5c5, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &893055748 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1981095214291014, guid: fcc7180f8ab7602489b320ddaff7c5c5,
+    type: 2}
+  m_PrefabInternal: {fileID: 893055747}
+--- !u!114 &893055749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 893055748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 207469858, guid: 220224b43fc464c28bc0e8de8f54a432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventName: 
+  m_TrackableProperty:
+    m_Fields:
+    - m_ParamName: 
+      m_Target: {fileID: 0}
+      m_FieldPath: 
+      m_TypeString: 
+      m_DoStatic: 0
+      m_StaticString: 
+  m_Trigger: 0
 --- !u!1001 &1197881869
 Prefab:
   m_ObjectHideFlags: 0
@@ -3310,6 +3336,21 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[0].m_Value.m_Target.m_ValidTypeNames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[1].m_Value.m_Target.m_ValidTypeNames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4026055990884518, guid: d25d9da504642f24daaf0228afca9f04, type: 2}
       propertyPath: m_LocalPosition.x
       value: 5.8762445
@@ -3363,9 +3404,215 @@ Prefab:
       propertyPath: scene.sceneName
       value: Scenes/Actual Playtesting/PT3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_Trigger.m_LifecycleEvent
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_StandardEventType
+      value: LevelStart
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[0].m_RequirementType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[0].m_GroupID
+      value: level
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[0].m_Tooltip
+      value: The level name. Either level_name or level_index is required.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[0].m_Name
+      value: level_name
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[0].m_Value.m_FixedType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[0].m_Value.m_CanDisable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[0].m_Value.m_PropertyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[0].m_Value.m_ValueType
+      value: System.String
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[0].m_Value.m_Target.m_ValidTypeNames.Array.data[0]
+      value: System.String
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[0].m_Value.m_Target.m_Type
+      value: System.String
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[1].m_RequirementType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[1].m_GroupID
+      value: level
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[1].m_Tooltip
+      value: The order of this level within the game. Either level_name or level_index
+        is required.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[1].m_Name
+      value: level_index
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[1].m_Value.m_FixedType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[1].m_Value.m_CanDisable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[1].m_Value.m_ValueType
+      value: System.Int32
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[1].m_Value.m_Target.m_ValidTypeNames.Array.data[0]
+      value: System.Int32
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[1].m_Value.m_Target.m_Type
+      value: System.Int32
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Name
+      value: level_start
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[0].m_Value.m_Value
+      value: PT1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[1].m_Value.m_PropertyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[1].m_Value.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114282265600729138, guid: d25d9da504642f24daaf0228afca9f04, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: d25d9da504642f24daaf0228afca9f04, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1656485844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1522227161732564, guid: d25d9da504642f24daaf0228afca9f04,
+    type: 2}
+  m_PrefabInternal: {fileID: 1656485843}
+--- !u!114 &1656485845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1656485844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -745406591, guid: 220224b43fc464c28bc0e8de8f54a432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Trigger:
+    m_IsTriggerExpanded: 1
+    m_Type: 0
+    m_LifecycleEvent: 2
+    m_ApplyRules: 0
+    m_Rules:
+      m_Rules: []
+    m_TriggerBool: 0
+    m_InitTime: 5
+    m_RepeatTime: 5
+    m_Repetitions: 0
+    repetitionCount: 0
+  m_EventPayload:
+    m_IsEventExpanded: 1
+    m_StandardEventType: LevelComplete
+    m_Parameters:
+      m_Parameters:
+      - m_RequirementType: 1
+        m_GroupID: level
+        m_Tooltip: The level name. Either level_name or level_index is required.
+        m_Name: level_name
+        m_Value:
+          m_EditingCustomValue: 0
+          m_PopupIndex: 0
+          m_CustomValue: 
+          m_FixedType: 1
+          m_EnumType: 
+          m_EnumTypeIsCustomizable: 0
+          m_CanDisable: 1
+          m_PropertyType: 0
+          m_ValueType: System.String
+          m_Value: PT1
+          m_Target:
+            m_Target: {fileID: 0}
+            m_Path: 
+            m_ValidTypeNames:
+            - System.String
+            m_Type: System.String
+            m_EnumType: 
+      - m_RequirementType: 1
+        m_GroupID: level
+        m_Tooltip: The order of this level within the game. Either level_name or level_index
+          is required.
+        m_Name: level_index
+        m_Value:
+          m_EditingCustomValue: 0
+          m_PopupIndex: 0
+          m_CustomValue: 
+          m_FixedType: 1
+          m_EnumType: 
+          m_EnumTypeIsCustomizable: 0
+          m_CanDisable: 1
+          m_PropertyType: 1
+          m_ValueType: System.Int32
+          m_Value: 1
+          m_Target:
+            m_Target: {fileID: 0}
+            m_Path: 
+            m_ValidTypeNames:
+            - System.Int32
+            m_Type: System.Int32
+            m_EnumType: 
+    m_Name: level_complete
 --- !u!1001 &1683422924
 Prefab:
   m_ObjectHideFlags: 0

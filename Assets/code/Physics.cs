@@ -265,6 +265,7 @@ public class Physics : MonoBehaviour
             RaycastHit2D stepCheckRightWall = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x, transform.position.y), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), 0, Vector2.right, stepHeight.y + c2D.bounds.extents.x - 0.005f);
             //Utilities.DrawBox(new Vector2(transform.position.x + stepHeight.y + c2D.bounds.extents.x - 0.025f, transform.position.y), new Vector2(0.05f, c2D.bounds.size.y - edgeCut * 2), Color.blue);
             RaycastHit2D stepCheckLeft  = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x - stepHeight.y, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), 0, direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
+            //Utilities.DrawBox(new Vector2(transform.position.x - stepHeight.y, transform.position.y - Math.Abs(y) - c2D.bounds.extents.y + 0.025f), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.05f), Color.blue);
 
             // Checks that the object is next to a wall to the left and can fall to the right of an object its about to hit (such as a vertical button on a left wall)
             RaycastHit2D stepCheckLeftWall = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x, transform.position.y), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), 0, Vector2.left, stepHeight.y + c2D.bounds.extents.x - 0.005f);
@@ -273,9 +274,12 @@ public class Physics : MonoBehaviour
             
             // In this scenario, we bump into an object which is below our stepheight threshhold (such as a button). If so, we will try to step on top of it.
             // We also only pass this if statement when the object we are colliding is NOT the originally collided object.
-            if ((stepCheckRightWall && (!stepCheckLeft || stepCheckLeft.collider.gameObject != nextCheck.collider.gameObject && (HasPhysics(stepCheckLeft.collider.gameObject))))
-                || (stepCheckLeftWall && (!stepCheckRight || stepCheckRight.collider.gameObject != nextCheck.collider.gameObject && (HasPhysics(stepCheckRight.collider.gameObject)))))
+            //if ((stepCheckRightWall && (!stepCheckLeft || stepCheckLeft.collider.gameObject != nextCheck.collider.gameObject && (HasPhysics(stepCheckLeft.collider.gameObject))))
+            //    || (stepCheckLeftWall && (!stepCheckRight || stepCheckRight.collider.gameObject != nextCheck.collider.gameObject && (HasPhysics(stepCheckRight.collider.gameObject)))))
+            if ((stepCheckRightWall && !stepCheckLeft)
+                || (stepCheckLeftWall && !stepCheckRight))
             {
+
                 // If we are able to step onto the object without glitching, do so!
                 if (Math.Abs(y) >= edgeCut)
                 {

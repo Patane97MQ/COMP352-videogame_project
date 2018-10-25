@@ -5,12 +5,14 @@ public class Barrier : Activating
 
     public DoorSounds sounds = new DoorSounds();
     private AudioSource source;
+    private string spriteName;
 
     private Color startColour;
 
     void Awake(){
         source = GetComponent<AudioSource>();
         startColour = gameObject.GetComponent<SpriteRenderer>().color;
+        spriteName = gameObject.GetComponent<SpriteRenderer>().sprite.name;
     }
     public override void Activate()
     {
@@ -31,7 +33,7 @@ public class Barrier : Activating
     }
     void ChangeSprite(bool active)
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/barrier_4" + (active ? "_off" : ""), typeof(Sprite)) as Sprite;
+        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/" + spriteName + (active ? "_off" : ""), typeof(Sprite)) as Sprite;
     }
        [System.Serializable]
     public class DoorSounds {

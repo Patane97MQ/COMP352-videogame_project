@@ -56,8 +56,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Actual Playtesting/PT10.unity
     guid: 116d3d39263de0f4baa5edafdfb51993
-  - enabled: 1
-    path: Assets/Scenes/Actual Playtesting/PT9.unity
+  - enabled: 0
+    path: Assets/Scenes/Actual Playtesting/Work in Progress/PT9.unity
     guid: e2a1f5bf15d751a46969b4c6dcd35229
   - enabled: 0
     path: 

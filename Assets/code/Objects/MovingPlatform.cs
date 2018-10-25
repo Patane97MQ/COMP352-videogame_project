@@ -16,17 +16,18 @@ public class MovingPlatform : Activating
 		private float speed;
 
 		[SerializeField]
-		private Transform childTransform;
+		private Transform Starting;
 
 	[SerializeField]
-		private Transform transformB;
+		private Transform Ending;
 
 	// Use this for initialization
 	new void Start () {
 		base.Start();
-		posA = childTransform.localPosition;
-		posB = transformB.localPosition;
+		posA = Starting.localPosition;
+		posB = Ending.localPosition;
 		nexPos = posB;
+        Ending.GetComponent<SpriteRenderer>().enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -36,9 +37,9 @@ public class MovingPlatform : Activating
 	}
 	private void Move ()
 	{
-		childTransform.localPosition = Vector3.MoveTowards (childTransform.localPosition, nexPos, speed * Time.deltaTime);
+        Starting.localPosition = Vector3.MoveTowards (Starting.localPosition, nexPos, speed * Time.deltaTime);
 
-		if (Vector3.Distance (childTransform.localPosition, nexPos) <= 0.1) 
+		if (Vector3.Distance (Starting.localPosition, nexPos) <= 0.1) 
 		{
 			ChangeDestination ();
 		}
@@ -54,7 +55,7 @@ public class MovingPlatform : Activating
 		if (other.gameObject.tag == "Player") 
 		{
 			other.gameObject.layer = 8;
-			other.transform.SetParent (childTransform);
+			other.transform.SetParent (Starting);
 		}
 	}
 	private void OnCollisionExit2D(Collision2D other)

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212358651831000944}
   - component: {fileID: 61417614920214426}
   - component: {fileID: 50982768128039380}
+  - component: {fileID: 114089840510558076}
   - component: {fileID: 114445992949953098}
   m_Layer: 8
   m_Name: red_clone
@@ -88,6 +89,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.38, y: 1.26}
   m_EdgeRadius: 0
+--- !u!114 &114089840510558076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1572015061269690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864d6fb59b56fb545942a9f30455b885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interacting: 0
 --- !u!114 &114445992949953098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 10
   drag: {x: 0, y: 0}
-  stepHeight: 0.1
+  stepHeight: {x: 0.1, y: 0.1}
   rotation: 0
   up: 0
   down: 0
@@ -109,13 +122,12 @@ MonoBehaviour:
   right: 0
   velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
-  parent: {fileID: 0}
-  useParentX: 0
-  useParentY: 0
   moveStrength: 1
   jumpStrength: 2.3
   sounds:
     jump: {fileID: 0}
+  flipSpriteX: 1
+  flipSpriteY: 1
 --- !u!212 &212358651831000944
 SpriteRenderer:
   m_ObjectHideFlags: 1

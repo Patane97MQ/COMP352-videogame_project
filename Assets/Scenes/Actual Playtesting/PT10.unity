@@ -1162,6 +1162,17 @@ Prefab:
       propertyPath: m_EventPayload.m_Parameters.m_Parameters.Array.data[1].m_Value.m_Value
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114904414888053730, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: scene.sceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: e2a1f5bf15d751a46969b4c6dcd35229,
+        type: 3}
+    - target: {fileID: 114904414888053730, guid: d25d9da504642f24daaf0228afca9f04,
+        type: 2}
+      propertyPath: scene.sceneName
+      value: Scenes/Actual Playtesting/PT9
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: d25d9da504642f24daaf0228afca9f04, type: 2}

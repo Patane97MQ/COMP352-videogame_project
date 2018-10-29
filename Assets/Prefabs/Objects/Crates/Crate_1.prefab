@@ -40,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1590858759579808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.35, y: 0.91, z: -1}
-  m_LocalScale: {x: 0.9, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 5
   drag: {x: 10, y: 1}
-  stepHeight: 0.1
+  stepHeight: {x: 0.1, y: 0.1}
   rotation: 0
   up: 0
   down: 0
@@ -136,8 +136,6 @@ MonoBehaviour:
   right: 0
   velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
-  useParentX: 0
-  useParentY: 0
 --- !u!114 &114669954875281554
 MonoBehaviour:
   m_ObjectHideFlags: 1

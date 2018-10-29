@@ -25,6 +25,11 @@ public class ColourHandler
         colourCounts[colour] = Math.Max(0, colourCounts[colour] + amount);
     }
 
+    public static int CountColour(ColourEnum colour)
+    {
+        return colourCounts[colour];
+    }
+
     public bool CheckAllColours()
     {
         foreach (FieldInfo fieldInfo in this.GetType().GetFields().Where(FieldInfo => FieldInfo.IsPublic))

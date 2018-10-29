@@ -276,8 +276,8 @@ public class Physics : MonoBehaviour
             // We also only pass this if statement when the object we are colliding is NOT the originally collided object.
             //if ((stepCheckRightWall && (!stepCheckLeft || stepCheckLeft.collider.gameObject != nextCheck.collider.gameObject && (HasPhysics(stepCheckLeft.collider.gameObject))))
             //    || (stepCheckLeftWall && (!stepCheckRight || stepCheckRight.collider.gameObject != nextCheck.collider.gameObject && (HasPhysics(stepCheckRight.collider.gameObject)))))
-            if ((stepCheckRightWall && !stepCheckLeft)
-                || (stepCheckLeftWall && !stepCheckRight))
+            if ((stepCheckRightWall && !HasPhysics(stepCheckRightWall.collider.gameObject) && !stepCheckLeft)
+                || (stepCheckLeftWall && !HasPhysics(stepCheckLeftWall.collider.gameObject) && !stepCheckRight))
             {
 
                 // If we are able to step onto the object without glitching, do so!

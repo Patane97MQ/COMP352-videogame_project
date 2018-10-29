@@ -2,7 +2,9 @@
 
 public class Indicator : MonoBehaviour {
 
-    public Activator activator;
+    //public Activator activator;
+    public ColourEnum colour;
+    public int amount = 1;
 
     void OnEnable()
     {
@@ -20,17 +22,17 @@ public class Indicator : MonoBehaviour {
     }
     void OnActivated(Activator activator)
     {
-        if (activator.Equals(this.activator))
+        if (activator.colour == colour)
             ChangeSprite();
 
     }
     void OnDeactivated(Activator activator)
     {
-        if (activator.Equals(this.activator))
+        if (activator.colour == colour)
             ChangeSprite();
     }
     void ChangeSprite()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/coloured/" + activator.colour + "/indicator_" + (activator.Activated() ? "on" : "off"), typeof(Sprite)) as Sprite;
+        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/coloured/" + colour + "/indicator_" + (ColourHandler.CountColour(colour) >= amount ? "on" : "off"), typeof(Sprite)) as Sprite;
     }
 }

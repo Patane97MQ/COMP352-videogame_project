@@ -32,7 +32,8 @@ public class Pull : Interactable{
             pMovement.flipSpriteX = false;
             
             pMovement.SetVelocity(new Vector2(0, pMovement.velocity.y));
-            pMovement.AddVelocity(new Vector2(thisPhysics.CalculateForce(pMovement, pMovementVelX), 0));
+            float x = thisPhysics.CalculateForce(pMovement, pMovementVelX);
+            pMovement.AddVelocity(new Vector2(x, 0));
             
             thisPhysics.AddRawForceX(pMovement, pMovement.velocity.x);
         }

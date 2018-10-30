@@ -20,9 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4488108524445910}
   - component: {fileID: 212822553610825270}
+  - component: {fileID: 95041078054156340}
   - component: {fileID: 61712993352533224}
   - component: {fileID: 50814658905732340}
   - component: {fileID: 114421367616141326}
+  - component: {fileID: 114441225422571096}
   - component: {fileID: 114585925650549672}
   - component: {fileID: 114086439817828508}
   - component: {fileID: 82984746507990336}
@@ -82,7 +84,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.38, y: 1.26}
+    oldSize: {x: 0.48, y: 1.28}
     newSize: {x: 0.38, y: 1.26}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -186,6 +188,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &95041078054156340
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1981095214291014}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3238e9b5d9164fc4e99d5f030f9ba3ec, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114086439817828508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -208,6 +228,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864d6fb59b56fb545942a9f30455b885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interacting: 0
+--- !u!114 &114441225422571096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1981095214291014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9406f1dc5cc909c4abd5180be1e22047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114585925650549672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -221,7 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 10
   drag: {x: 0, y: 0}
-  stepHeight: 0.1
+  stepHeight: {x: 0.1, y: 0.1}
   rotation: 0
   up: 0
   down: 0
@@ -229,12 +261,14 @@ MonoBehaviour:
   right: 0
   velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
-  useParentX: 0
-  useParentY: 0
   moveStrength: 1
   jumpStrength: 2.3
   sounds:
     jump: {fileID: 8300000, guid: c91e52590bd17f34fb64e8ffaf9834bd, type: 3}
+  axis: 0
+  jumping: 0
+  flipSpriteX: 1
+  flipSpriteY: 1
 --- !u!212 &212822553610825270
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -270,7 +304,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 23a738a848681454ea7b5023d143d511, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 80320acf381509a4eb55e56c58e694ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

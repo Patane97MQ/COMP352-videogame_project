@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class PlayerMovement : Physics {
@@ -15,12 +14,17 @@ public class PlayerMovement : Physics {
     private bool crouching = false;
 
     private float capMovement = float.MaxValue;
-    private float axis;
+
+    [HideInInspector]
+    public float axis;
+    [HideInInspector]
+    public bool jumping;
 
     private AudioSource source;
 
     [HideInInspector]
     public bool flipSpriteX = true, flipSpriteY = true;
+
 
     new void Start()
     {
@@ -45,12 +49,14 @@ public class PlayerMovement : Physics {
 
     private void JumpInput()
     {
+        jumping = false;
         // If player is on the ground and "Jump" button is pressed,
         // They will jump the opposite direction of gravity
         if (down && Input.GetButton("Jump") && !crouching)
         {
             if (!waitJump)
             {
+                jumping = true;
                 SetVelocity((-Physics2D.gravity.normalized) * jumpStrength / weight);
                 source.PlayOneShot(sounds.jump);
                 waitJump = true;

@@ -14,9 +14,10 @@ public class PlayerMovement : Physics {
     private bool crouching = false;
 
     private float capMovement = float.MaxValue;
+    private float axis;
 
     [HideInInspector]
-    public float axis;
+    public bool moving;
     [HideInInspector]
     public bool jumping;
 
@@ -98,16 +99,29 @@ public class PlayerMovement : Physics {
         }
     }
 
+    private bool x;
+
     private void MovementInput()
     {
         // Changes the movement to different axes depending on the direction of gravity
 
         axis = Input.GetAxis("Horizontal");
-        //SetVelocity(new Vector2(movementSpeed / 10 * axis, movementSpeed / 10 * axis) * Vector2.Perpendicular(gravityDirection));
-        if (Physics2D.gravity.normalized.x == 0)
-            SetVelocity(new Vector2(Utilities.ClosestTo(moveStrength / weight * axis, capMovement, 0), velocity.y));
-        else if (Physics2D.gravity.normalized.y == 0)
-            SetVelocity(new Vector2(velocity.x, Utilities.ClosestTo(moveStrength / weight * axis, capMovement, 0)));
+
+        SetVelocity(new Vector2(Utilities.ClosestTo(moveStrength / weight * axis, capMovement, 0), velocity.y));
+
+        if(axis == 0)
+        {
+            if (x)
+                moving = false;
+            else
+                x = true;
+        }
+        else
+        {
+            x = false;
+            moving = true;
+        }
+        
 
         capMovement = float.MaxValue;
     }

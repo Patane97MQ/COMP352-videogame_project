@@ -11,8 +11,6 @@ public class PlayerMovement : Physics {
 
     public PlayerSounds sounds = new PlayerSounds();
 
-    private bool waitJump;
-
     private bool facingRight = true, facingDown = true;
     private bool crouching = false;
 
@@ -24,6 +22,7 @@ public class PlayerMovement : Physics {
     public bool moving;
     [HideInInspector]
     public bool jumping;
+    private bool jumpRefresh;
 
     private AudioSource source;
 
@@ -54,21 +53,22 @@ public class PlayerMovement : Physics {
 
     private void JumpInput()
     {
-        jumping = false;
         // If player is on the ground and "Jump" button is pressed,
         // They will jump the opposite direction of gravity
+        if (down && jumping)
+            jumping = false;
         if (down && Input.GetButton("Jump") && !crouching)
         {
-            if (!waitJump)
+            if (!jumpRefresh)
             {
                 jumping = true;
+                jumpRefresh = true;
                 SetVelocity((-Physics2D.gravity.normalized) * jumpStrength / weight);
                 source.PlayOneShot(sounds.jump);
-                waitJump = true;
             }
         }
         if (Input.GetButtonUp("Jump"))
-            waitJump = false;
+            jumpRefresh = false;
     }
 
     private void CrouchInput()
@@ -105,6 +105,9 @@ public class PlayerMovement : Physics {
     private void MovementInput()
     {
         axis = Input.GetAxisRaw("Horizontal");
+
+        moving = (axis == 0 ? false : true);
+
         accelAdd = Mathf.MoveTowards(accelAdd, axis, moveAcceleration);
         
         SetVelocity(new Vector2(Utilities.ClosestTo(moveStrength / weight * accelAdd, capMovement, 0), velocity.y));

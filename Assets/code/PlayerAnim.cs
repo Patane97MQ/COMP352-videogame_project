@@ -15,18 +15,8 @@ public class PlayerAnim : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(Input.GetAxisRaw("Horizontal"));
-        if (Input.GetAxisRaw("Horizontal") != 0)
-        {
-            if (!animator.GetBool("Walk"))
-                animator.SetBool("Walk", true);
-        }
-        else
-        {
-            if (animator.GetBool("Walk"))
-                animator.SetBool("Walk", false);
-        }
-        if (pMovement.jumping)
-            animator.SetTrigger("Jump");
+        animator.SetBool("Walk", pMovement.moving);
+
+        animator.SetBool("Jump", pMovement.jumping);
 	}
 }

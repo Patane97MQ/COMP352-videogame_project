@@ -261,11 +261,12 @@ MonoBehaviour:
   right: 0
   velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
-  moveStrength: 1
+  moveStrength: 0.7
   jumpStrength: 2.3
+  moveAcceleration: 0.25
   sounds:
     jump: {fileID: 8300000, guid: c91e52590bd17f34fb64e8ffaf9834bd, type: 3}
-  axis: 0
+  moving: 0
   jumping: 0
   flipSpriteX: 1
   flipSpriteY: 1

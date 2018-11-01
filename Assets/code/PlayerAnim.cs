@@ -15,10 +15,17 @@ public class PlayerAnim : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(Input.GetAxisRaw("Horizontal") != 0)
-            animator.SetTrigger("Moving");
+        Debug.Log(Input.GetAxisRaw("Horizontal"));
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            if (!animator.GetBool("Walk"))
+                animator.SetBool("Walk", true);
+        }
         else
-            animator.SetTrigger("Idle");
+        {
+            if (animator.GetBool("Walk"))
+                animator.SetBool("Walk", false);
+        }
         if (pMovement.jumping)
             animator.SetTrigger("Jump");
 	}

@@ -6,6 +6,9 @@ public class PlayerMovement : Physics {
     public float moveStrength = 1f;
     public float jumpStrength = 1.5f;
 
+    public float moveAcceleration = 0.25f;
+
+
     public PlayerSounds sounds = new PlayerSounds();
 
     private bool waitJump;
@@ -13,8 +16,9 @@ public class PlayerMovement : Physics {
     private bool facingRight = true, facingDown = true;
     private bool crouching = false;
 
-    private float capMovement = float.MaxValue;
     private float axis;
+    private float accelAdd = 0f;
+    private float capMovement = float.MaxValue;
 
     [HideInInspector]
     public bool moving;
@@ -98,30 +102,12 @@ public class PlayerMovement : Physics {
             }
         }
     }
-
-    private bool x;
-
     private void MovementInput()
     {
-        // Changes the movement to different axes depending on the direction of gravity
-
-        axis = Input.GetAxis("Horizontal");
-
-        SetVelocity(new Vector2(Utilities.ClosestTo(moveStrength / weight * axis, capMovement, 0), velocity.y));
-
-        if(axis == 0)
-        {
-            if (x)
-                moving = false;
-            else
-                x = true;
-        }
-        else
-        {
-            x = false;
-            moving = true;
-        }
+        axis = Input.GetAxisRaw("Horizontal");
+        accelAdd = Mathf.MoveTowards(accelAdd, axis, moveAcceleration);
         
+        SetVelocity(new Vector2(Utilities.ClosestTo(moveStrength / weight * accelAdd, capMovement, 0), velocity.y));
 
         capMovement = float.MaxValue;
     }

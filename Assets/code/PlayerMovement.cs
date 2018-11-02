@@ -57,15 +57,15 @@ public class PlayerMovement : Physics {
         // They will jump the opposite direction of gravity
         if (down && jumping)
             jumping = false;
-        if (down && Input.GetButton("Jump") && !crouching)
+        if (down 
+            && Input.GetButton("Jump") 
+            && !crouching 
+            && !jumpRefresh)
         {
-            if (!jumpRefresh)
-            {
-                jumping = true;
-                jumpRefresh = true;
-                SetVelocity((-Physics2D.gravity.normalized) * jumpStrength / weight);
-                source.PlayOneShot(sounds.jump);
-            }
+            jumping = true;
+            jumpRefresh = true;
+            SetVelocity((-Physics2D.gravity.normalized) * jumpStrength / weight);
+            source.PlayOneShot(sounds.jump);
         }
         if (Input.GetButtonUp("Jump"))
             jumpRefresh = false;

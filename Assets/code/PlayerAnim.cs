@@ -18,5 +18,7 @@ public class PlayerAnim : MonoBehaviour {
         animator.SetBool("Walk", pMovement.moving);
 
         animator.SetBool("Jump", pMovement.jumping);
+
+        animator.SetBool("Airborne", !pMovement.down);
 	}
 }

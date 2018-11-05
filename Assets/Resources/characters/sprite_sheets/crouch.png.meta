@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: 4b170602048eecf4b803163b5582e57e
+guid: 8731b64fb0e25764e9b208b4b9457d13
 TextureImporter:
   fileIDToRecycleName:
-    21300000: jump_0
-    21300002: jump_1
-    21300004: jump_2
-    21300006: jump_3
-    21300008: jump_4
-    21300010: jump_5
-    21300012: jump_6
-    21300014: jump_7
+    21300000: crouch_0
+    21300002: crouch_1
+    21300004: crouch_2
+    21300006: crouch_3
+    21300008: crouch_4
+    21300010: crouch_5
+    21300012: crouch_6
+    21300014: crouch_7
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -88,44 +88,11 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jump_0
+      name: crouch_0
       rect:
         serializedVersion: 2
         x: 0
@@ -139,13 +106,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed122a6266d2b5549a5fcef0b7eba4f7
+      spriteID: 012a6a73d8d90ef49b28094256c404f8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_1
+      name: crouch_1
       rect:
         serializedVersion: 2
         x: 96
@@ -159,13 +126,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7372d601d8147e4eb2c637df9ab46cb
+      spriteID: d9c90774826fc2f4d8b7d6ebd103628c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_2
+      name: crouch_2
       rect:
         serializedVersion: 2
         x: 192
@@ -179,13 +146,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 521e1a04712fc3247a1f394306469ff2
+      spriteID: ed9d8282750ff444ca3af9bcfcc38efd
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_3
+      name: crouch_3
       rect:
         serializedVersion: 2
         x: 288
@@ -199,13 +166,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85fc2b507dffae4498d175157b2f3fe8
+      spriteID: 62eb50711e233b0448151179dcdc7815
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_4
+      name: crouch_4
       rect:
         serializedVersion: 2
         x: 0
@@ -219,13 +186,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 692115eb38e7c9948a3052ac679fd838
+      spriteID: 2e6a57a7c320e234eb4240c0b693c9be
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_5
+      name: crouch_5
       rect:
         serializedVersion: 2
         x: 96
@@ -239,13 +206,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4bf0e2e8c96a5e947b3eb1cb1abcc4cb
+      spriteID: b052c0c765ea74b408a3aab272d222ec
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_6
+      name: crouch_6
       rect:
         serializedVersion: 2
         x: 192
@@ -259,13 +226,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24604b6354760994493e37c517bd21eb
+      spriteID: 2f845c549d608764494a524fa6564457
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_7
+      name: crouch_7
       rect:
         serializedVersion: 2
         x: 288
@@ -279,7 +246,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8df530c21ff6736418bf098b0dd6e006
+      spriteID: bbdafd812aa48c3499c9a70b868c8785
       vertices: []
       indices: 
       edges: []
@@ -287,7 +254,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 24dda09d2ebdd434186c099a16317982
+    spriteID: 6b830df0776659641a789f124e8b85fb
     vertices: []
     indices: 
     edges: []

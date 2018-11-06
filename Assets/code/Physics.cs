@@ -47,7 +47,6 @@ public class Physics : MonoBehaviour
     // Update is called once per frame
     protected void FixedUpdate()
     {
-        Debug.Log(Math.Sign(Physics2D.gravity.y) * (-c2D.offset.y + (Math.Sign(c2D.offset.y) * 0.030f)));
         c2Dcenter = new Vector2(transform.position.x + c2D.offset.x - (Math.Sign(c2D.offset.x) * 0.030f), transform.position.y + (Math.Sign(Physics2D.gravity.y) * (-c2D.offset.y +  (Math.Sign(c2D.offset.y) * 0.030f))));
         // Velocity constants are always applied!
         AddPositionY(velocity.y);

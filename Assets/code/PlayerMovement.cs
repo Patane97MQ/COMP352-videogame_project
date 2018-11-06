@@ -84,7 +84,8 @@ public class PlayerMovement : Physics {
             {
                 crouching = true;
                 c2D.offset = new Vector2(standingOffset.x, standingOffset.y - standingBounds.y / 4);
-                c2D.size = new Vector3(standingBounds.x, standingBounds.y / 2, standingBounds.z);
+                c2D.size = new Vector3(standingBounds.x + 0.17f, standingBounds.y / 2, standingBounds.z);
+
                 //transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 2, 0);
                 //transform.position = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y / 2), 0);
             }

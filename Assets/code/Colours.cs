@@ -27,7 +27,13 @@ public class ColourHandler
 
     public static int CountColour(ColourEnum colour)
     {
-        return colourCounts[colour];
+        try
+        {
+            return colourCounts[colour];
+        } catch (KeyNotFoundException)
+        {
+            return 0;
+        }
     }
 
     public bool CheckAllColours()

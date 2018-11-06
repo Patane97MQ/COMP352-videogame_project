@@ -26,20 +26,20 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Level7.unity
     guid: fdde29081c0ff71448b99a3eae087be0
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Actual Playtesting/Work in Progress/PT2.unity
     guid: c8d1959bcba8ae24f8fc0587ebe52bf2
   - enabled: 0
     path: Assets/Scenes/Playtesting Levels/Level9.unity
     guid: a3a75719e9018f342b1e026b6b62c2fb
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Actual Playtesting/Work in Progress/PT4.unity
     guid: b27118d5cb295514386319e685a13413
   - enabled: 0
-    path: Assets/__DELETED_GUID_Trash/7fcaae93a82298e4894f90ca79b3d502
-    guid: 7fcaae93a82298e4894f90ca79b3d502
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Actual Playtesting/PT1.unity
+    path: Assets/Scenes/Actual Playtesting/PT2.unity
     guid: d334517803ace8a4f8475431971e1262
   - enabled: 1
     path: Assets/Scenes/Actual Playtesting/PT3.unity

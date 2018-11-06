@@ -21,7 +21,14 @@ public class Button : Tagable
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag) && !pressing.Contains(collision.gameObject))
+        {
             pressing.Add(collision.gameObject);
+            if (collision.gameObject.tag.Contains("crate"))
+            {
+                string colour = collision.gameObject.tag.Replace("_crate", "");
+                collision.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/crates/" + colour + "_on", typeof(Sprite)) as Sprite;
+            }
+        }
         if (pressed == false && pressing.Count > 0)
         {
             SetActivated(true);
@@ -34,7 +41,14 @@ public class Button : Tagable
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag) && pressing.Contains(collision.gameObject))
+        {
             pressing.Remove(collision.gameObject);
+            if (collision.gameObject.tag.Contains("crate"))
+            {
+                string colour = collision.gameObject.tag.Replace("_crate", "");
+                collision.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/crates/" + colour, typeof(Sprite)) as Sprite;
+            }
+        }
         if (pressed == true && pressing.Count <= 0)
         {
             SetActivated(false);

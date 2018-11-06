@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8439ffef412951488b294045c92eea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 5
+  weight: 3
   drag: {x: 10, y: 1}
   stepHeight: {x: 0.1, y: 0.1}
   rotation: 0
@@ -134,6 +134,8 @@ MonoBehaviour:
   down: 0
   left: 0
   right: 0
+  pushing: 0
+  pulling: 0
   velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
 --- !u!114 &114669954875281554
@@ -182,7 +184,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 5d0c3f0363271b04e9c3c049675e9dd3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: daa7306d5fe717c469c6235235c4b86e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

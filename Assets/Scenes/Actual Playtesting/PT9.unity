@@ -1661,6 +1661,29 @@ TilemapCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+--- !u!1 &623882135 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1522227161732564, guid: d25d9da504642f24daaf0228afca9f04,
+    type: 2}
+  m_PrefabInternal: {fileID: 2038099958}
+--- !u!95 &623882141
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 623882135}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9675483bf111f5b4c8735204afe6be53, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &651036980
 Prefab:
   m_ObjectHideFlags: 0

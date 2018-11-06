@@ -126,18 +126,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8439ffef412951488b294045c92eea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 5
+  weight: 3
   drag: {x: 10, y: 1}
-  stepHeight: 0.1
+  stepHeight: {x: 0.1, y: 0.1}
   rotation: 0
   up: 0
   down: 0
   left: 0
   right: 0
+  pushing: 0
+  pulling: 0
   velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
-  useParentX: 0
-  useParentY: 0
 --- !u!114 &114925920308682566
 MonoBehaviour:
   m_ObjectHideFlags: 1

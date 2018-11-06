@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Barrier : Activating
 {
@@ -7,33 +8,27 @@ public class Barrier : Activating
     private AudioSource source;
     private string spriteName;
 
+    private Animator animator;
+
     private Color startColour;
 
     void Awake(){
         source = GetComponent<AudioSource>();
         startColour = gameObject.GetComponent<SpriteRenderer>().color;
         spriteName = gameObject.GetComponent<SpriteRenderer>().sprite.name;
+        animator = gameObject.GetComponent<Animator>();
     }
     public override void Activate()
     {
-        // gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        ChangeSprite(true);
-        gameObject.GetComponent<Collider2D>().enabled = false;
+        animator.SetBool("Active", true);
         source.PlayOneShot(sounds.soundTrigger);
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(239, 240, 240);
     }
 
     public override void DeActivate()
     {
-        // gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        ChangeSprite(false);
-        gameObject.GetComponent<Collider2D>().enabled = true;
-        gameObject.GetComponent<SpriteRenderer>().color = startColour;
-    
-    }
-    void ChangeSprite(bool active)
-    {
-        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/" + spriteName + (active ? "_off" : ""), typeof(Sprite)) as Sprite;
+        animator.SetBool("Active", false);
+        source.PlayOneShot(sounds.soundTrigger);
+
     }
        [System.Serializable]
     public class DoorSounds {

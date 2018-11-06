@@ -83,7 +83,6 @@ public class PlayerMovement : Physics {
             if (!crouching)
             {
                 crouching = true;
-                Debug.Log(standingBounds.y);
                 c2D.offset = new Vector2(standingOffset.x, standingOffset.y - standingBounds.y / 4);
                 c2D.size = new Vector3(standingBounds.x, standingBounds.y / 2, standingBounds.z);
                 //transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 2, 0);

@@ -13,6 +13,7 @@ public class Physics : MonoBehaviour
     protected Transform t;
     protected Rigidbody2D rb2D;
     protected BoxCollider2D c2D;
+    protected Vector2 c2Dcenter;
 
     [HideInInspector]
     public float rotation;
@@ -46,7 +47,8 @@ public class Physics : MonoBehaviour
     // Update is called once per frame
     protected void FixedUpdate()
     {
-
+        Debug.Log(Math.Sign(Physics2D.gravity.y) * (-c2D.offset.y + (Math.Sign(c2D.offset.y) * 0.030f)));
+        c2Dcenter = new Vector2(transform.position.x + c2D.offset.x - (Math.Sign(c2D.offset.x) * 0.030f), transform.position.y + (Math.Sign(Physics2D.gravity.y) * (-c2D.offset.y +  (Math.Sign(c2D.offset.y) * 0.030f))));
         // Velocity constants are always applied!
         AddPositionY(velocity.y);
         AddPositionX(velocity.x);
@@ -167,7 +169,7 @@ public class Physics : MonoBehaviour
     }
     private void DrawBoxCast(Vector2 origin, Vector2 size, Vector2 direction, float distance)
     {
-        //Utilities.DrawBox(origin, size, Color.grey);
+        Utilities.DrawBox(origin, size, Color.green);
         Utilities.DrawBox(origin + direction * distance, size, Color.black);
     }
 
@@ -190,21 +192,17 @@ public class Physics : MonoBehaviour
     private float RunAllBoxCastsForX(float x, Vector2 direction)
     {
         // Drawing a BoxCast of the below (for debugging)
-        DrawBoxCast(new Vector2(transform.position.x + c2D.offset.x, transform.position.y + c2D.offset.y), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
-
+        DrawBoxCast(c2Dcenter, new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
+        Utilities.DrawBox(new Vector2(transform.position.x + c2D.offset.x - (Math.Sign(c2D.offset.x) * 0.030f), transform.position.y + c2D.offset.y - (Math.Sign(c2D.offset.y) * 0.030f)), c2D.bounds.size, Color.red);
         // BoxCast of this object is shot in the direction it wants to move. This will basically check if the objects 'next move' will hit anything
-        RaycastHit2D nextCheck = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x + c2D.offset.x, transform.position.y + c2D.offset.y), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), transform.rotation.z, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
-
-        // ************************************************************************************************************************************************************************************************
-        // *** When Stephen gets time, he will change this 'nextCheck' and 'stepCheck' to list an array of all objects to be hit and determine everything after looping through all.
-        // ************************************************************************************************************************************************************************************************
+        RaycastHit2D nextCheck = Utilities.BoxCastHandler(gameObject, c2Dcenter, new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), transform.rotation.z, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
 
         // If an object is hit.
         if (nextCheck)
         {
             // Distance is saved as this object. The reason that its saved here is because it might be changed later (within stepCheck)
             float raycastDistance = nextCheck.distance;
-            RaycastHit2D stepCheck = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x + c2D.offset.x, transform.position.y + c2D.offset.y + (-Physics2D.gravity.normalized.y) * stepHeight.x), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), 0, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
+            RaycastHit2D stepCheck = Utilities.BoxCastHandler(gameObject, c2Dcenter + new Vector2(0, (-Physics2D.gravity.normalized.y) * stepHeight.x), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), 0, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
             
             // In this scenario, we bump into an object which is below our stepheight threshhold (such as a button). If so, we will try to step on top of it.
             // We also only pass this if statement when the object we are colliding is NOT the originally collided object.
@@ -246,14 +244,10 @@ public class Physics : MonoBehaviour
     {
 
         // Drawing a BoxCast of the below (for debugging)
-        DrawBoxCast(new Vector2(transform.position.x + c2D.offset.x, transform.position.y + c2D.offset.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
+        DrawBoxCast(c2Dcenter, new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
 
         // BoxCast of this object is shot in the direction it wants to move. This will basically check if the objects 'next move' will hit anything
-        RaycastHit2D nextCheck = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x + c2D.offset.x, transform.position.y + c2D.offset.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), transform.rotation.z, direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
-
-        // ************************************************************************************************************************************************************************************************
-        // *** When Stephen gets time, he will change this 'nextCheck' and 'stepCheck' to list an array of all objects to be hit and determine everything after looping through all.
-        // ************************************************************************************************************************************************************************************************
+        RaycastHit2D nextCheck = Utilities.BoxCastHandler(gameObject, c2Dcenter, new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), transform.rotation.z, direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
 
         // If an object is hit.
         if (nextCheck)
@@ -262,20 +256,18 @@ public class Physics : MonoBehaviour
             float raycastDistance = nextCheck.distance;
 
             // Checks that the object is next to a wall to the right and can fall to the left of an object its about to hit (such as a vertical button on a right wall)
-            RaycastHit2D stepCheckRightWall = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x + c2D.offset.x, transform.position.y + c2D.offset.y), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), 0, Vector2.right, stepHeight.y + c2D.bounds.extents.x - 0.005f);
+            RaycastHit2D stepCheckRightWall = Utilities.BoxCastHandler(gameObject, c2Dcenter, new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), 0, Vector2.right, stepHeight.y + c2D.bounds.extents.x - 0.005f);
             //Utilities.DrawBox(new Vector2(transform.position.x + stepHeight.y + c2D.bounds.extents.x - 0.025f, transform.position.y), new Vector2(0.05f, c2D.bounds.size.y - edgeCut * 2), Color.blue);
-            RaycastHit2D stepCheckLeft  = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x - stepHeight.y, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), 0, direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
+            RaycastHit2D stepCheckLeft  = Utilities.BoxCastHandler(gameObject, c2Dcenter - new Vector2(stepHeight.y, 0), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), 0, direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
             //Utilities.DrawBox(new Vector2(transform.position.x - stepHeight.y, transform.position.y - Math.Abs(y) - c2D.bounds.extents.y + 0.025f), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.05f), Color.blue);
 
             // Checks that the object is next to a wall to the left and can fall to the right of an object its about to hit (such as a vertical button on a left wall)
-            RaycastHit2D stepCheckLeftWall = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x + c2D.offset.x, transform.position.y + c2D.offset.y), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), 0, Vector2.left, stepHeight.y + c2D.bounds.extents.x - 0.005f);
+            RaycastHit2D stepCheckLeftWall = Utilities.BoxCastHandler(gameObject, c2Dcenter, new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), 0, Vector2.left, stepHeight.y + c2D.bounds.extents.x - 0.005f);
             //Utilities.DrawBox(new Vector2(transform.position.x - stepHeight.y - c2D.bounds.extents.x + 0.025f, transform.position.y), new Vector2(0.05f, c2D.bounds.size.y - edgeCut * 2), Color.blue);
-            RaycastHit2D stepCheckRight = Utilities.BoxCastHandler(gameObject, new Vector2(transform.position.x + stepHeight.y, transform.position.y), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), 0, direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
+            RaycastHit2D stepCheckRight = Utilities.BoxCastHandler(gameObject, c2Dcenter + new Vector2(stepHeight.y, 0), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), 0, direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
             
             // In this scenario, we bump into an object which is below our stepheight threshhold (such as a button). If so, we will try to step on top of it.
             // We also only pass this if statement when the object we are colliding is NOT the originally collided object.
-            //if ((stepCheckRightWall && (!stepCheckLeft || stepCheckLeft.collider.gameObject != nextCheck.collider.gameObject && (HasPhysics(stepCheckLeft.collider.gameObject))))
-            //    || (stepCheckLeftWall && (!stepCheckRight || stepCheckRight.collider.gameObject != nextCheck.collider.gameObject && (HasPhysics(stepCheckRight.collider.gameObject)))))
             if ((stepCheckRightWall && !HasPhysics(stepCheckRightWall.collider.gameObject) && !stepCheckLeft)
                 || (stepCheckLeftWall && !HasPhysics(stepCheckLeftWall.collider.gameObject) && !stepCheckRight))
             {

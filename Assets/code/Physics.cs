@@ -24,9 +24,14 @@ public class Physics : MonoBehaviour
     public bool right;
 
     [HideInInspector]
+    public bool pushing;
+    public bool pulling;
+
+    [HideInInspector]
     public Vector2 velocity;
     [HideInInspector]
     public Vector2 acceleration;
+    
 
     protected float edgeCut = 0.02f;
 
@@ -47,6 +52,8 @@ public class Physics : MonoBehaviour
     // Update is called once per frame
     protected void FixedUpdate()
     {
+        pushing = false;
+        // Crouching hotfix. Have no idea why, but 0.030f is the magic number here. Not going to question it, its working for now xD
         c2Dcenter = new Vector2(transform.position.x + c2D.offset.x - (Math.Sign(c2D.offset.x) * 0.030f), transform.position.y + (Math.Sign(Physics2D.gravity.y) * (-c2D.offset.y +  (Math.Sign(c2D.offset.y) * 0.030f))));
         // Velocity constants are always applied!
         AddPositionY(velocity.y);
@@ -56,18 +63,9 @@ public class Physics : MonoBehaviour
         // accelerationY should never/rarely be changed. This is the constant downwards force of 'gravity'
         CheckRotation();
 
-
         // Velocity is always accelerated. This is exclusively used for gravity
         AddVelocity(acceleration);
 
-
-        //Debug.Log("Collisions: " + (down ? "down " : "")
-        //    + (up ? "up " : "")
-        //    + (left ? "left " : "")
-        //    + (right ? "right " : ""));
-
-        //Debug.Log("Velocity(" + velocity.x + "," + velocity.y + ")");
-        //Debug.Log("Down(" + down + ")");
         CalculateDrag();
     }
     // ====================================================================
@@ -213,6 +211,7 @@ public class Physics : MonoBehaviour
                     // If we did hit an object AND that object has any sort of physics
                     if (stepCheck && HasPhysics(stepCheck.collider.gameObject))
                     {
+                        pushing = true;
                         // Add force to that object
                         GrabPhysics(stepCheck.collider.gameObject).AddForceX(this, x);
                         // Move the distance from this object to the physics object
@@ -230,7 +229,10 @@ public class Physics : MonoBehaviour
             {
                 // If we are colliding into an object with physics, push it.
                 if (HasPhysics(nextCheck.collider.gameObject))
+                {
+                    pushing = true;
                     GrabPhysics(nextCheck.collider.gameObject).AddForceX(this, x);
+                }
 
                 SetTouching(direction, true);
                 SetVelocity(new Vector2(0, velocity.y));

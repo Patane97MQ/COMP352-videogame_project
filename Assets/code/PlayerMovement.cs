@@ -11,7 +11,8 @@ public class PlayerMovement : Physics {
 
     public PlayerSounds sounds = new PlayerSounds();
 
-    private bool facingRight = true, facingDown = true;
+    [HideInInspector]
+    public bool facingRight = true, facingDown = true;
 
     private float axis;
     private float accelAdd = 0f;

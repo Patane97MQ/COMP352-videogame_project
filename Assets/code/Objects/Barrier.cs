@@ -21,17 +21,26 @@ public class Barrier : Activating
     public override void Activate()
     {
         animator.SetBool("Active", true);
-        source.PlayOneShot(sounds.soundTrigger);
     }
 
     public override void DeActivate()
     {
         animator.SetBool("Active", false);
-        source.PlayOneShot(sounds.soundTrigger);
 
     }
+
+    public void SoundOpen()
+    {
+        source.PlayOneShot(sounds.open);
+    }
+    public void SoundBoom()
+    {
+        source.PlayOneShot(sounds.boom);
+    }
+
        [System.Serializable]
     public class DoorSounds {
-        public AudioClip soundTrigger;
+        public AudioClip open;
+        public AudioClip boom;
     }
 }

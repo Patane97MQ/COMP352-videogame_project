@@ -86,7 +86,6 @@ public class Physics : MonoBehaviour
         {
             SetTouching(Vector2.left, false);
             SetTouching(Vector2.right, false);
-            return;
         }
         float x = CheckNextMoveX(bx);
         transform.position = new Vector3(Utilities.ClosestTo(transform.position.x + x, speedCap, 0), transform.position.y, 0);
@@ -200,13 +199,14 @@ public class Physics : MonoBehaviour
             // Distance is saved as this object. The reason that its saved here is because it might be changed later (within stepCheck)
             float raycastDistance = nextCheck.distance;
             RaycastHit2D stepCheck = Utilities.BoxCastHandler(gameObject, c2Dcenter + new Vector2(0, (-Physics2D.gravity.normalized.y) * stepHeight.x), new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), 0, direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
-            RaycastHit2D stepCheckGround = Utilities.BoxCastHandler(gameObject, c2Dcenter, new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), 0, Vector2.down, edgeCut + c2D.bounds.extents.y - 0.005f);
+            RaycastHit2D stepCheckGround = Utilities.BoxCastHandler(gameObject, c2Dcenter, new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), 0, Physics2D.gravity.normalized, edgeCut + c2D.bounds.extents.y - 0.005f);
 
             DrawBoxCast(c2Dcenter, new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), Vector2.down, edgeCut + c2D.bounds.extents.y - 0.005f);
             // In this scenario, we bump into an object which is below our stepheight threshhold (such as a button). If so, we will try to step on top of it.
             // We also only pass this if statement when the object we are colliding is NOT the originally collided object.
             if (stepCheckGround && (!stepCheck || stepCheck.collider.gameObject != nextCheck.collider.gameObject && HasPhysics(stepCheck.collider.gameObject)))
             {
+                Debug.Log("stepcheck");
                 // If we are able to step onto the object without glitching, do so!
                 if (Math.Abs(x) >= edgeCut)
                 {
@@ -259,7 +259,6 @@ public class Physics : MonoBehaviour
 
             // Checks that the object is next to a wall to the right and can fall to the left of an object its about to hit (such as a vertical button on a right wall)
             RaycastHit2D stepCheckRightWall = Utilities.BoxCastHandler(gameObject, c2Dcenter, new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), 0, Vector2.right, stepHeight.y + c2D.bounds.extents.x - 0.005f);
-            
             //Utilities.DrawBox(new Vector2(transform.position.x + stepHeight.y + c2D.bounds.extents.x - 0.025f, transform.position.y), new Vector2(0.05f, c2D.bounds.size.y - edgeCut * 2), Color.blue);
             RaycastHit2D stepCheckLeft  = Utilities.BoxCastHandler(gameObject, c2Dcenter - new Vector2(stepHeight.y, 0), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.01f), 0, direction, Math.Abs(y) + c2D.bounds.extents.y - 0.005f);
             //Utilities.DrawBox(new Vector2(transform.position.x - stepHeight.y, transform.position.y - Math.Abs(y) - c2D.bounds.extents.y + 0.025f), new Vector2(c2D.bounds.size.x - edgeCut * 2, 0.05f), Color.blue);
@@ -271,8 +270,8 @@ public class Physics : MonoBehaviour
             
             // In this scenario, we bump into an object which is below our stepheight threshhold (such as a button). If so, we will try to step on top of it.
             // We also only pass this if statement when the object we are colliding is NOT the originally collided object.
-            if ((stepCheckRightWall && !HasPhysics(stepCheckRightWall.collider.gameObject) && !stepCheckLeft)
-                || (stepCheckLeftWall && !HasPhysics(stepCheckLeftWall.collider.gameObject) && !stepCheckRight))
+            if ((stepCheckRightWall && stepCheckRightWall.collider.gameObject != nextCheck.collider.gameObject && !HasPhysics(stepCheckRightWall.collider.gameObject) && !stepCheckLeft)
+                || (stepCheckLeftWall && stepCheckLeftWall.collider.gameObject != nextCheck.collider.gameObject && !HasPhysics(stepCheckLeftWall.collider.gameObject) && !stepCheckRight))
             {
 
                 // If we are able to step onto the object without glitching, do so!
@@ -295,13 +294,10 @@ public class Physics : MonoBehaviour
                         // Move the distance from this object to the physics object
                         raycastDistance = stepCheckRight.distance;
                     }
+                    // This is when the player actually gets pushed as they cannot stand on the thin object
                     else
                     {
-                        int dir = 0;
-                        if (!stepCheckLeft)
-                            dir = -1;
-                        else if (!stepCheckRight)
-                            dir = 1;
+                        int dir = !stepCheckLeft ? -1 : (!stepCheckRight ? 1 : 0);
                         // Move the Y value up to the current stepHeight (works in both Gravity directions)
                         transform.position += (new Vector3(dir, 0)) * stepHeight.y;
                         

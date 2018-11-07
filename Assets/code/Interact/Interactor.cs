@@ -33,7 +33,6 @@ public class Interactor : MonoBehaviour {
         {
             if (Input.GetKey("e"))
             {
-                Debug.Log(current);
                 interacting = true;
                 if (current == null)
                     current = interactables[0];

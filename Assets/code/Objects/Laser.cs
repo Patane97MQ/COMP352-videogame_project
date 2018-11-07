@@ -55,7 +55,7 @@ public class Laser : Activating {
             hit = laserRay.collider.gameObject;
 
             if(hit.tag != "environment") { 
-}               Utilities.Destroy(hit);
+}               Utilities.Destroy(PlayerHandler.DeathType.Laser, hit);
 
             lr.SetPosition(0, startPosition);
             lr.SetPosition(1, startPosition + laserRay.distance * vectorDirection);

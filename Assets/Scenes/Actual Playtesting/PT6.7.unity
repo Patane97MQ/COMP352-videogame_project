@@ -393,7 +393,7 @@ Prefab:
     - target: {fileID: 114986333187768500, guid: 8f97a99a01be56e4f9bf9570bba04428,
         type: 2}
       propertyPath: amount
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f97a99a01be56e4f9bf9570bba04428, type: 2}
@@ -7425,6 +7425,11 @@ Prefab:
     - target: {fileID: 1346263202968980, guid: f8ae0862dfada22458bfb67480191cfd, type: 2}
       propertyPath: m_Name
       value: Blue_Indicator (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114932085324512270, guid: f8ae0862dfada22458bfb67480191cfd,
+        type: 2}
+      propertyPath: amount
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8ae0862dfada22458bfb67480191cfd, type: 2}

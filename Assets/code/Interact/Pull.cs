@@ -4,6 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(Physics))]
 public class Pull : Interactable{
 
+    public Sprite left;
+    public Sprite right;
+
     public override void Interact(Interactor interactor)
     {
         GameObject iGameObject = interactor.gameObject;

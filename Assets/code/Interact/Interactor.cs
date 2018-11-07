@@ -6,6 +6,9 @@ public class Interactor : MonoBehaviour {
     [HideInInspector]
     public bool interacting = false;
 
+    public KeyCode interactKey = KeyCode.LeftControl;
+    public Sprite interactSprite;
+
     private List<Interactable> interactables = new List<Interactable>();
     private Interactable current;
 
@@ -20,11 +23,6 @@ public class Interactor : MonoBehaviour {
         interactables.Remove(interactable);
     }
 
-    public Interactable GetCurrentInteractable()
-    {
-        return interactables[0];
-    }
-
     private void Update()
     {
         if (!interactables.Contains(current) && current != null)
@@ -34,7 +32,8 @@ public class Interactor : MonoBehaviour {
         }
         if (interactables.Count > 0)
         {
-            if (Input.GetKey("e"))
+
+            if (Input.GetKey(interactKey))
             {
                 interacting = true;
                 if (current == null)

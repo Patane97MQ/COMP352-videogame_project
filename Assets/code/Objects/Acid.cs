@@ -4,6 +4,6 @@ public class Acid : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Utilities.Destroy(collision.collider.gameObject);
+        Utilities.Destroy(PlayerHandler.DeathType.Acid, collision.collider.gameObject);
     }
 }

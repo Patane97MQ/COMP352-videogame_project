@@ -20,13 +20,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4488108524445910}
   - component: {fileID: 212822553610825270}
+  - component: {fileID: 114421367616141326}
+  - component: {fileID: 114545908041614682}
+  - component: {fileID: 114585925650549672}
   - component: {fileID: 95041078054156340}
   - component: {fileID: 61712993352533224}
   - component: {fileID: 50814658905732340}
-  - component: {fileID: 114421367616141326}
-  - component: {fileID: 114441225422571096}
-  - component: {fileID: 114585925650549672}
-  - component: {fileID: 114086439817828508}
   - component: {fileID: 82984746507990336}
   m_Layer: 8
   m_Name: Player
@@ -206,17 +205,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114086439817828508
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1981095214291014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2d971758751a8242a9d31fa71320378, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114421367616141326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interacting: 0
---- !u!114 &114441225422571096
+--- !u!114 &114545908041614682
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,9 +225,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1981095214291014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9406f1dc5cc909c4abd5180be1e22047, type: 3}
+  m_Script: {fileID: 11500000, guid: fc08640b5d4c2e044ad994e5656ec464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  restarter: {fileID: 1751303793043492, guid: 9183f3a778329684a9bbda033a0f3a62, type: 2}
+  required: 1
 --- !u!114 &114585925650549672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -259,6 +249,9 @@ MonoBehaviour:
   down: 0
   left: 0
   right: 0
+  airborne: 0
+  pushing: 0
+  pulling: 0
   velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
   moveStrength: 0.8
@@ -266,7 +259,10 @@ MonoBehaviour:
   moveAcceleration: 0.25
   sounds:
     jump: {fileID: 8300000, guid: c91e52590bd17f34fb64e8ffaf9834bd, type: 3}
+  facingRight: 1
+  facingDown: 1
   moving: 0
+  crouching: 0
   jumping: 0
   flipSpriteX: 1
   flipSpriteY: 1

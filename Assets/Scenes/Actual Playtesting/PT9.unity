@@ -310,7 +310,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4974878267216176, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.65
+      value: -3.2700002
       objectReference: {fileID: 0}
     - target: {fileID: 4974878267216176, guid: d9414ed4c08020c4580b3a591c3ee1d5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4200,7 +4200,7 @@ Prefab:
     - target: {fileID: 114337366619656864, guid: 1bbdbd88a671d5143acb37eec78fbfb5,
         type: 2}
       propertyPath: activateTags.Array.data[3]
-      value: Crate_1
+      value: white_crate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bbdbd88a671d5143acb37eec78fbfb5, type: 2}
@@ -4353,7 +4353,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4046520060528978, guid: ef088de062194b848835f394c2d5590c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.4
+      value: 0.29
       objectReference: {fileID: 0}
     - target: {fileID: 4046520060528978, guid: ef088de062194b848835f394c2d5590c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4499,7 +4499,7 @@ Prefab:
     - target: {fileID: 114988312221898924, guid: 6ccb3ff542e8f9c49b867b910a698948,
         type: 2}
       propertyPath: activateTags.Array.data[3]
-      value: Crate_1
+      value: white_crate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ccb3ff542e8f9c49b867b910a698948, type: 2}

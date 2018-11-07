@@ -21,7 +21,7 @@ public class PlayerAnim : MonoBehaviour {
 
         animator.SetBool("Jump", pMovement.jumping);
 
-        animator.SetBool("Airborne", !pMovement.down);
+        animator.SetBool("Airborne", pMovement.airborne);
         
         animator.SetBool("Push", pMovement.pushing || pMovement.pulling ? true : false);
 	}

@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
 public class Button : Tagable
 {
     bool pressed = false;
+    public float deactivateDelay = 0f;
     List<GameObject> pressing = new List<GameObject>();
     public ButtonSounds sounds = new ButtonSounds();
     private AudioSource source;
@@ -40,6 +42,11 @@ public class Button : Tagable
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        StartCoroutine(CheckDeactive(collision));
+    }
+    IEnumerator CheckDeactive(Collision2D collision)
+    {
+        yield return new WaitForSeconds(deactivateDelay);
         if (activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag) && pressing.Contains(collision.gameObject))
         {
             pressing.Remove(collision.gameObject);

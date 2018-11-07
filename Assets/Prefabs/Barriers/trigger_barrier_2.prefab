@@ -201,7 +201,8 @@ MonoBehaviour:
     green: 0
     orange: 0
   sounds:
-    soundTrigger: {fileID: 8300000, guid: 1fa3bc5eb41feeb4ea2c542735f8f047, type: 3}
+    open: {fileID: 8300000, guid: 5a3729a6a27e45e46a3feb8f9bd8286f, type: 3}
+    boom: {fileID: 8300000, guid: ffc291f1eef478847a4f009b04e07990, type: 3}
 --- !u!212 &212742473591711038
 SpriteRenderer:
   m_ObjectHideFlags: 1

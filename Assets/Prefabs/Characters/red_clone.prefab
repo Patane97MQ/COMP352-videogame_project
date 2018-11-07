@@ -120,12 +120,21 @@ MonoBehaviour:
   down: 0
   left: 0
   right: 0
+  airborne: 0
+  pushing: 0
+  pulling: 0
   velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
-  moveStrength: 1
+  moveStrength: 0.8
   jumpStrength: 2.3
+  moveAcceleration: 0.25
   sounds:
     jump: {fileID: 0}
+  facingRight: 1
+  facingDown: 1
+  moving: 0
+  crouching: 0
+  jumping: 0
   flipSpriteX: 1
   flipSpriteY: 1
 --- !u!212 &212358651831000944

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Physics : MonoBehaviour
@@ -23,7 +24,9 @@ public class Physics : MonoBehaviour
     public bool left;
     public bool right;
 
+
     [HideInInspector]
+    public bool airborne;
     public bool pushing;
     public bool pulling;
 
@@ -52,6 +55,7 @@ public class Physics : MonoBehaviour
     // Update is called once per frame
     protected void FixedUpdate()
     {
+
         pushing = false;
         // Crouching hotfix. Have no idea why, but 0.030f is the magic number here. Not going to question it, its working for now xD
         c2Dcenter = new Vector2(transform.position.x + c2D.offset.x - (Math.Sign(c2D.offset.x) * 0.030f), transform.position.y + (Math.Sign(Physics2D.gravity.y) * (-c2D.offset.y +  (Math.Sign(c2D.offset.y) * 0.030f))));
@@ -67,6 +71,18 @@ public class Physics : MonoBehaviour
         AddVelocity(acceleration);
 
         CalculateDrag();
+        if (!down)
+            StartCoroutine(CheckAirborne());
+        else
+            airborne = false;
+    }
+    IEnumerator CheckAirborne()
+    {
+        yield return new WaitForSeconds(0.05f);
+        if (!down)
+        {
+            airborne = true;
+        }
     }
     // ====================================================================
 

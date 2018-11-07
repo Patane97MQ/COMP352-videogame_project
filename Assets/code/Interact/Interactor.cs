@@ -27,8 +27,11 @@ public class Interactor : MonoBehaviour {
 
     private void Update()
     {
-        if (!interactables.Contains(current))
+        if (!interactables.Contains(current) && current != null)
+        {
+            current.DeInteract(this);
             current = null;
+        }
         if (interactables.Count > 0)
         {
             if (Input.GetKey("e"))

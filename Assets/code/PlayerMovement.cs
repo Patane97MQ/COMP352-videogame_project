@@ -122,6 +122,7 @@ public class PlayerMovement : Physics {
 
     private void SpriteFlipX()
     {
+        Debug.Log(flipSpriteX);
         // Flips objects spriteX depending on moving left or right
         if (flipSpriteX)
         {

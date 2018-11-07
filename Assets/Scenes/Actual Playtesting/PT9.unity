@@ -4144,7 +4144,7 @@ Prefab:
     - target: {fileID: 114337366619656864, guid: 1bbdbd88a671d5143acb37eec78fbfb5,
         type: 2}
       propertyPath: activateTags.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4808503078617606, guid: 1bbdbd88a671d5143acb37eec78fbfb5, type: 2}
       propertyPath: m_LocalPosition.x
@@ -4186,6 +4186,21 @@ Prefab:
         type: 2}
       propertyPath: activateTags.Array.data[0]
       value: red_crate
+      objectReference: {fileID: 0}
+    - target: {fileID: 114337366619656864, guid: 1bbdbd88a671d5143acb37eec78fbfb5,
+        type: 2}
+      propertyPath: activateTags.Array.data[1]
+      value: red_clone
+      objectReference: {fileID: 0}
+    - target: {fileID: 114337366619656864, guid: 1bbdbd88a671d5143acb37eec78fbfb5,
+        type: 2}
+      propertyPath: activateTags.Array.data[2]
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 114337366619656864, guid: 1bbdbd88a671d5143acb37eec78fbfb5,
+        type: 2}
+      propertyPath: activateTags.Array.data[3]
+      value: Crate_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bbdbd88a671d5143acb37eec78fbfb5, type: 2}
@@ -4428,7 +4443,7 @@ Prefab:
     - target: {fileID: 114988312221898924, guid: 6ccb3ff542e8f9c49b867b910a698948,
         type: 2}
       propertyPath: activateTags.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4965673402231012, guid: 6ccb3ff542e8f9c49b867b910a698948, type: 2}
       propertyPath: m_LocalPosition.x
@@ -4470,6 +4485,21 @@ Prefab:
         type: 2}
       propertyPath: activateTags.Array.data[0]
       value: blue_crate
+      objectReference: {fileID: 0}
+    - target: {fileID: 114988312221898924, guid: 6ccb3ff542e8f9c49b867b910a698948,
+        type: 2}
+      propertyPath: activateTags.Array.data[1]
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 114988312221898924, guid: 6ccb3ff542e8f9c49b867b910a698948,
+        type: 2}
+      propertyPath: activateTags.Array.data[2]
+      value: red_clone
+      objectReference: {fileID: 0}
+    - target: {fileID: 114988312221898924, guid: 6ccb3ff542e8f9c49b867b910a698948,
+        type: 2}
+      propertyPath: activateTags.Array.data[3]
+      value: Crate_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ccb3ff542e8f9c49b867b910a698948, type: 2}

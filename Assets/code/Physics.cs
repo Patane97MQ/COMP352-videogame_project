@@ -158,9 +158,6 @@ public class Physics : MonoBehaviour
             rotation = -90;
         else if (Physics2D.gravity.normalized == Vector2.right)
             rotation = 90;
-        //Debug.Log(rotation);
-        //if (transform.rotation.z != rotation)
-        //    transform.Rotate(new Vector3(0, 0, rotation));
 
     }
     private void DrawBoxCast(Vector2 origin, Vector2 size, Vector2 direction, float distance)
@@ -206,7 +203,6 @@ public class Physics : MonoBehaviour
             // We also only pass this if statement when the object we are colliding is NOT the originally collided object.
             if (stepCheckGround && (!stepCheck || stepCheck.collider.gameObject != nextCheck.collider.gameObject && HasPhysics(stepCheck.collider.gameObject)))
             {
-                Debug.Log("stepcheck");
                 // If we are able to step onto the object without glitching, do so!
                 if (Math.Abs(x) >= edgeCut)
                 {

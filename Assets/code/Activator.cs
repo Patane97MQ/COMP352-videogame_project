@@ -12,7 +12,8 @@ public abstract class Activator : MonoBehaviour {
     protected bool activated = false;
     protected bool activatedOnce = false;
     
-    protected void SetActivated(bool activated)
+    // Returns true if the activation state has changed, false otherwise.
+    protected bool SetActivated(bool activated)
     {
         bool before = this.activated;
         if (activated)
@@ -25,13 +26,16 @@ public abstract class Activator : MonoBehaviour {
             ColourHandler.AddCount(colour, 1);
             try { OnActivated(this); }
             catch { }
+            return true;
         }
         else if (before && !this.activated)
         {
             ColourHandler.AddCount(colour, -1);
             try { OnDeactivated(this); }
             catch { }
+            return true;
         }
+        return false;
     }
     // Decides how the object should be activated depending on the type. Eg. Toggle chooses to either Toggle On (active) or Off (not active)
     protected bool ActivateHandler(bool activated)

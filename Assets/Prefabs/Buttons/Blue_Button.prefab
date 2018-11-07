@@ -177,8 +177,10 @@ MonoBehaviour:
   colour: 1
   activatorType: 0
   activateTags: []
+  deactivateDelay: 0
   sounds:
-    soundTrigger: {fileID: 8300000, guid: 4c60f4fe6840d7f4fa604cd7b60469c4, type: 3}
+    correctActive: {fileID: 8300000, guid: 7e72adce499c5384384d90837462c36c, type: 3}
+    incorrectActive: {fileID: 8300000, guid: 7811ea537c8751b4a8a9dcd2d28f23d1, type: 3}
 --- !u!212 &212099553473590272
 SpriteRenderer:
   m_ObjectHideFlags: 1

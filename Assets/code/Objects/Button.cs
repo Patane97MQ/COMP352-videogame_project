@@ -8,6 +8,7 @@ public class Button : Tagable
     bool pressed = false;
     public float deactivateDelay = 0f;
     List<GameObject> pressing = new List<GameObject>();
+    List<GameObject> delayed = new List<GameObject>();
     public ButtonSounds sounds = new ButtonSounds();
     private AudioSource source;
 
@@ -22,31 +23,43 @@ public class Button : Tagable
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag) && !pressing.Contains(collision.gameObject))
+        if (delayed.Remove(collision.gameObject))
+            return;
+        if (!pressing.Contains(collision.gameObject))
         {
-            pressing.Add(collision.gameObject);
-            if (collision.gameObject.tag.Contains("crate"))
+            if(activateTags.Count == 0 || (activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag)))
             {
-                string colour = collision.gameObject.tag.Replace("_crate", "");
-                collision.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/crates/" + colour + "_on", typeof(Sprite)) as Sprite;
+                pressing.Add(collision.gameObject);
+                if (collision.gameObject.tag.Contains("crate"))
+                {
+                    string colour = collision.gameObject.tag.Replace("_crate", "");
+                    collision.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/crates/" + colour + "_on", typeof(Sprite)) as Sprite;
+                }
+            }
+            else
+            {
+                source.PlayOneShot(sounds.incorrectActive);
             }
         }
-        if (pressed == false && pressing.Count > 0)
+        if (!pressed && pressing.Count > 0)
         {
-            SetActivated(true);
+            if (SetActivated(true) && activated)
+                source.PlayOneShot(sounds.correctActive);
             pressed = true;
             ChangeSprite();
-            source.PlayOneShot(sounds.soundTrigger);
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        delayed.Add(collision.gameObject);
         StartCoroutine(CheckDeactive(collision));
     }
     IEnumerator CheckDeactive(Collision2D collision)
     {
         yield return new WaitForSeconds(deactivateDelay);
+        if (!delayed.Remove(collision.gameObject))
+            yield break;
         if (activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag) && pressing.Contains(collision.gameObject))
         {
             pressing.Remove(collision.gameObject);
@@ -70,6 +83,7 @@ public class Button : Tagable
 
     [System.Serializable]
     public class ButtonSounds {
-        public AudioClip soundTrigger;
+        public AudioClip correctActive;
+        public AudioClip incorrectActive;
     }
 }

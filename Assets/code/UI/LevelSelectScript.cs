@@ -16,17 +16,25 @@ public class LevelSelectScript : MonoBehaviour {
 		
 	}
 
-    public void selectLevel()
+    public void SelectLevel()
     {
-        int y = 0;
+        int y;
+
         string x = gameObject.name;
+
+        Debug.Log(x);
+
         if (!Int32.TryParse(x, out y))
         {
-            y = -1;
-        }
-        Debug.Log(y);
-        return y;
+          Debug.Log("Failed to load level of index: " + x);
 
-        SceneManager.loadScene(y);
+            return; 
+        }
+
+        Debug.Log(y);
+
+        Utilities.LoadScene(y);
+
+        
     }
 }

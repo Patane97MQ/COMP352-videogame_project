@@ -45,7 +45,6 @@ public class Restart : MonoBehaviour {
 
     public static void GoToLevel(SceneField scene)
     {
-        Debug.Log(scene.SceneName);
         nextScene = scene;
         if (!loading)
         {

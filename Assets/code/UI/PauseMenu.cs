@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using EditorUtilities;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
 
@@ -14,18 +12,9 @@ public class PauseMenu : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GamePaused)
-            {
                 Resume();
-
-            }
-
             else
-            {
-
                 Pause();
-            }
-
-         
         }
 	}
 
@@ -57,6 +46,7 @@ public class PauseMenu : MonoBehaviour {
 
     public void LoadMenu()
     {
+        Time.timeScale = 1f;
         foreach (PlayerHandler pHandler in GameObject.FindObjectsOfType<PlayerHandler>())
         {
             pHandler.gameObject.GetComponent<PlayerMovement>().enabled = true;
@@ -73,7 +63,7 @@ public class PauseMenu : MonoBehaviour {
     public void RestartLevel()
     {
         Time.timeScale = 1f;
-        Utilities.ReloadScene();
+        Restart.Go();
         GamePaused = false;
     }
 }

@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using EditorUtilities;
+using UnityEngine;
 
 public class MainMenu : MonoBehaviour {
+    
+    public SceneField firstLevel;
 
     public void PlayGame()
     {
-        Utilities.LoadNextScene();
-
+        Restart.GoToLevel(firstLevel);
 	}
 
     public void QuitGame()

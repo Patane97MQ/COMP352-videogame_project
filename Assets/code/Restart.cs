@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using EditorUtilities;
+using UnityEngine;
 
 public class Restart : MonoBehaviour {
     
     public static Restart r;
+    private static SceneField nextScene;
+    private static bool loading;
+
     Animator animator;
-    // Update is called once per frame
 
     private void Awake()
     {
@@ -23,10 +26,34 @@ public class Restart : MonoBehaviour {
     {
         Utilities.ReloadScene();
     }
+    public void LoadNextScene()
+    {
+        loading = false;
+        if(nextScene == null)
+        {
+            Debug.Log("Failed to load scene as 'nextScene' field is missing");
+            Utilities.ReloadScene();
+        }
+        Utilities.LoadScene(nextScene);
+        r.animator.SetTrigger("ResetAnim");
+    }
 
     public static void Go()
     {
         r.animator.SetTrigger("Restart");
     }
+
+    public static void GoToLevel(SceneField scene)
+    {
+        Debug.Log(scene.SceneName);
+        nextScene = scene;
+        if (!loading)
+        {
+            loading = true;
+            r.animator.SetTrigger("Change Level");
+        }
+
+    }
+
 
 }

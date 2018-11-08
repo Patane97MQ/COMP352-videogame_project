@@ -48,13 +48,13 @@ public class ChangeLevelDoor : Activating {
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (open && collider.gameObject.tag.Equals("Player"))
-            Utilities.LoadScene(scene);
+            Restart.GoToLevel(scene);
 
     }
     void OnTriggerStay2D(Collider2D collider)
     {
         if (open && collider.gameObject.tag.Equals("Player"))
-            Utilities.LoadScene(scene);
+            Restart.GoToLevel(scene);
     }
     [System.Serializable]
     public class ChangeLevelDoorSounds

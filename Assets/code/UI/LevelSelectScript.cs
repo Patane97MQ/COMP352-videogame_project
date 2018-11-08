@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,7 +24,7 @@ public class LevelSelectScript : MonoBehaviour {
         {
             y = -1;
         }
-        debug.log(y);
+        Debug.Log(y);
         return y;
 
         SceneManager.loadScene(y);

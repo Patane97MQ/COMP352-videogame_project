@@ -8,73 +8,61 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI/MainMenu.unity
     guid: c5746c40507e1164d8d01f8fb2a20776
-  - enabled: 0
-    path: Assets/Scenes/Level4.unity
-    guid: 03d29f3a0cd61cc43802fe5b52277406
-  - enabled: 0
-    path: Assets/Scenes/Level5.unity
-    guid: 6a56eec49fb7fba44b35e136248ecc08
-  - enabled: 0
-    path: Assets/Scenes/prototype1_movement.unity
-    guid: 941552570de29804a9472df1b17a239e
-  - enabled: 0
-    path: Assets/Scenes/Playtesting Levels/Playtesting1.unity
-    guid: 63da335b059f96d46bce30373e668362
-  - enabled: 0
-    path: Assets/Scenes/Level7.unity
-    guid: fdde29081c0ff71448b99a3eae087be0
-  - enabled: 0
-    path: Assets/Scenes/Actual Playtesting/Work in Progress/PT2.unity
-    guid: c8d1959bcba8ae24f8fc0587ebe52bf2
-  - enabled: 0
-    path: Assets/Scenes/Playtesting Levels/Level9.unity
-    guid: a3a75719e9018f342b1e026b6b62c2fb
-  - enabled: 0
-    path: Assets/Scenes/Actual Playtesting/Work in Progress/PT4.unity
-    guid: b27118d5cb295514386319e685a13413
   - enabled: 1
-    path: Assets/Scenes/Actual Playtesting/PT0.unity
-    guid: 7b4825ab0c298524da08cf7edc1fb1a3
+    path: Assets/Scenes/Ordered Levels/1 - Basic Movement/1 - Jumping.unity
+    guid: c07e6f9ae8d9b324c8477f656452bf0c
   - enabled: 1
-    path: Assets/Scenes/Actual Playtesting/PT1.unity
-    guid: ac64ceed541fccb4c925251e2d1e5383
+    path: Assets/Scenes/Ordered Levels/1 - Basic Movement/2 - Crouching.unity
+    guid: ebbca701586239f4b873bfb5a69be7e3
   - enabled: 1
-    path: Assets/Scenes/Actual Playtesting/PT2.unity
-    guid: d334517803ace8a4f8475431971e1262
+    path: Assets/Scenes/Ordered Levels/1 - Basic Movement/3 - Restart.unity
+    guid: b3a02048c0fd63a469d65b65d32e5221
   - enabled: 1
-    path: Assets/Scenes/Actual Playtesting/PT3.unity
-    guid: f4091639d6169dc42954b60c76ba9472
+    path: Assets/Scenes/Ordered Levels/2 - Basic Mechanics/1 - Constant Buttons.unity
+    guid: 115713fb029ef0345aab49416a5f68ef
   - enabled: 1
-    path: Assets/Scenes/Actual Playtesting/PT6.unity
-    guid: 37b1a79cefcc54fab8a7ce02acef8de5
+    path: Assets/Scenes/Ordered Levels/2 - Basic Mechanics/2 - Clones.unity
+    guid: 1b577762fa3d0534e9768e951cae035d
   - enabled: 1
-    path: Assets/Scenes/Actual Playtesting/PT6.5.unity
-    guid: 3a92f496d89036343beb0dfdbed25887
+    path: Assets/Scenes/Ordered Levels/2 - Basic Mechanics/3 - Killing Clones.unity
+    guid: e94754eea73b05e468d60578dd634f28
   - enabled: 1
-    path: Assets/Scenes/Actual Playtesting/PT6.7.unity
-    guid: cf77d7454b9772448a384173333f15c7
+    path: Assets/Scenes/Ordered Levels/2 - Basic Mechanics/4 - Triggers.unity
+    guid: 91e0677daf0952647b164a90daf7a20f
   - enabled: 1
-    path: Assets/Scenes/Actual Playtesting/PT7.unity
-    guid: 887cdf8111e034572b8e30f186975540
+    path: Assets/Scenes/Ordered Levels/2 - Basic Mechanics/5 - Once Buttons.unity
+    guid: acef76ea8fd74d641a6a6162e88b4971
   - enabled: 1
-    path: Assets/Scenes/Actual Playtesting/PT8.unity
-    guid: 0a6857fb9184a994192e32dacdb138b3
-  - enabled: 0
-    path: Assets/Scenes/Actual Playtesting/PT8.1.unity
-    guid: 7dda22a12a72f9a4eb1d8c386cf12a07
+    path: Assets/Scenes/Ordered Levels/3 - Basic Puzzle/1- Trigger Trial.unity
+    guid: ba1a6077acf654a4ea7e7cc723207c6f
   - enabled: 1
-    path: Assets/Scenes/Actual Playtesting/PT8.5.unity
-    guid: d8f4cd39c41a8db4dac4aa515a5f5d27
+    path: Assets/Scenes/Ordered Levels/3 - Basic Puzzle/2 - Clone Positioning.unity
+    guid: ea9b8774731e65547b76dc0709ab07da
   - enabled: 1
-    path: Assets/Scenes/Actual Playtesting/PT9.unity
-    guid: 116d3d39263de0f4baa5edafdfb51993
+    path: Assets/Scenes/Ordered Levels/3 - Basic Puzzle/3 - Multipurpose Crate.unity
+    guid: bf65c571980ac1948a1cfc1a824ccda5
   - enabled: 1
-    path: Assets/Scenes/Actual Playtesting/PT10.unity
-    guid: e2a1f5bf15d751a46969b4c6dcd35229
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/Scenes/Ordered Levels/4 - Medium Mechanics/1- Moving Platforms.unity
+    guid: 17cde5a74c529004083df19433948eeb
+  - enabled: 1
+    path: Assets/Scenes/Ordered Levels/4 - Medium Mechanics/2 - Advanced Moving Platforms.unity
+    guid: 9e5871f15be38f148960d0ab44b3def1
+  - enabled: 1
+    path: Assets/Scenes/Ordered Levels/4 - Medium Mechanics/3 - Multicoloured Crates.unity
+    guid: 3d85cfc80e57057408628de77f7b2781
+  - enabled: 1
+    path: Assets/Scenes/Ordered Levels/5 - Advanced Puzzles/1 - Barrier Bananza!.unity
+    guid: f6f48e731d64f604e9f00f8fc0ce6124
+  - enabled: 1
+    path: Assets/Scenes/Ordered Levels/5 - Advanced Puzzles/2 - Button Switching.unity
+    guid: 9da9a2a0270de6342a63be4f82ca3691
+  - enabled: 1
+    path: Assets/Scenes/Ordered Levels/5 - Advanced Puzzles/3 - Gravity Switching.unity
+    guid: 0fc575219334ff94da2d2c4799c7744c
+  - enabled: 1
+    path: Assets/Scenes/Ordered Levels/5 - Advanced Puzzles/4 - Ordered Flips.unity
+    guid: 19fe58b8377f9fc4f88a9ba85447614f
+  - enabled: 1
+    path: Assets/Scenes/Ordered Levels/5 - Advanced Puzzles/5 - Upside down.unity
+    guid: 125a472af373de14fab63eb2f8accf6e
   m_configObjects: {}

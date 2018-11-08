@@ -62,7 +62,7 @@ public class PauseMenu : MonoBehaviour {
             pHandler.gameObject.GetComponent<PlayerMovement>().enabled = true;
             pHandler.enabled = true;
         }
-        SceneManager.LoadScene(0);
+        Utilities.LoadScene(0);
     }
 
     public void QuitGame()

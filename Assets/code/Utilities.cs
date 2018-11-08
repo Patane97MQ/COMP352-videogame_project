@@ -6,19 +6,6 @@ using UnityEngine.SceneManagement;
 public class Utilities {
     public static Vector2 initialGravity;
 
-
-    //public static void Destroy(GameObject gameObject)
-    //{
-    //    if (gameObject.tag == "Player")
-    //    {
-    //        Restart.Go();
-    //    }
-    //    else
-    //    {
-    //        // Maybe play a destroy animation?
-    //        UnityEngine.Object.Destroy(gameObject);
-    //    }
-    //}
     public static void Destroy(PlayerHandler.DeathType type, GameObject gameObject)
     {
         // If it is a player or clone
@@ -39,6 +26,10 @@ public class Utilities {
     public static void ReloadScene()
     {
         LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public static void LoadNextScene()
+    {
+        LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public static void LoadScene(int index)
     {

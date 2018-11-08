@@ -5367,7 +5367,7 @@ Prefab:
     - target: {fileID: 114904414888053730, guid: d25d9da504642f24daaf0228afca9f04,
         type: 2}
       propertyPath: scene.sceneName
-      value: Scenes/Ordered Levels/2 - Basic Mechanics/4 - Triggers
+      value: Scenes/Ordered Levels/2 - Basic Mechanics/6 - Triggers
       objectReference: {fileID: 0}
     - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
         type: 2}

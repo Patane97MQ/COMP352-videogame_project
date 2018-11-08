@@ -54,4 +54,11 @@ public class PauseMenu : MonoBehaviour {
         Debug.Log("game quit");
         Application.Quit();
     }
+
+    public void RestartLevel()
+    {
+        Time.timeScale = 1f;
+        Utilities.ReloadScene();
+        GamePaused = false;
+    }
 }

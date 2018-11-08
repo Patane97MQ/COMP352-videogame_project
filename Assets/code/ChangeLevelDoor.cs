@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using EditorUtilities;
-using System.Collections;
 
 public class ChangeLevelDoor : Activating {
 
@@ -15,8 +14,8 @@ public class ChangeLevelDoor : Activating {
     // Use this for initialization
     new void Start()
     {
-        base.Start();
         animator = GetComponent<Animator>();
+        base.Start();
     }
     public void Awake()
     {
@@ -24,6 +23,7 @@ public class ChangeLevelDoor : Activating {
     }
     public override void Activate()
     {
+
         animator.SetTrigger("Open");
     }
 

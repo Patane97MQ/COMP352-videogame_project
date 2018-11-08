@@ -3451,12 +3451,12 @@ Prefab:
         type: 2}
       propertyPath: scene.sceneAsset
       value: 
-      objectReference: {fileID: 102900000, guid: bf65c571980ac1948a1cfc1a824ccda5,
+      objectReference: {fileID: 102900000, guid: e94754eea73b05e468d60578dd634f28,
         type: 3}
     - target: {fileID: 114904414888053730, guid: d25d9da504642f24daaf0228afca9f04,
         type: 2}
       propertyPath: scene.sceneName
-      value: Scenes/Ordered Levels/3 - Basic Puzzle/3 - Multipurpose Crate
+      value: Scenes/Ordered Levels/2 - Basic Mechanics/4 - Killing Clones
       objectReference: {fileID: 0}
     - target: {fileID: 114611182983780016, guid: d25d9da504642f24daaf0228afca9f04,
         type: 2}

@@ -43,11 +43,13 @@ public class Pull : Interactable{
             return;
 
 
-        pMovement.SetVelocity(new Vector2(0, pMovement.velocity.y));
+        //pMovement.SetVelocity(new Vector2(0, pMovement.velocity.y));
         float x = thisPhysics.CalculateForce(pMovement, pMovementVelX);
-        pMovement.AddVelocity(new Vector2(x, 0));
+        //pMovement.AddVelocity(new Vector2(x, 0));
+        pMovement.SetVelocity(new Vector2(x, pMovement.velocity.y));
 
-        thisPhysics.AddRawForceX(pMovement, pMovement.velocity.x);
+        thisPhysics.SetVelocity(new Vector2(x, thisPhysics.velocity.y));
+        //thisPhysics.AddRawForceX(pMovement, pMovement.velocity.x);
     }
     public override void DeInteract(Interactor interactor)
     {

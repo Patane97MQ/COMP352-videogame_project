@@ -29,9 +29,10 @@ public class PlayerMovement : Physics {
     private bool jumpRefresh;
 
     private AudioSource source;
+    private SpriteRenderer spriteRenderer;
 
-    [HideInInspector]
-    public bool flipSpriteX = true, flipSpriteY = true;
+    //[HideInInspector]
+    public bool allowFlipX = true, allowFlipY = true;
 
 
     new void Start()
@@ -39,6 +40,7 @@ public class PlayerMovement : Physics {
         base.Start();
         Utilities.initialGravity = Physics2D.gravity;
         source = GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         standingBounds = c2D.size;
         standingOffset = c2D.offset;
     }
@@ -122,33 +124,47 @@ public class PlayerMovement : Physics {
 
     private void SpriteFlipX()
     {
-        // Flips objects spriteX depending on moving left or right
-        if (flipSpriteX)
+        if (allowFlipX)
         {
-            if (axis < 0 && facingRight || axis > 0 && !facingRight)
+            // Flips objects spriteX depending on moving left or right
+            if (axis < 0 && facingRight)
             {
                 facingRight = !facingRight;
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 0);
+                spriteRenderer.flipX = !spriteRenderer.flipX;
+            }
+            if (axis > 0 && !facingRight)
+            {
+                facingRight = !facingRight;
+                spriteRenderer.flipX = !spriteRenderer.flipX;
+
             }
         }
         else
-            flipSpriteX = true;
+        {
+            allowFlipX = true;
+        }
     }
 
     private void SpriteFlipY()
     {
-        // Flips objects spriteY depending on the direction of Y Gravity
-        if (flipSpriteY)
+        if (allowFlipY)
         {
-            if (Physics2D.gravity.normalized.y == 1 && facingDown || Physics2D.gravity.normalized.y == -1 && !facingDown)
+            if (Physics2D.gravity.normalized.y == 1 && facingDown)
             {
                 facingDown = !facingDown;
-                //transform.localRotation = new Quaternion(0, 0, 180, 0);
-                transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, 0);
+                spriteRenderer.flipY = !spriteRenderer.flipY;
+            }
+            if (Physics2D.gravity.normalized.y == -1 && !facingDown)
+            {
+                facingDown = !facingDown;
+                spriteRenderer.flipY = !spriteRenderer.flipY;
+
             }
         }
         else
-            flipSpriteY = true;
+        {
+            allowFlipY = true;
+        }
     }
 
     public float CapMovement(float x)

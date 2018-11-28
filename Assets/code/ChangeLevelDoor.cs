@@ -20,6 +20,7 @@ public class ChangeLevelDoor : Activating {
     public void Awake()
     {
         source = GetComponent<AudioSource>();
+
     }
     public override void Activate()
     {
@@ -48,13 +49,20 @@ public class ChangeLevelDoor : Activating {
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (open && collider.gameObject.tag.Equals("Player"))
+        {
             Restart.GoToLevel(scene);
+            collider.gameObject.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+        }
+
 
     }
     void OnTriggerStay2D(Collider2D collider)
     {
         if (open && collider.gameObject.tag.Equals("Player"))
+        {
             Restart.GoToLevel(scene);
+            collider.gameObject.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+        }
     }
     [System.Serializable]
     public class ChangeLevelDoorSounds

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Button : Tagable
+public class DirectButton : Tagable
 {
     bool pressed = false;
     public float deactivateDelay = 0f;
@@ -16,24 +16,24 @@ public class Button : Tagable
     {
         ChangeSprite();
     }
-    
+
     void Awake (){
         source = GetComponent<AudioSource>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (delayed.Remove(collider.gameObject))
+        if (delayed.Remove(collision.gameObject))
             return;
-        if (!pressing.Contains(collider.gameObject))
+        if (!pressing.Contains(collision.gameObject))
         {
-            if(activateTags.Count == 0 || (activateTags.Count != 0 && activateTags.Contains(collider.gameObject.tag)))
+            if(activateTags.Count == 0 || (activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag)))
             {
-                pressing.Add(collider.gameObject);
-                if (collider.gameObject.tag.Contains("crate"))
+                pressing.Add(collision.gameObject);
+                if (collision.gameObject.tag.Contains("crate"))
                 {
-                    string colour = collider.gameObject.tag.Replace("_crate", "");
-                    collider.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/crates/" + colour + "_on", typeof(Sprite)) as Sprite;
+                    string colour = collision.gameObject.tag.Replace("_crate", "");
+                    collision.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/crates/" + colour + "_on", typeof(Sprite)) as Sprite;
                 }
             }
             else
@@ -49,23 +49,24 @@ public class Button : Tagable
             ChangeSprite();
         }
     }
-    private void OnTriggerExit2D(Collider2D collider)
+
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        delayed.Add(collider.gameObject);
-        StartCoroutine(CheckDeactive(collider));
+        delayed.Add(collision.gameObject);
+        StartCoroutine(CheckDeactive(collision));
     }
-    IEnumerator CheckDeactive(Collider2D collider)
+    IEnumerator CheckDeactive(Collision2D collision)
     {
         yield return new WaitForSeconds(deactivateDelay);
-        if (!delayed.Remove(collider.gameObject))
+        if (!delayed.Remove(collision.gameObject))
             yield break;
-        if (activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collider.gameObject.tag) && pressing.Contains(collider.gameObject))
+        if (activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collision.gameObject.tag) && pressing.Contains(collision.gameObject))
         {
-            pressing.Remove(collider.gameObject);
-            if (collider.gameObject.tag.Contains("crate"))
+            pressing.Remove(collision.gameObject);
+            if (collision.gameObject.tag.Contains("crate"))
             {
-                string colour = collider.gameObject.tag.Replace("_crate", "");
-                collider.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/crates/" + colour, typeof(Sprite)) as Sprite;
+                string colour = collision.gameObject.tag.Replace("_crate", "");
+                collision.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/crates/" + colour, typeof(Sprite)) as Sprite;
             }
         }
         if (pressed == true && pressing.Count <= 0)

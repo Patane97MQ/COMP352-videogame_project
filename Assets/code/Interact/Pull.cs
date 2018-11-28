@@ -4,9 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(Physics))]
 public class Pull : Interactable{
 
-    public Sprite left;
-    public Sprite right;
-
     public override void Interact(Interactor interactor)
     {
         GameObject iGameObject = interactor.gameObject;
@@ -28,11 +25,12 @@ public class Pull : Interactable{
     }
     private void PullObject(PlayerMovement pMovement, bool pMovementToLeft)
     {
+        Debug.Log("pulling");
         pMovement.pulling = true;
         Physics thisPhysics = gameObject.GetComponent<Physics>();
 
         float pMovementVelX = pMovement.velocity.x;
-        pMovement.flipSpriteX = false;
+        pMovement.allowFlipX = false;
 
         // Simply saves the X direction of the pMovement object to this object (eg. of this object is to the left, direction will be -1)
         int direction = Math.Sign(thisPhysics.GetTransform().position.x - pMovement.GetTransform().position.x);
@@ -42,6 +40,7 @@ public class Pull : Interactable{
         if (Math.Sign(pMovementVelX) == direction)
             return;
 
+        Debug.Log("pulling2");
 
         //pMovement.SetVelocity(new Vector2(0, pMovement.velocity.y));
         float x = thisPhysics.CalculateForce(pMovement, pMovementVelX);
@@ -49,6 +48,7 @@ public class Pull : Interactable{
         pMovement.SetVelocity(new Vector2(x, pMovement.velocity.y));
 
         thisPhysics.SetVelocity(new Vector2(x, thisPhysics.velocity.y));
+        Debug.Log(thisPhysics.velocity.x);
         //thisPhysics.AddRawForceX(pMovement, pMovement.velocity.x);
     }
     public override void DeInteract(Interactor interactor)

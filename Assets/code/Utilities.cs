@@ -60,19 +60,44 @@ public class Utilities {
             return a;
         return b;
     }
+    // Is 'other' to the left of 'origin'
+    public static bool ToLeft(GameObject origin, GameObject other)
+    {
+        if (origin.transform.position.x - origin.GetComponent<Collider2D>().bounds.extents.x > other.transform.position.x + other.GetComponent<Collider2D>().bounds.extents.x)
+            return true;
+        return false;
+    }
+    public static bool ToRight(GameObject origin, GameObject other)
+    {
+        if (origin.transform.position.x + origin.GetComponent<Collider2D>().bounds.extents.x < other.transform.position.x - other.GetComponent<Collider2D>().bounds.extents.x)
+            return true;
+        return false;
+    }
+
+    public static T[] OnlyChildrenComponents<T>(GameObject target)
+    {
+        T[] initialArray = target.GetComponentsInChildren<T>();
+        List<T> targetTypeList = new List<T>(target.GetComponents<T>());
+        List<T> list = new List<T>();
+        foreach(T type in initialArray)
+        {
+            if (targetTypeList.Contains(type))
+                continue;
+            list.Add(type);
+        }
+        return list.ToArray();
+    }
+
     // Currently returns the first RaycastHit2D that:
     // 1. Isnt the object this script is attached to.
     // 2. Isnt a trigger.
     public static RaycastHit2D BoxCastHandler(GameObject caster, Vector2 origin, Vector2 size, float angle, Vector2 direction, float distance)
     {
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(origin, size, angle, direction, distance);
-        foreach (RaycastHit2D hit in hits)
-        {
-            if (hit && (hit.collider.gameObject == caster || hit.collider.isTrigger))
-                continue;
-            return hit;
-        }
-        return new RaycastHit2D();
+        RaycastHit2D[] hits = BoxCastHandlerAll(caster, origin, size, angle, direction, distance);
+        if (hits.Length > 0)
+            return hits[0];
+        else
+            return new RaycastHit2D();
     }
 
     public static RaycastHit2D[] BoxCastHandlerAll(GameObject caster, Vector2 origin, Vector2 size, float angle, Vector2 direction, float distance)
@@ -81,7 +106,7 @@ public class Utilities {
         List<RaycastHit2D> returnedHits = new List<RaycastHit2D>();
         foreach (RaycastHit2D hit in hits)
         {
-            if (hit && (hit.collider.gameObject == caster || hit.collider.isTrigger))
+            if (hit && (hit.collider.gameObject == caster || hit.collider.gameObject.transform.parent == caster.transform || hit.collider.isTrigger))
                 continue;
             returnedHits.Add(hit);
         }

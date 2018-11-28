@@ -22,7 +22,10 @@ public class Interactor : MonoBehaviour {
     {
         interactables.Remove(interactable);
     }
-
+    public Interactable GetCurrent()
+    {
+        return current;
+    }
     private void Update()
     {
         if (!interactables.Contains(current) && current != null)
@@ -36,8 +39,7 @@ public class Interactor : MonoBehaviour {
             if (Input.GetKey(interactKey))
             {
                 interacting = true;
-                if (current == null)
-                    current = interactables[0];
+                current = interactables[0];
                 current.Interact(this);
                 return;
             }

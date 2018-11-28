@@ -27,13 +27,15 @@ public class Physics : MonoBehaviour
 
     [HideInInspector]
     public bool airborne;
+    [HideInInspector]
     public bool pushing;
+    [HideInInspector]
     public bool pulling;
 
     [HideInInspector]
     public Vector2 velocity;
     [HideInInspector]
-    public Vector2 acceleration;
+    public Vector2 acceleration = new Vector2(0, 0);
     
 
     protected float edgeCut = 0.02f;
@@ -62,7 +64,7 @@ public class Physics : MonoBehaviour
         // Velocity constants are always applied!
         AddPositionY(velocity.y);
         AddPositionX(velocity.x);
-
+        
         acceleration = (Physics2D.gravity + (Physics2D.gravity.normalized * weight)) / 1000;
         // accelerationY should never/rarely be changed. This is the constant downwards force of 'gravity'
         CheckRotation();
@@ -80,9 +82,7 @@ public class Physics : MonoBehaviour
     {
         yield return new WaitForSeconds(0.05f);
         if (!down)
-        {
             airborne = true;
-        }
     }
     // ====================================================================
 
@@ -196,10 +196,21 @@ public class Physics : MonoBehaviour
         return obj.GetComponent<Physics>();
     }
 
-
+    private float CalculateXCollision(float x, Vector2 direction)
+    {
+        float current = x;
+        foreach (Physics physics in gameObject.GetComponentsInChildren<Physics>())
+        {
+            float temp = physics.RunAllBoxCastsForX(x, direction);
+            if (Math.Abs(temp) < Math.Abs(current))
+                current = temp;
+        }
+        return current;
+    }
     
     private float RunAllBoxCastsForX(float x, Vector2 direction)
     {
+
         // Drawing a BoxCast of the below (for debugging)
         DrawBoxCast(c2Dcenter, new Vector2(0.01f, c2D.bounds.size.y - edgeCut * 2), direction, Math.Abs(x) + c2D.bounds.extents.x - 0.005f);
         Utilities.DrawBox(new Vector2(transform.position.x + c2D.offset.x - (Math.Sign(c2D.offset.x) * 0.030f), transform.position.y + c2D.offset.y - (Math.Sign(c2D.offset.y) * 0.030f)), c2D.bounds.size, Color.red);
@@ -337,9 +348,9 @@ public class Physics : MonoBehaviour
         SetTouching(Vector2.left, false);
         SetTouching(Vector2.right, false);
         if (x < 0)
-            return RunAllBoxCastsForX(x, Vector2.left);
+            return CalculateXCollision(x, Vector2.left);
         else if (x > 0)
-            return RunAllBoxCastsForX(x, Vector2.right);
+            return CalculateXCollision(x, Vector2.right);
         return x;
     }
     private float CheckNextMoveY(float y)

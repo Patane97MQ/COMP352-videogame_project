@@ -1,4 +1,4 @@
-﻿public abstract class ColourActivator : AbstractActivator {
+﻿public class ColourActivator : AbstractActivator {
 
     public ColourEnum colour = ColourEnum.red;
 

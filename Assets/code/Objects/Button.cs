@@ -1,88 +1,66 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+public class Button : MonoBehaviour {
 
-public class Button : Tagable
-{
-    bool pressed = false;
-    public float deactivateDelay = 0f;
-    List<GameObject> pressing = new List<GameObject>();
-    List<GameObject> delayed = new List<GameObject>();
-    public ButtonSounds sounds = new ButtonSounds();
-    private AudioSource source;
+    public ColourEnum colour;
 
-    private void Start()
+    private bool pressed = false;
+
+    private Animator animator;
+    private AbstractActivator activator;
+    private Tags tags;
+    private List<GameObject> pressing = new List<GameObject>();
+
+    private void Awake()
     {
-        ChangeSprite();
-    }
-    
-    void Awake (){
-        source = GetComponent<AudioSource>();
+        animator = gameObject.GetComponent<Animator>();
+        activator = gameObject.GetComponent<AbstractActivator>();
+        colour = (activator && activator is ColourActivator ? ((ColourActivator)activator).colour : colour);
+        tags = gameObject.GetComponent<Tags>();
+        UpdateSprite();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (delayed.Remove(collider.gameObject))
-            return;
         if (!pressing.Contains(collider.gameObject))
         {
-            if(activateTags.Count == 0 || (activateTags.Count != 0 && activateTags.Contains(collider.gameObject.tag)))
+            if (!tags || tags.CheckTag(collider.gameObject.tag))
             {
                 pressing.Add(collider.gameObject);
                 if (collider.gameObject.tag.Contains("crate"))
-                {
-                    string colour = collider.gameObject.tag.Replace("_crate", "");
-                    collider.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/crates/" + colour + "_on", typeof(Sprite)) as Sprite;
-                }
+                    collider.gameObject.GetComponent<Crate>().LightUp(true);
             }
             else
             {
-                source.PlayOneShot(sounds.incorrectActive);
+                animator.SetTrigger("failed");
             }
         }
-        if (!pressed && pressing.Count > 0)
+        if(!animator.GetBool("pressed") && pressing.Count > 0 && activator.SetActivated(true) && activator.Activated())
         {
-            if (SetActivated(true) && activated)
-                source.PlayOneShot(sounds.correctActive);
             pressed = true;
-            ChangeSprite();
+            animator.SetTrigger("pressed");
+            UpdateSprite();
         }
+
     }
     private void OnTriggerExit2D(Collider2D collider)
     {
-        delayed.Add(collider.gameObject);
-        StartCoroutine(CheckDeactive(collider));
-    }
-    IEnumerator CheckDeactive(Collider2D collider)
-    {
-        yield return new WaitForSeconds(deactivateDelay);
-        if (!delayed.Remove(collider.gameObject))
-            yield break;
-        if (activateTags.Count == 0 || activateTags.Count != 0 && activateTags.Contains(collider.gameObject.tag) && pressing.Contains(collider.gameObject))
+        if(!tags || tags.CheckTag(collider.gameObject.tag))
         {
             pressing.Remove(collider.gameObject);
-            if (collider.gameObject.tag.Contains("crate"))
-            {
-                string colour = collider.gameObject.tag.Replace("_crate", "");
-                collider.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/crates/" + colour, typeof(Sprite)) as Sprite;
-            }
+            if(collider.gameObject.tag.Contains("crate"))
+                collider.gameObject.GetComponent<Crate>().LightUp(false);
         }
-        if (pressed == true && pressing.Count <= 0)
+        if(animator.GetBool("pressed") && pressing.Count <= 0 && activator.SetActivated(false) && !activator.Activated())
         {
-            SetActivated(false);
             pressed = false;
-            ChangeSprite();
+            UpdateSprite();
         }
+            
     }
-    void ChangeSprite()
+    void UpdateSprite()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/coloured/" + colour + "/button_" + (activated ? "on" : "off") + (pressed ? "_pressed" : "") + ("_"+activatorType.ToString()), typeof(Sprite)) as Sprite;
-    }
-
-    [System.Serializable]
-    public class ButtonSounds {
-        public AudioClip correctActive;
-        public AudioClip incorrectActive;
+        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/coloured/" + colour + "/button_" + (activator.Activated() ? "on" : "off") + (pressed ? "_pressed" : "") + ("_" + activator.activatorType.ToString()), typeof(Sprite)) as Sprite;
     }
 }

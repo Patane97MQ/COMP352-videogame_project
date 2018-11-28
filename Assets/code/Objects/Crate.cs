@@ -26,6 +26,12 @@ public class Crate : Physics {
         }
         base.FixedUpdate();
     }
+    public void LightUp(bool on)
+    {
+        string colour = gameObject.tag.Replace("_crate", "");
+        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/crates/" + colour + (on ? "_on" : ""), typeof(Sprite)) as Sprite;
+
+    }
     public void StopCurrentSound()
     {
         source.Stop();

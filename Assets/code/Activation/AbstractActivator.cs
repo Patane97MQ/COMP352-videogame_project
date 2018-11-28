@@ -12,7 +12,7 @@ public abstract class AbstractActivator : MonoBehaviour {
     protected bool activatedOnce = false;
 
     // Returns true if the activation state has changed, false otherwise.
-    protected bool SetActivated(bool activated)
+    public bool SetActivated(bool activated)
     {
         bool before = this.activated;
         if (activated)

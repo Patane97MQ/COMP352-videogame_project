@@ -23,11 +23,10 @@ GameObject:
   - component: {fileID: 61500002890601926}
   - component: {fileID: 61464825771656898}
   - component: {fileID: 50624667483812838}
-  - component: {fileID: 114331648145828758}
   - component: {fileID: 114883299785108234}
   - component: {fileID: 114725822448276176}
-  - component: {fileID: 82844154777038370}
   - component: {fileID: 95683016665807862}
+  - component: {fileID: 82844154777038370}
   m_Layer: 10
   m_Name: Crate_2
   m_TagString: blue_crate
@@ -231,17 +230,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114331648145828758
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1590858759579808}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e8b7e9042060f14b8fd1cff7312ddec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114725822448276176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -277,8 +265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d8ed986214c8a4394fb5f0e4ee989a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  left: {fileID: 0}
-  right: {fileID: 0}
 --- !u!212 &212125089487465878
 SpriteRenderer:
   m_ObjectHideFlags: 1

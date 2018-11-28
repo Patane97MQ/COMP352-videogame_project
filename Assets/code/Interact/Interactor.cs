@@ -39,7 +39,8 @@ public class Interactor : MonoBehaviour {
             if (Input.GetKey(interactKey))
             {
                 interacting = true;
-                current = interactables[0];
+                if(current == null)
+                    current = interactables[0];
                 current.Interact(this);
                 return;
             }

@@ -25,7 +25,6 @@ public class Pull : Interactable{
     }
     private void PullObject(PlayerMovement pMovement, bool pMovementToLeft)
     {
-        Debug.Log("pulling");
         pMovement.pulling = true;
         Physics thisPhysics = gameObject.GetComponent<Physics>();
 
@@ -39,8 +38,6 @@ public class Pull : Interactable{
         // If pMovement is moving towards the object, do nothing.
         if (Math.Sign(pMovementVelX) == direction)
             return;
-
-        Debug.Log("pulling2");
 
         //pMovement.SetVelocity(new Vector2(0, pMovement.velocity.y));
         float x = thisPhysics.CalculateForce(pMovement, pMovementVelX);

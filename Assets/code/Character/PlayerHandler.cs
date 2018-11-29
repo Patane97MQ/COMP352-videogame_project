@@ -7,14 +7,21 @@ public class PlayerHandler : MonoBehaviour {
     Animator animator;
     PlayerMovement pMovement;
     public GameObject restarter;
+    public bool restarterEnabled = true;
     private AudioSource source;
     public bool required;
     private bool dead;
     // Use this for initialization
     void Start()
     {
-        if(!GameObject.FindObjectOfType<Restart>())
-            Instantiate(restarter);
+        Restart restart = FindObjectOfType<Restart>();
+        if (restart)
+            restart.keyActive = restarterEnabled;
+        else
+        {
+            GameObject r = Instantiate(restarter);
+            r.GetComponent<Restart>().keyActive = restarterEnabled;
+        }
         animator = GetComponent<Animator>();
         pMovement = GetComponent<PlayerMovement>();
     }

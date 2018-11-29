@@ -68,4 +68,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ordered Levels/4 - Advanced Mechanics/5 - Upside down.unity
     guid: 125a472af373de14fab63eb2f8accf6e
+  - enabled: 1
+    path: Assets/Scenes/UI/LevelSelect.unity
+    guid: 91134a397ce5f134c920157d41197fe6
   m_configObjects: {}

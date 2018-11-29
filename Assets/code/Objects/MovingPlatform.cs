@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MovingPlatform : Activating 
 {
-
 		private bool moving;
 		private Vector3 posA;
 
@@ -39,13 +36,13 @@ public class MovingPlatform : Activating
 	{
         Starting.localPosition = Vector3.MoveTowards (Starting.localPosition, nexPos, speed * Time.deltaTime);
 
-		if (Vector3.Distance (Starting.localPosition, nexPos) <= 0.1) 
-		{
-			ChangeDestination ();
-		}
-	}
+		if (Vector3.Distance (Starting.localPosition, nexPos) <= 0.1)
+        {
+            ChangeDestination();
 
-	private void ChangeDestination()
+        }
+	}
+    private void ChangeDestination()
 	{
 		nexPos = nexPos != posA ? posA : posB;
 	}

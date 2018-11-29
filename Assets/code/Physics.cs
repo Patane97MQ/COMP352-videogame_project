@@ -196,17 +196,17 @@ public class Physics : MonoBehaviour
         return obj.GetComponent<Physics>();
     }
 
-    private float CalculateXCollision(float x, Vector2 direction)
-    {
-        float current = x;
-        foreach (Physics physics in gameObject.GetComponentsInChildren<Physics>())
-        {
-            float temp = physics.RunAllBoxCastsForX(x, direction);
-            if (Math.Abs(temp) < Math.Abs(current))
-                current = temp;
-        }
-        return current;
-    }
+    //private float CalculateXCollision(float x, Vector2 direction)
+    //{
+    //    float current = x;
+    //    foreach (Physics physics in gameObject.GetComponentsInChildren<Physics>())
+    //    {
+    //        float temp = physics.RunAllBoxCastsForX(x, direction);
+    //        if (Math.Abs(temp) < Math.Abs(current))
+    //            current = temp;
+    //    }
+    //    return current;
+    //}
     
     private float RunAllBoxCastsForX(float x, Vector2 direction)
     {
@@ -343,14 +343,24 @@ public class Physics : MonoBehaviour
         }
         return y;
     }
+    //private float CheckNextMoveX(float x)
+    //{
+    //    SetTouching(Vector2.left, false);
+    //    SetTouching(Vector2.right, false);
+    //    if (x < 0)
+    //        return CalculateXCollision(x, Vector2.left);
+    //    else if (x > 0)
+    //        return CalculateXCollision(x, Vector2.right);
+    //    return x;
+    //}
     private float CheckNextMoveX(float x)
     {
         SetTouching(Vector2.left, false);
         SetTouching(Vector2.right, false);
         if (x < 0)
-            return CalculateXCollision(x, Vector2.left);
+            return RunAllBoxCastsForX(x, Vector2.left);
         else if (x > 0)
-            return CalculateXCollision(x, Vector2.right);
+            return RunAllBoxCastsForX(x, Vector2.right);
         return x;
     }
     private float CheckNextMoveY(float y)

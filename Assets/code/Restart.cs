@@ -6,6 +6,7 @@ public class Restart : MonoBehaviour {
     public static Restart r;
     private static SceneField nextScene;
     private static bool loading;
+    public bool keyActive = true;
 
     Animator animator;
 
@@ -18,7 +19,7 @@ public class Restart : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (keyActive && Input.GetKeyDown(KeyCode.R))
             Go();
     }
 

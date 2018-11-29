@@ -7,8 +7,10 @@ public class BackgroundMusic : MonoBehaviour {
 
 	void Start()
     {
+        if (FindObjectsOfType<BackgroundMusic>().Length > 1)
+            return;
         source = gameObject.GetComponent<AudioSource>();
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
         source.PlayOneShot(music);
 	}
 }

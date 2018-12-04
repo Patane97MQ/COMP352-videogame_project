@@ -6,7 +6,7 @@ public class Interactor : MonoBehaviour {
     [HideInInspector]
     public bool interacting = false;
 
-    public KeyCode interactKey = KeyCode.LeftControl;
+    public KeyCode[] interactKeys = {KeyCode.LeftControl, KeyCode.RightControl};
     public Sprite interactSprite;
 
     private List<Interactable> interactables = new List<Interactable>();
@@ -36,7 +36,7 @@ public class Interactor : MonoBehaviour {
         if (interactables.Count > 0)
         {
 
-            if (Input.GetKey(interactKey))
+            if (CheckInteractingKeys())
             {
                 interacting = true;
                 if(current == null)
@@ -52,5 +52,13 @@ public class Interactor : MonoBehaviour {
             }
         }
         interacting = false;
+    }
+
+    private bool CheckInteractingKeys()
+    {
+        foreach(KeyCode key in interactKeys)
+            if (Input.GetKey(key))
+                return true;
+        return false;
     }
 }

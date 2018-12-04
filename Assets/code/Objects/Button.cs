@@ -77,7 +77,10 @@ public class Button : Tagable
     }
     void ChangeSprite()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/coloured/" + colour + "/button_" + (activated ? "on" : "off") + (pressed ? "_pressed" : "") + ("_"+activatorType.ToString()), typeof(Sprite)) as Sprite;
+        if(activatorType == ActivatorType.Once)
+            gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/coloured/" + colour + "/button_" + (activated ? "on" : "off") + (activated ? "_pressed" : "") + ("_" + activatorType.ToString()), typeof(Sprite)) as Sprite;
+        else
+            gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("objects/coloured/" + colour + "/button_" + (activated ? "on" : "off") + (pressed ? "_pressed" : "") + ("_"+activatorType.ToString()), typeof(Sprite)) as Sprite;
     }
 
     [System.Serializable]
